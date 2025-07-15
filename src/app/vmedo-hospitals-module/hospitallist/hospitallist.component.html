@@ -1,0 +1,63 @@
+<!-- Approval Status
+
+0 - Hospitals waiting for approval
+1 - Approved hospitals
+2 - Rejected hospitals
+3 - Blocked hospitals -->
+
+<nav mat-tab-nav-bar>
+  <a mat-tab-link [routerLink]="['/admin-dashboard/vmedo-hospitals-module/hospitallist/registeredhospital']" routerLinkActive
+    #rla1="routerLinkActive" [active]="rla1.isActive">
+    <span class="approvedBadgeColor" matBadge="{{approvedHospitalNumber?.length}}" matBadgeOverlap="false"
+      matBadgePosition="after" matBadgeColor="primary">Approved hospitals</span>
+
+  </a>
+
+  <a mat-tab-link [routerLink]="['/admin-dashboard/vmedo-hospitals-module/hospitallist/pendinghospitals']" routerLinkActive
+    #rla2="routerLinkActive" [active]="rla2.isActive">
+
+    <span class="pendingBadgeColor" matBadge="{{pendingHospitalNumber?.length}}" matBadgeOverlap="false"
+      matBadgePosition="after" matBadgeColor="primary">Hospitals waiting for approval</span>
+  </a>
+
+  <a mat-tab-link [routerLink]="['/admin-dashboard/vmedo-hospitals-module/hospitallist/approveemergencyhandled']"
+    routerLinkActive #rla5="routerLinkActive" [active]="rla5.isActive">
+
+    <span class="emergencyHandledBadge" matBadge="{{emergencyHandledNumber?.length}}" matBadgeOverlap="false"
+      matBadgePosition="after" matBadgeColor="primary">Approve Emergency Handled</span>
+  </a>
+
+  <a mat-tab-link [routerLink]="['/admin-dashboard/vmedo-hospitals-module/hospitallist/approvespecialization']"
+  routerLinkActive #rla6="routerLinkActive" [active]="rla6.isActive">
+
+  <span class="specializationBadge" matBadge="{{specializationNumber?.length}}" matBadgeOverlap="false"
+    matBadgePosition="after" matBadgeColor="primary">Approve Specialization</span>
+</a>
+
+  <a mat-tab-link [routerLink]="['/admin-dashboard/vmedo-hospitals-module/hospitallist/hospitalchangeslist']"
+    routerLinkActive #rla7="routerLinkActive" [active]="rla7.isActive">
+
+    <span class="hospitalChangesListNumber" matBadge="{{hospitalChangesNumber?.length}}" matBadgeOverlap="false"
+      matBadgePosition="after" matBadgeColor="primary">Hospitals update request</span>
+  </a>
+
+
+  <a mat-tab-link [routerLink]="['/admin-dashboard/vmedo-hospitals-module/hospitallist/rejectedhospitals']" routerLinkActive
+    #rla8="routerLinkActive" [active]="rla8.isActive">
+
+    <span class="rejectedHospitalNumber" matBadge="{{rejectedHospitalNumber?.length}}" matBadgeOverlap="false"
+      matBadgePosition="after" matBadgeColor="primary">Rejected hospitals</span>
+  </a>
+
+  <a mat-tab-link [routerLink]="['/admin-dashboard/vmedo-hospitals-module/hospitallist/blockedhospitals']" routerLinkActive
+    #rla4="routerLinkActive" [active]="rla4.isActive">
+
+    <span class="unblockBadgeColor" matBadge="{{blockedHospitalNumber?.length}}" matBadgeOverlap="false"
+      matBadgePosition="after" matBadgeColor="primary">Blocked hospitals</span>
+  </a>
+
+</nav>
+
+<router-outlet>
+
+</router-outlet>

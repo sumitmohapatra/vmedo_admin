@@ -1,0 +1,108 @@
+
+<div>
+
+    <div class="row mt-4" style="width: 100%;">
+
+
+        <div class="col mb-3" style="text-align: start;">
+
+            <button mat-raised-button type="submit" color="primary" class="btn btn-primary btn-sm ml-4"
+                (click)="onUpdateRenewals()" style="color: white;"> Update renewals </button>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="grid-container">
+
+    <div class="vmedo-admin-enquiry-table">
+        <div class="mat-elevation-z8">
+
+            <div class="row modal-header col-12  text-white vmedoadmintableheader">
+
+                <div class="col-6 mt-2">
+
+                    <h2>Total premium subscribers - {{dataSource.data?.length}}</h2>
+
+                </div>
+
+                <div class="col-6 mt-2 mb-1 form-group" style="color:white;justify-content: flex-end;">
+                    <input class="form-control" fxFlex="50%" style="border-radius: 12px;" type="text"
+                        (keyup)="doFilter($event.target.value)" placeholder="Search...">
+                </div>
+
+            </div>
+
+
+            <table mat-table matSort [dataSource]="dataSource" matSortActive='created_on' matSortDirection='desc'>
+
+
+                <ng-container matColumnDef="userName">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Name</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="userMobile">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Mobile
+                        </strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.userMobile}} </td>
+                </ng-container>
+
+
+
+                <ng-container matColumnDef="couponCode">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>
+                            Coupon code used</strong></th>
+                    <td mat-cell *matCellDef="let element">{{element.couponCode}} </td>
+                </ng-container>
+
+
+
+                <ng-container matColumnDef="packageName">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Package
+                            name</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{element.packageName}}</td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="packageAmount">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Amount
+                            paid</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.packageAmount | currency:'INR'}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="created_on">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Created
+                            on</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.created_on | date : medium}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="valid_till">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Valid
+                            till</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.valid_till | date : medium}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[25, 50, 100]" showFirstLastButtons
+                aria-label="Select page of periodic elements">
+            </mat-paginator>
+
+
+        </div>
+
+    </div>
+</div>
+
+<mat-divider></mat-divider>

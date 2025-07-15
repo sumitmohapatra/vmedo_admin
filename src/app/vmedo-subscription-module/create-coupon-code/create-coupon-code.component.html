@@ -1,0 +1,117 @@
+<div class="text-right  modal-header bg-danger text-white" style="
+padding-bottom: 0px;">
+    <h3>Create Coupon Code</h3>
+    <button mat-icon-button aria-label="close dialog" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+<mat-divider></mat-divider>
+
+
+<div class="container mt-2">
+    <form #createCouponForm="ngForm" (ngSubmit)="createCouponData(createCouponForm.value);createCouponForm.reset();">
+
+        <div>
+
+            <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>Coupon name</mat-label>
+
+                <input matInput placeholder="Package name" type="text" ngModel name="couponName" required>
+            </mat-form-field>
+
+        </div>
+
+        <div>
+
+
+            <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>Discount Type</mat-label>
+                <mat-select ngModel name="discountType">
+                    <mat-option *ngFor="let discount of discountType" [value]="discount.id">
+                        {{discount.value}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+
+
+        </div>
+
+        <div>
+
+            <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>Discounted amount / percentage</mat-label>
+
+                <input matInput placeholder="Discounted amount / Percentage" type="text" ngModel name="couponDiscount" required>
+            </mat-form-field>
+
+        </div>
+
+
+        <div>
+
+
+            <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>Select Valid till date</mat-label>
+
+                <input matInput placeholder="Enter number of months" type="datetime-local" [(ngModel)]="currentDateTime"
+                    name="couponValidty" required>
+            </mat-form-field>
+
+            <!-- <mat-form-field appearance="outline" fxFlex="60">
+                <mat-label>Validity in months</mat-label>
+
+                <input matInput placeholder="Enter number of months" type="text" ngModel name="couponValidty" required>
+            </mat-form-field> -->
+
+        </div>
+
+        <div>
+
+            <mat-form-field appearance="outline" fxFlex="100" hidden>
+                <mat-label>Created on</mat-label>
+
+                <input matInput placeholder="Created on" type="text" [(ngModel)]="currentTime" name="added_On" required>
+            </mat-form-field>
+
+        </div>
+
+
+        <div>
+            <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>Total coupons</mat-label>
+
+                <input matInput placeholder="Total coupons" type="text" ngModel name="totalCoupon" required>
+            </mat-form-field>
+        </div>
+
+
+        <div>
+
+            <div class="mt-3 ml-4 mb-4" style="display: flex;justify-content: center;">
+                <button mat-raised-button type="submit" color="primary">Create</button>
+
+
+                <button mat-raised-button color="warn" mat-dialog-close class="ml-3">
+                    Cancel
+                </button>
+
+
+            </div>
+
+        </div>
+
+        <!-- <button mat-raised-button type="submit" color="primary"
+            class="btn btn-primary btn-sm ml-4" style="height: fit-content;">Submit</button>
+  
+            <div class="text-right col-md-4">
+  
+                <mat-dialog-actions>
+                  <button class="btn  cancelbutton btn-sm" mat-dialog-close>
+                    Cancel
+                  </button>
+                </mat-dialog-actions>        
+              </div> -->
+    </form>
+
+</div>

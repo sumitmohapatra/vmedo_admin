@@ -1,0 +1,318 @@
+<div [hidden]="!listView2">
+
+  <div class="mt-1 ml-3">
+    <h2 style="color: rgb(11, 100, 160);">Add VMEDO partner</h2>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="col-12 mb-3 mt-3">
+
+
+
+    <form #addVmedoPartnerForm="ngForm" (ngSubmit)="addVmedoPartnersData(addVmedoPartnerForm.value); addVmedoPartnerForm.reset()">
+
+ 
+    
+      <div class="row" style="display: flex;justify-content: center;">
+    
+        <div class="col-4">
+    
+          <mat-form-field appearance="outline" class="formInputWiledWith">
+            <mat-label>Select partner type</mat-label>
+            <mat-select ngModel name="partner_type" required>
+              <mat-option *ngFor="let partnerType of PartnerTypeDetails?.objorg" [value]="partnerType.id">
+                {{partnerType.type_name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="addVmedoPartnerForm.controls['partner_type'].hasError('required')">
+              Please select a partner type.
+            </mat-error>
+          </mat-form-field>
+    
+        </div>
+    
+        <div class="col-4">
+    
+          <mat-form-field appearance="outline" class="formInputWiledWith">
+            <mat-label>Partner name</mat-label>
+            <input matInput placeholder="Enter partner name" ngModel type="text" name="partnerorg_name" required>
+            <mat-error *ngIf="addVmedoPartnerForm.controls['partnerorg_name'].hasError('required')">
+              Partner name is required.
+            </mat-error>
+          </mat-form-field>
+    
+        </div>
+    
+        <div class="col-4">
+    
+          <mat-form-field appearance="outline" class="formInputWiledWith">
+            <mat-label>Partner Email</mat-label>
+            <input matInput placeholder="Enter Email" ngModel type="email" name="partnerorg_email" required>
+            <mat-error *ngIf="addVmedoPartnerForm.controls['partnerorg_email'].hasError('required')">
+              Email is required.
+            </mat-error>
+            <mat-error *ngIf="addVmedoPartnerForm.controls['partnerorg_email'].hasError('email')">
+              Enter a valid email address.
+            </mat-error>
+          </mat-form-field>
+    
+        </div>
+    
+      </div>
+    
+      <div class="row" style="display: flex;justify-content: center;">
+    
+        <div class="col-6">
+    
+          <mat-form-field appearance="outline" class="formInputWiledWith">
+            <mat-label>Primary Phone number</mat-label>
+            <input matInput placeholder="Enter primary number" ngModel type="tel" name="partnerorg_primaryphone"
+              pattern="[0-9]{10}" required>
+            <mat-error *ngIf="addVmedoPartnerForm.controls['partnerorg_primaryphone'].hasError('required')">
+              Primary phone number is required.
+            </mat-error>
+            <mat-error *ngIf="addVmedoPartnerForm.controls['partnerorg_primaryphone'].hasError('pattern')">
+              Please enter a valid 10-digit phone number.
+            </mat-error>
+          </mat-form-field>
+    
+        </div>
+    
+        <div class="col-6">
+    
+          <mat-form-field appearance="outline" class="formInputWiledWith">
+            <mat-label>Secondary phone number</mat-label>
+            <input matInput placeholder="Enter secondary number" ngModel type="tel" name="partnerorg_secondaryphone"
+              pattern="[0-9]{10}" required>
+            <mat-error *ngIf="addVmedoPartnerForm.controls['partnerorg_secondaryphone'].hasError('required')">
+              Secondary phone number is required.
+            </mat-error>
+            <mat-error *ngIf="addVmedoPartnerForm.controls['partnerorg_secondaryphone'].hasError('pattern')">
+              Please enter a valid 10-digit phone number.
+            </mat-error>
+          </mat-form-field>
+    
+        </div>
+        <div class="col-3" hidden>
+    
+          <mat-form-field appearance="outline" class="formInputWiledWith">
+            <mat-label>Services</mat-label>
+            <input matInput placeholder="Enter service" [(ngModel)]="defaultService" type="text" name="partnerorg_services">
+          </mat-form-field>
+    
+        </div>
+
+        
+    
+      </div>
+    
+      <div class="row mt-1 mb-3">
+        <div class="col-12">
+          <!-- <ng-multiselect-dropdown name="partner_skills" [placeholder]="'Select partner skills'" [settings]="dropdownSettings"
+            [data]="dropdownList" [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+          </ng-multiselect-dropdown> -->
+
+          <mat-form-field appearance="outline" class="formInputWiledWith">
+            <mat-select [placeholder]="'Select partner skills'" [formControl]="toppings" [(value)]="selectedItems" multiple (onChange)="onItemSelect($event)">
+              <mat-option *ngFor="let topping of dropdownList" [value]="topping.id">{{topping.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col" style="text-align: right;">
+          <button mat-raised-button color="primary" class="btn-sm ml-4" type="submit"
+            [disabled]="addVmedoPartnerForm.invalid" (click)="displayListView()">Save & Add Address</button>
+        </div>
+    
+        <div class="col" style="text-align: left;">
+          <button mat-raised-button color="warn" mat-dialog-close class="ml-3">
+            Cancel
+          </button>
+        </div>
+    
+      </div>
+    
+    </form>
+    
+
+
+
+  </div>
+
+</div>
+
+<!-- partner address form -->
+
+<div [hidden]="!listView">
+
+  
+
+  <div class="mt-1 ml-3">
+    <h2 style="color: rgb(11, 100, 160);">Add Partner Address</h2>
+  </div>
+
+
+  <mat-divider></mat-divider>
+
+
+  <div class="col-12 mb-3 mt-3">
+
+
+    <form #addVmedoPartnerAddressForm="ngForm"
+      (ngSubmit)="addVmedoPartnersAddressData(addVmedoPartnerAddressForm.value);addVmedoPartnerAddressForm.reset()">
+
+
+      <div class="row">
+
+
+        <div class="col-2">
+
+
+          <mat-form-field appearance="outline" fxFlex="90">
+            <mat-label>ID</mat-label>
+            <input matInput placeholder="Partner ID" [(ngModel)]="partnerID" type="text" name="partner_id" required>
+          </mat-form-field>
+
+
+        </div>
+
+
+        <div class="col-9">
+
+
+          <mat-form-field appearance="outline" fxFlex="97">
+            <input type="text" placeholder="Enter partner address" matInput [formControl]="inputValue"
+              [matAutocomplete]="auto" required>
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let location of filteredLocations | async" [value]="location.description" ngModel
+                name="partnerorg_address" (onSelectionChange)="optionSelected(location)" >
+                {{ location.description }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
+
+        </div>
+
+
+      </div>
+
+
+      <div class="row">
+
+
+        <div class="col-3">
+
+
+          <!-- <mat-form-field appearance="outline" fxFlex="90">
+            <mat-label>Select partner city</mat-label>
+
+
+            <mat-select ngModel name="partner_city">
+              <mat-option *ngFor="let partnerCity of partnerCities?.objorg" [value]="partnerCity.name">
+                {{partnerCity.name}}
+              </mat-option>
+            </mat-select>
+
+
+          </mat-form-field> -->
+
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Select City</mat-label>
+            <input type="text"
+                   placeholder="Select city"
+                   aria-label="Number"
+                   matInput
+                   [formControl]="myControl"
+                   [matAutocomplete]="auto2" (click)="onClickButton()" required>
+  
+            <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete"  >
+              <mat-option *ngFor="let option of filteredOptions | async" ngDefaultControl  ngModel name="partner_city" (onSelectionChange)="optionCitySelected(option)" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
+
+        </div>
+
+
+        <div class="col-3">
+
+
+          <mat-form-field appearance="outline" fxFlex="90">
+            <mat-label>Area</mat-label>
+            <input matInput placeholder="Enter area" ngModel type="text" name="partner_area" required>
+          </mat-form-field>
+
+
+        </div>
+
+
+        <div class="col-3">
+
+
+          <mat-form-field appearance="outline" fxFlex="90">
+            <mat-label>Pincode</mat-label>
+            <input matInput placeholder="Enter pincode" ngModel type="text" name="partner_pincode" required>
+          </mat-form-field>
+
+
+        </div>
+
+
+
+
+      </div>
+
+
+      <div class="row">
+        <div class="col-3">
+          <mat-form-field appearance="outline" fxFlex="90">
+            <mat-label>Latitude</mat-label>
+            <input matInput placeholder="Enter latitude" [(ngModel)]="latitude" name="latitude" required>
+          </mat-form-field>
+        </div>
+        <div class="col-3">
+          <mat-form-field appearance="outline" fxFlex="90">
+            <mat-label>Longitude</mat-label>
+            <input matInput placeholder="Enter Longitude" [(ngModel)]="longitude" name="longitude" required>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+
+      <div class="row">
+        <div class="col" style="text-align: center;">
+          <button mat-raised-button color="primary" class="btn-sm ml-4" style="height: fit-content;" type="submit"
+            [disabled]="!addVmedoPartnerAddressForm.valid">Create Partner</button>
+        </div>
+        <div class="col" style="text-align: center;">
+          <button mat-raised-button color="primary" class="btn-sm ml-4" style="height: fit-content;" type="button"
+            [disabled]="!addVmedoPartnerAddressForm.valid"
+            (click)="saveAndAnotherAddress(addVmedoPartnerAddressForm.value)">Save and add another address</button>
+        </div>
+
+        <div class="col" style="text-align: center;">
+          <button mat-raised-button color="warn" mat-dialog-close class="ml-3">
+            Cancel
+          </button>
+        </div>
+
+
+      </div>
+
+
+
+    </form>
+
+
+
+  </div>
+
+
+</div>

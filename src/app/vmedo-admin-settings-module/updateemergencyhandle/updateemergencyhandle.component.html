@@ -1,0 +1,42 @@
+<div class="text-right  modal-header bg-danger text-white" style="
+padding-bottom: 0px;">
+  <h3>Update hospital emergency handle</h3>
+</div>
+<mat-divider></mat-divider>
+<br>
+
+<div class="mt-2">
+    <form #hospitalEmergencyHandleForm="ngForm" (ngSubmit)="hospitalEmergencyHandleData(hospitalEmergencyHandleForm.value);hospitalEmergencyHandleForm.reset();">
+
+        <mat-form-field appearance="legacy" fxFlex="50" hidden>
+            <mat-label> ID</mat-label>
+
+            <input matInput placeholder="ID" [(ngModel)]="emergencyHandleEditData.id" type="text" name="ID" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" fxFlex="40" class="ml-3">
+            <mat-label>Enter hospital specialization</mat-label>
+
+            <input matInput placeholder="Enter hospital specialization" type="text" [(ngModel)]="emergencyHandleEditData.emergencyhandel" name="Emergencyhandel" required>
+      
+    
+          </mat-form-field>
+
+
+
+        <button mat-raised-button type="submit" color="primary"
+            class="btn btn-primary btn-sm ml-4" style="height: fit-content;">Submit</button>
+
+
+
+            <div class="text-right col-md-4">
+
+                <mat-dialog-actions>
+                  <button class="btn  cancelbutton btn-sm" mat-dialog-close>
+                    Cancel
+                  </button>
+                </mat-dialog-actions>        
+              </div>
+    </form>
+
+</div>

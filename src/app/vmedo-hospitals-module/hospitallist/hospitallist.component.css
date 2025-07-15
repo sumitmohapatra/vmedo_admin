@@ -1,0 +1,101 @@
+table {
+    width: 100%;
+  }
+  
+  .vmedo-admin-enquiry-table{
+    padding:8px 8px 8px 8px;
+   
+  }
+  
+  .headerstyle{
+    font-size: 13px;
+    background-color:#b3aeae29; font-weight: 400;
+  }
+
+  .vmedoadmintableheader{
+
+    padding-bottom: 0px;
+    margin: 0px;
+    padding-top: 0px;
+    background-color: #383131d9;
+
+  }
+
+
+  
+.profile-card{
+
+  text-align: center;
+  padding: 0px 20px 20px 20px;
+}
+
+.imagestyle{
+  height: 122px;
+    width: 122px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid rgb(238 237 237 / 25%);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+}
+
+ .mat-badge-content{
+  background : #383131ea
+} 
+
+.mat-tab-group {
+  margin-bottom: 48px;
+}
+
+.approvedBadgeColor
+.mat-badge-content {
+  background: rgb(70, 163, 27);
+  color: rgb(255, 255, 255);
+}
+
+.pendingBadgeColor
+.mat-badge-content {
+  background: rgb(185, 115, 35);
+  color: rgb(255, 255, 255);
+}
+
+.unblockBadgeColor
+.mat-badge-content {
+  background: rgb(163, 27, 27);
+  color: rgb(255, 255, 255);
+}
+
+.approvedBadgeColor
+.mat-badge-content {
+  background: rgb(70, 163, 27);
+  color: rgb(255, 255, 255);
+}
+
+.emergencyHandledBadge
+.mat-badge-content {
+  background: rgb(17, 81, 145);
+  color: rgb(255, 255, 255);
+}
+
+.specializationBadge
+.mat-badge-content {
+  background: rgb(16,124,109);
+  color: rgb(255, 255, 255);
+}
+
+.hospitalChangesListNumber
+.mat-badge-content {
+  background: #0b454e;
+  color: rgb(255, 255, 255);
+}
+
+
+.example-action-button {
+  margin-top: 8px;
+  margin-right: 8px;
+}
+
+.mat-tab-link {
+  color: black;
+  opacity: 1 !important;
+}

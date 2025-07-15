@@ -1,0 +1,96 @@
+<div class="bg-light">
+
+  <mat-card style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+    <mat-card-title>
+      <img src="assets/Images/vmedologo.png" style="height: 45px;">
+      <br>
+
+    </mat-card-title>
+
+    <div class="mt-2 ml-3 text-center">
+      <h2 style="font-weight: 400;">
+        Admin Login
+      </h2>
+    </div>
+
+
+    <!-- <mat-card-content>
+            <form #adminloginForm="ngForm" (ngSubmit)="adminLoginData(adminloginForm.value);adminloginForm.reset();" >
+            
+                <div class="text-center mt-3 justify-content-center col-md-12">
+                <mat-form-field  fxFlex="25">
+                    <mat-label>Email ID or Mobile Number</mat-label>
+                    <input matInput placeholder="Enter Email or Mobile Number" type="text" ngModel name="userCredential" required>
+                  </mat-form-field>
+                  </div>
+            
+    
+    
+              <div class="text-center justify-content-center mt-3 mb-3 col-md-12" >
+      
+                <mat-form-field  fxFlex="25">
+                  <mat-label>userPassword</mat-label>
+                  <input matInput placeholder="Enter userPassword" type="userPassword" ngModel name="useruserPassword" required>
+                </mat-form-field>
+      
+              </div>
+    
+    
+           
+              <div class="text-center col-md-12">
+                <button type="submit" class="btn btn-danger">Login</button>
+              </div>
+      
+             
+    
+            </form>
+          </mat-card-content> -->
+
+    <mat-card-content>
+      <div class="col-md offset-md mt-2">
+
+        <div class="card">
+
+          <div class="card-body">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" (keydown.enter)="onSubmit()">
+
+              <div class="form-group">
+                <label for="userCredential">Admin ID</label>
+                <input type="text" formControlName="userCredential" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.userCredential.errors }" />
+                <div *ngIf="submitted && f.userCredential.errors" class="invalid-feedback">
+                  <div *ngIf="f.userCredential.errors.required">userCredential is required</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="userPassword">Password</label>
+                <input type="password" formControlName="userPassword" class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f.userPassword.errors }" />
+                <div *ngIf="submitted && f.userPassword.errors" class="invalid-feedback">
+                  <div *ngIf="f.userPassword.errors.required">userPassword is required</div>
+                </div>
+              </div>
+
+              <div class="text-center col-md-12">
+
+                <button mat-raised-button type="submit"
+                  style="background-color: #ce2424; color: white;" (click)="onSubmit()">Login</button>
+
+              </div>
+
+              <!-- <button  class="btn btn-primary">
+                              <span  class="spinner-border spinner-border-sm mr-1"></span>
+                              Login
+                          </button> -->
+
+
+              <!-- <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div> -->
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

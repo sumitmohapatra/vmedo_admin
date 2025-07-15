@@ -1,0 +1,72 @@
+.sidenav-container {
+    height: 100%;
+  }
+  
+  .sidenav {
+    width: 200px;
+  }
+  
+  .sidenav .mat-toolbar {
+    background: inherit;
+  }
+  
+  .mat-toolbar.mat-primary {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  
+  .profile-card{
+  
+    text-align: center;
+    padding: 0px 20px 20px 20px;
+  }
+  
+  .imagestyle{
+    height: 146px;
+      width: 146px;
+    object-fit: cover;
+    border-radius: 50%;
+      border: 5px solid rgb(233, 229, 229);
+  
+  }
+  
+  
+  ul li {
+    list-style: none;
+    margin-top: 15px;
+  }
+
+  .loader {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .loader:after {
+    content: ' ';
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: loader 1.2s linear infinite;
+  }
+  
+  @keyframes loader {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

@@ -1,0 +1,133 @@
+
+<div class="container mb-2" style="overflow-x: hidden;">
+    <mat-card class="m-1 p-1" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+        <div class="row">
+            <div class="col-4">
+                <div class="image-container" style="display: flex;justify-content: center;">
+                    <img class="corporate-logo" *ngIf="partnerDetails?.partner_typeID === 1"
+                        src="assets/Images/vmedo_hospital_icon.png" alt="Organization Logo"
+                        onerror="this.src='assets/Images/user_profile.png';">
+
+                    <img class="corporate-logo" *ngIf="partnerDetails?.partner_typeID === 2"
+                        src="assets/Images/vmedo_labs_icon.png" alt="Organization Logo"
+                        onerror="this.src='assets/Images/user_profile.png';">
+
+                    <img class="corporate-logo" *ngIf="partnerDetails?.partner_typeID === 3"
+                        src="assets/Images/vmedo_ambulance_icon.png" alt="Organization Logo"
+                        onerror="this.src='assets/Images/user_profile.png';">
+
+                    <img class="corporate-logo" *ngIf="partnerDetails?.partner_typeID === 4"
+                        src="assets/Images/vmedo-home-healthcare-icon.png" alt="Organization Logo"
+                        onerror="this.src='assets/Images/user_profile.png';">
+
+                </div>
+            </div>
+            <div class="col-4 mt-2">
+                <h3
+                    style="font-size: 14px; display: flex;justify-content: center;text-align: center;color: #0b64a0;text-wrap: nowrap;font-weight: 500; margin: 0px;">
+                    {{partnerDetails?.partnerorg_name }}</h3>
+            </div>
+            <div class="col-4 mt-2">
+                <div style="display: flex;justify-content: center;text-align: center;margin-top: 5px;">
+                    <div [ngClass]="{
+                        'green-value': partnerDetails?.partner_status === 1,
+                        'red-value': partnerDetails?.partner_status === 2,
+                        'black-value': partnerDetails?.partner_status === 3
+                      }" style="font-weight: 500;">
+                        {{partnerDetails?.partner_status === 1 ? 'Registered' : partnerDetails?.partner_status === 2 ?
+                        'Unregistered' :
+                        'Blocked'}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-card>
+
+    <mat-card class="m-1 p-1" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+        <div class="row">
+            <div class="col-8">
+                <div class="m-1 p-1 pl-2" style="display: flex;text-align: left;">
+                    <h4 style="font-size: 14px; margin: 0%;color: #0b64a0;font-weight: 500;">Contact details</h4>
+                </div>
+        
+                <div class="m-1 p-1 pl-2" style="display: flex;text-align: left;font-weight: 500;font-size: 12px;">Primary phone number -
+                    &nbsp;<span style="font-weight: 400;">{{ partnerDetails?.partnerorg_primaryphone }}</span></div>
+        
+                <div class="m-1 p-1 pl-2" style="display: flex;text-align: left;font-weight: 500;font-size: 12px;">Secondary phone number -
+                    &nbsp;<span style="font-weight: 400;">{{ partnerDetails?.partnerorg_secondaryphone }}</span></div>
+        
+                <div class="m-1 p-1 pl-2" style="display: flex;text-align: left;justify-content: left;font-weight: 500;font-size: 12px;">Partner
+                    email - &nbsp;<span style="font-weight: 400;"> {{ partnerDetails?.partnerorg_email }}</span></div>
+        
+        
+                <div class="m-1 p-1 pl-2" style="display: flex;text-align: left;position: relative;top: 10px;">
+                    <h4 style="font-size: 14px; margin: 0%;color: #0b64a0;font-weight: 500;">Skills</h4>
+                </div>
+
+                
+
+                <div class="m-1 p-1 pl-2" style="display: flex;text-align: left;font-size: 12px;">
+                    <ol >
+                        <li *ngFor="let skill of partnerDetails?.partner_skills">{{ skill.name }}</li>
+                    </ol>
+                </div>
+        
+            </div>
+            <div class="col-4" style="position: relative;left: 50px;top: 10px;">
+                
+                <button mat-flat-button color="primary" (click)="onEditVmedoPartner(partnerDetails?.id)"  class="ml-3">
+                    Edit Details
+                </button>
+            </div>
+        </div>
+
+       
+    </mat-card>
+
+    <mat-card class="dialog-content-container  m-1 p-1" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+<div class="row">
+    <div class="col-6 m-1 p-1 pl-4" style="display: flex;text-align: left;">
+        <h4 style="font-size: 14px; margin: 0%;color: #0b64a0;font-weight: 500;">Service Locations</h4>
+    </div>
+    <div class="col-4 mt-2" style="position: relative; margin-left: 100px;">
+        <button mat-flat-button  color="primary" class="ml-3" (click)="onAddVmedoPartnerAddress()">
+            Add Partner Address
+        </button> 
+    </div>
+</div>
+   
+        <div *ngFor="let address of partnerDetails?.partner_address" class="mt-2">
+            <div class="row" style="font-size: 12px;">
+                <div class="col-9 ml-4 p-1">
+
+                    <strong>Branch</strong> - {{ address.partnerorg_address }}, {{address.partner_area}},
+                    {{address.partner_city}} - {{address.partner_pincode}}
+                </div>
+                <div class="col-1 ml-4 p-1 mb-2" style="display: flex; justify-content: flex-end;">
+                    <button  mat-icon-button (click)="onEditVmedoPartnerAddress(address.id)" matTooltip="Update">
+                        <mat-icon mat-icon-button color='primary'>edit</mat-icon>
+                    </button>
+                </div>
+            </div>
+           
+
+          
+            <mat-divider></mat-divider>
+        </div>
+
+
+    </mat-card>
+
+
+
+    <div class="row">
+
+        <div class="col mt-3" style="text-align: center;">
+            <button mat-raised-button color="primary" mat-dialog-close class="ml-3">
+                Close
+            </button>
+        </div>
+
+    </div>
+
+</div>

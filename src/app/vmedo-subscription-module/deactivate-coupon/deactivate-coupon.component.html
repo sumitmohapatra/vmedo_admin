@@ -1,0 +1,63 @@
+<div class="text-right  modal-header bg-danger text-white" style="
+padding-bottom: 0px;">
+  <h3>Confirmation required</h3>
+  <button mat-icon-button aria-label="close dialog" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<mat-divider></mat-divider>
+
+
+<div class="mt-4 ml-4">
+  <span style="font-size: 19px;">Are you sure you want to deactivate <span style="font-weight: 500;">{{couponName}}</span> code ?</span>
+
+</div>
+
+
+<div>
+
+  <div class="mt-4 ml-4 mb-4">
+    <button mat-raised-button color="primary" (click)="onConfirmDeactivateCouponCode()">Confirm</button>
+
+   
+      <button mat-raised-button color="warn" mat-dialog-close class="ml-3">
+        Close
+      </button>
+  
+
+  </div>
+
+  <!-- <div>
+
+    <div class="text-left col-md-4">
+
+      <mat-dialog-actions>
+        <button class="btn btn-danger cancelbutton btn-sm" mat-dialog-close>
+          Close
+        </button>
+      </mat-dialog-actions>
+    
+    
+    </div>
+    
+
+  </div> -->
+
+</div>
+
+
+
+
+
+
+
+
+<!-- <h1>Confirm to deactivate the selected package ? </h1>
+
+<button mat-raised-button color="primary" (click)="onConfirmDeactivatePackage()">Confirm</button>
+
+<br>
+
+<button class="btn  cancelbutton btn-sm" mat-dialog-close>
+    Cancel
+  </button> -->

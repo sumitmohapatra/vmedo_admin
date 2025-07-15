@@ -1,0 +1,323 @@
+<div *ngIf="userRole === 1;">
+
+    <div class="row mt-4 ml-3" style="width: 100%;">
+
+        <div class="col mb-3">
+
+            <span style="font-size: 18px;">
+                Subscription details
+            </span>
+
+            <button mat-raised-button type="submit" color="primary" class="btn btn-primary btn-sm ml-4"
+                [routerLink]="['/admin-dashboard/vmedo-subscribers-module/paid-subscribers']"
+                style=" background-color: rgb(175, 40, 40); color: white;"> View </button>
+        </div>
+
+        <div class="col mb-3 mr-4" style="text-align: end;">
+
+            <button mat-raised-button type="submit" color="primary" class="btn btn-primary btn-sm ml-4"
+                (click)="onUpdateRenewals()" style="color: white;"> Update renewals </button>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="grid-container">
+
+    <div class="vmedo-admin-enquiry-table">
+        <div style="box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;">
+
+            <div class="row modal-header col-12  text-white vmedoadmintableheader">
+
+                <div class="col-6 mt-2">
+
+                    <h2>Premium subscribers list</h2>
+
+                </div>
+
+                <!-- <div class="col-6 mt-2 mb-1 form-group" style="color:white;justify-content: flex-end;">
+                    <input class="form-control" fxFlex="50%" style="border-radius: 42px;" type="text"
+                        (keyup)="doFilter($event.target.value)" placeholder="Search users...">
+                </div> -->
+
+                <div class="col-6 mt-2 mb-1 form-group" style="color:white;justify-content: flex-end;display: flex;">
+                    <input class="form-control" fxFlex="50%" style="border-radius: 12px;" type="text"
+                        [(ngModel)]="searchValue" placeholder="Search subscriber.." (keydown.enter)="search()">
+                    <button mat-raised-button type="submit" class="btn btn-primary btn-sm ml-4"
+                        style=" background-color: rgb(175, 40, 40); color: white;"
+                        (click)="search()">Search</button>
+
+
+                    <div *ngIf="userRole === 1;">
+
+                        <button mat-raised-button class="btn btn-primary btn-sm ml-4"
+                            style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);"
+                            (click)="adminClear()">Clear</button>
+
+                    </div>
+
+                    <div *ngIf="userRole === 2;">
+                        <button mat-raised-button class="btn btn-primary btn-sm ml-4"
+                            style="background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);"
+                            (click)="clear()">Clear</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <table mat-table matSort [dataSource]="dataSource" matSortActive='registered_on' matSortDirection='desc'
+                matSort>
+
+                <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="profilePhoto">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Profile
+                            photo</strong></th>
+                    <div class="profile-card">
+                        <td mat-cell *matCellDef="let element">
+
+                            <img class="imagestyle mb-2 mt-2" [src]="element.profilePhoto" alt="Profile photo"
+                                onerror="this.src='assets/Images/user_profile.png';" jLightbox />
+
+                            <!-- <img class="imagestyle mb-2 mt-2" [src]="element.profilePhoto" alt="Profile photo"> -->
+
+                        </td>
+                    </div>
+                </ng-container>
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="registered_on">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Registered On
+                        </strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.registered_on | date:medium}} </td>
+                </ng-container>
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="uName">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Username</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.uName}} </td>
+                </ng-container>
+
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="uMobile">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Mobile
+                            Number</strong></th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.uMobile}} </td>
+                </ng-container>
+
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="uEmail">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Email</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.uEmail}} </td>
+                </ng-container>
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="uType">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Type</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.uType}} </td>
+                </ng-container>
+
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="uStatus">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Status</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.uStatus ? '&#10003;' :
+                        '&#10005;'}} </td>
+
+                </ng-container>
+
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="mobileVerified">
+                    <th class="headerstyle" style="text-align: center;" mat-header-cell *matHeaderCellDef
+                        mat-sort-header><strong> Mobile verified
+                        </strong></th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.mobileVerified ?
+                        '&#10003;' : '&#10005;'}} </td>
+                </ng-container>
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="emailVerified">
+                    <th class="headerstyle" style="text-align: center;" mat-header-cell *matHeaderCellDef
+                        mat-sort-header><strong> Email Verified
+                        </strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.emailVerified ?
+                        '&#10003;' : '&#10005;'}} </td>
+                </ng-container>
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="isPaidMember">
+                    <th class="headerstyle" style="text-align: center;" mat-header-cell *matHeaderCellDef
+                        mat-sort-header><strong> Package name
+                        </strong>
+                    </th>
+
+                    <td mat-cell *matCellDef="let element" style="text-align: center; font-weight: 500;">
+
+                        <!-- <button mat-raised-button color="warn"> 
+                            {{element.isPaidMember ? 'Premium' : 'Default'}}
+                        </button> -->
+
+                        {{element.isPaidMember ? element.packageName : 'Default'}}
+
+                        <!-- <button mat-raised-button style="font-size: 12px;" class="custom-button"
+                            [ngClass]="{'yellow-button': element.isPaidMember}">
+                            {{element.isPaidMember ? element.packageName : 'Default'}}
+                        </button> -->
+
+                </ng-container>
+
+
+                <!-- <ng-container matColumnDef="packageName">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Subscription</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.packageName? element.packageName:'Default'}} </td>
+                </ng-container> -->
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="isDoner">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Is Blood donor
+                        </strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;">
+
+                        <button mat-stroked-button  color="primary" class="btn-sm"
+                            style="height: fit-content; font-size: 12px;" type="submit"
+                            (click)="onBloodDonation(element.userID)">
+                            {{element.isDoner ? 'yes' : 'no'}}
+                        </button>
+
+                </ng-container>
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="hasEID">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Emergency ID
+                        </strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;">
+
+                        <button mat-stroked-button color="primary" class="btn-sm"
+                            style="height: fit-content; font-size: 12px;" type="submit"
+                            (click)="onEmergencyID(element.userID)">
+                            {{element.hasEID ? 'yes' : 'no'}}
+                        </button>
+
+                    </td>
+                </ng-container>
+
+                <!-- <ng-container matColumnDef="packagevalid_till">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Valid till</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{ calculateDaysLeft(element.packagevalid_till) }} Days
+                      </td>
+                
+                </ng-container> -->
+
+                <!-- <td mat-cell *matCellDef="let element"> {{element.packagevalid_till | date : medium}} </td> -->
+
+                <!-- <ng-container matColumnDef="packagevalid_till">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Days Left</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element"
+                        [ngStyle]="{'color': calculateDaysLeftColor(element.packagevalid_till)}">
+                        {{ calculateDaysLeft(element.packagevalid_till) }} days
+                    </td>
+                </ng-container> -->
+
+                <ng-container matColumnDef="packagevalid_till">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Validity</strong></th>
+                    <td mat-cell *matCellDef="let element" [ngStyle]="getDaysLeftStyles(element.packagevalid_till)">
+                    <b> {{ calculateDaysLeft(element.packagevalid_till) }} </b> 
+                    </td>
+                  </ng-container>
+
+                <!-- Users Details -->
+                <ng-container [matColumnDef]="'actions'" hidden>
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef><strong>Actions</strong> </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button class="mr-3" mat-icon-button matTooltip="Details">
+                            <button type="button" class="btn btn-danger btn-sm"
+                                (click)="emergencyID(element.userID)">Details</button>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+
+            <table>
+                <tr *ngIf="!dataSource?.data?.length">
+                    <td style="text-align: center;" [attr.colspan]="displayedColumns?.length">
+                        <div class="mt-2">
+                            <h3>Search for the subscriber to get the details</h3>
+                        </div>
+
+                    </td>
+                </tr>
+            </table>
+
+
+            <div *ngIf="userRole === 1;">
+                <div class="mt-3 mb-3 mr-3" style="text-align: right;padding: 10px;">
+
+                    <span style="font-size: 0.85rem; font-weight: 500;"> Page : {{currentPage + 1 }}</span>
+
+                    <button class="mb-3 ml-3 mr-3" mat-stroked-button color="basic" (click)="handlePreviousClick()" style="margin: 0px 10px !important;">
+                        <span style="font-size: 13px;">
+                            <mat-icon style="vertical-align: middle;">keyboard_arrow_left</mat-icon>
+                            Previous
+                        </span>
+                    </button>
+
+                    <button mat-stroked-button color="basic" (click)="handleNextClick()">
+
+                        <span style="font-size: 13px;">
+                            Next
+                            <mat-icon style="vertical-align: middle;">keyboard_arrow_right</mat-icon> </span>
+
+                    </button>
+
+
+
+                </div>
+            </div>
+
+
+
+
+
+
+            <!-- paginator original -->
+
+            <!-- <mat-paginator [length]="totalUsers" [pageSize]="15" [pageSizeOptions]="[15]"></mat-paginator>
+
+            <button mat-button (click)="handlePreviousClick()" matTooltip="Previous Page">
+                <mat-icon>keyboard_arrow_left</mat-icon>
+            </button>
+
+            <button mat-button (click)="handleNextClick()" matTooltip="Next Page">
+                <mat-icon>keyboard_arrow_right</mat-icon>
+            </button> -->
+
+        </div>
+
+    </div>
+</div>

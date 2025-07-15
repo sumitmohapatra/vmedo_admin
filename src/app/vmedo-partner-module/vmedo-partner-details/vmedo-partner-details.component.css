@@ -1,0 +1,85 @@
+.corporate-logo {
+  height: 40px;
+  width: 40px;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 5px solid rgb(233, 229, 229);
+  background-size: cover;
+  background-position: center center;
+}
+
+/* .container {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  text-align: center; 
+} */
+
+.corporate-logo {
+  max-width: 100%; /* Ensure the image doesn't overflow */
+  margin-bottom: 10px; /* Add spacing between image and table */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+/* Style for the camera icon */
+.camera-icon {
+position: absolute;
+bottom: 5px; /* Adjust this value to position the icon as needed */
+right: 5px; /* Adjust this value to position the icon as needed */
+background-color: rgba(255, 255, 255, 0.8);
+padding: 5px;
+border-radius: 50%;
+cursor: pointer;
+color: #333; /* Icon color */
+font-size: 20px; /* Adjust the font size as needed */
+}
+
+/* Container for the image and camera icon */
+.image-container {
+position: relative;
+display: inline-block;
+}
+
+
+/* Green text color for 'Registered' status */
+.green-value {
+  color: green;
+}
+
+/* Red text color for 'Unregistered' status */
+.red-value {
+  color: red;
+}
+
+/* You can define additional styles for 'Black' status if needed */
+.black-value {
+  color: black;
+}
+.dialog-content-container {
+  max-height: 265px; /* Set your desired maximum height */
+  overflow-y: auto; /* Enable vertical scrolling if content overflows */
+  overflow-x: hidden;
+}

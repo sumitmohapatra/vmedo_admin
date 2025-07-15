@@ -1,0 +1,43 @@
+<div class="text-right  modal-header bg-danger text-white" style="
+padding-bottom: 0px;">
+  <h3>Created by user details</h3>
+  <button mat-icon-button aria-label="close dialog" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<mat-divider></mat-divider>
+<br>
+
+<div class="container">
+
+<table class="table table-light table-striped">
+  <thead>
+    <tr>
+      
+      <th scope="col" style="font-weight: 500;">Username</th>
+      <th scope="col" style="font-weight: 500;">Mobile number</th>
+      <th scope="col" style="font-weight: 500;">Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{userDetails.userName}}</td>
+      <td>{{userDetails.userMobile}}</td>
+      <td>{{userDetails.userEmail}}</td>
+    </tr>
+
+  </tbody>
+</table>
+
+</div>
+
+<div class="text-right col-md-4">
+
+  <mat-dialog-actions>
+    <button class="btn btn-danger cancelbutton btn-sm" mat-dialog-close>
+      Close
+    </button>
+  </mat-dialog-actions>
+
+
+</div>

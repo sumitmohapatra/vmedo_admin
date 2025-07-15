@@ -1,0 +1,117 @@
+<div class="text-right  modal-header bg-danger text-white" style="
+  padding-bottom: 0px;">
+    <h3>Edit corporate details</h3>
+    <button mat-icon-button aria-label="close dialog" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+<mat-divider></mat-divider>
+
+
+<div class="container mt-4" style="display: flex; justify-content: center;">
+
+
+    <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm);myForm.reset();">
+
+        <div hidden>
+
+            <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>ID</mat-label>
+
+                <input matInput placeholder="ID" type="text" [(ngModel)]="CorporatesData.organisationID" name="organisationID" required>
+            </mat-form-field>
+
+        </div>
+                                                                                                                                                                                                                                                 
+        <div>
+
+            <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>Enter corporate name</mat-label>
+
+                <input matInput placeholder="Corporate name" type="text" [(ngModel)]="CorporatesData.organisationName" name="organisationName" required>
+            </mat-form-field>
+
+        </div>
+
+        <div>
+
+            <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>Enter corporate email</mat-label>
+
+                <input matInput placeholder="Corporate Email" type="text" [(ngModel)]="CorporatesData.organisationEmail" name="organisationEmail" required>
+            </mat-form-field>
+
+        </div>
+
+        <div>
+
+            <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>Enter corporate shortcode</mat-label>
+
+                <input matInput placeholder="Short code" type="text" [(ngModel)]="CorporatesData.organisationShortcode" name="organisationShortcode" required>
+            </mat-form-field>
+
+        </div>
+
+        <div>
+
+            
+
+                <mat-form-field appearance="outline" fxFlex="100">
+                  <mat-label>Select corporate type</mat-label>
+        
+                  <mat-select ngModel [(ngModel)]="selectedUserRole" name="organisationType"  >
+                    <mat-option *ngFor="let corporatevalue of adminRoleListData" [value]="corporatevalue.id">
+                        {{corporatevalue.type_name}}
+                    </mat-option>
+                  </mat-select>
+
+                </mat-form-field>
+        
+             
+
+            <!-- <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>Select corporate type</mat-label>
+
+                <input matInput placeholder="Package name" type="text" ngModel name="organisationType" required>
+            </mat-form-field> -->
+
+        </div>
+
+        <div>
+            <mat-form-field appearance="outline" fxFlex="100" class="mr-2">
+                <mat-label>{{CorporatesData.organisationStatus ? 'Active' : 'Deactive'}}</mat-label>
+                <mat-select ngModel [(ngModel)]="CorporatesData.organisationStatus" name="organisationStatus">
+                    <mat-option *ngFor="let status of corporateStatus" [value]="status.id">
+                        {{status.value}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    
+
+        <div>
+            <input type="file" (change)="handleFileInput($event.target.files)" name="file" required>
+
+        </div>
+
+
+
+        <div>
+
+            <div class="mt-3 ml-4 mb-4">
+                <button mat-raised-button type="submit" color="primary">Save</button>
+
+
+                <button mat-raised-button color="warn" mat-dialog-close class="ml-3">
+                    Cancel
+                </button>
+
+
+            </div>
+
+        </div>
+
+    </form>
+
+</div>

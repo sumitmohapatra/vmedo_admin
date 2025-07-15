@@ -1,0 +1,495 @@
+<div>
+
+</div>
+
+<div class="grid-container">
+
+    <div class="container">
+        <form #searchVmedoPartnerForm="ngForm" (ngSubmit)="searchVmedoPartnerFormData(searchVmedoPartnerForm.value)">
+            <div class="row" style="justify-content: space-between;">
+
+                <div class="text-center justify-content-center col-md-2">
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Select partner type</mat-label>
+
+                        <mat-select ngModel name="partner_type">
+                            <mat-option value="0">All Partners</mat-option>
+                            <mat-option *ngFor="let partnerType of PartnerTypeDetails?.objorg" [value]="partnerType.id">
+                                {{partnerType.type_name}}
+                            </mat-option>
+                        </mat-select>
+
+                    </mat-form-field>
+
+                </div>
+
+                <div class="text-center justify-content-center col-md-4 ml-5">
+
+                    <mat-form-field appearance="outline" fxFlex="95">
+
+                        <input type="text" placeholder="Search Locations" matInput [formControl]="inputValue"
+                            [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let location of filteredLocations | async"
+                                [value]="location.description" (onSelectionChange)="optionSelected(location)">
+                                {{ location.description }}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+
+                </div>
+
+                <div class="text-left justify-content-left col-md-2">
+
+                    <mat-form-field appearance="outline" fxFlex="90">
+                        <mat-label>Range in km</mat-label>
+                        <input matInput placeholder="Enter in km" [(ngModel)]="search_Range" type="number"
+                            name="search_Range">
+                    </mat-form-field>
+
+                </div>
+
+                <div style="margin-top: 10px;margin-left: 40px;">
+
+                    <button  #submitButton type="submit" mat-flat-button color="warn" class="ml-2"
+                        [disabled]="!searchVmedoPartnerForm.valid" >Search
+                        partner</button>
+
+
+                    <button type="button" class="ml-3" style="margin-top: 2%;" mat-raised-button color="primary"
+                        (click)="clear()">Clear</button>
+
+                </div>
+
+            </div>
+
+            <div class="row ml-2" hidden>
+
+                <div class="col-3">
+                    <mat-form-field appearance="outline" fxFlex="90">
+                        <mat-label>Latitude</mat-label>
+                        <input matInput placeholder="Enter latitude" [(ngModel)]="latitude" name="latitude">
+                    </mat-form-field>
+                </div>
+                <div class="col-3">
+                    <mat-form-field appearance="outline" fxFlex="90">
+                        <mat-label>Longitude</mat-label>
+                        <input matInput placeholder="Enter Longitude" [(ngModel)]="longitude" name="longitude">
+                    </mat-form-field>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+
+    <div class="container" [hidden]="!listView">
+        <div class="row mt-2 mb-2">
+
+            <div class="col-4">
+                <button type="button" mat-stroked-button color="primary" (click)="displayMapView()">Click to
+                    display
+                    map view</button>
+            </div>
+
+
+            <div class="col mt-1" style="text-align: left;">
+                <h3 style="color:#0f4c76">"{{dataSource.data?.length}} results found in {{sourceRange}}km range"</h3>
+            </div>
+
+        </div>
+
+        <div class="vmedo-admin-enquiry-table">
+            <div class="mat-elevation-z8">
+
+                <div class="row modal-header col-12  text-white vmedoadmintableheader">
+
+                    <div class="col-6 mt-2">
+
+                        <h2>VMEDO partners search list </h2>
+
+                    </div>
+
+                    <div class="col-6 mt-2 mb-1 form-group" style="color:white;justify-content: flex-end;">
+                        <input class="form-control" fxFlex="50%" style="border-radius: 12px;" type="text"
+                            (keyup)="doFilter($event.target.value)" placeholder="Search VMEDO partner...">
+                    </div>
+
+                </div>
+
+
+
+                <table mat-table matSort [dataSource]="dataSource" matSortActive='partner_distance'
+                    matSortDirection='asc' matSort>
+
+
+                    <!-- Enquired By Column -->
+                    <ng-container matColumnDef="id">
+                        <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Sl no
+                            </strong>
+                        </th>
+                        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="partner_typeID">
+                        <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Partner
+                                type</strong></th>
+                        <td mat-cell *matCellDef="let element" style="text-align: center; width: 15%;">
+    
+                            <ng-container *ngIf="element.partner_typeID=== 1; else labIcon">
+                                <img src="assets/Images/vmedo_hospital_icon.png" alt="Hospital Icon"
+                                    style="height:15%; width: 15%;" />
+                            </ng-container>
+    
+                            <ng-template #labIcon>
+                                <ng-container *ngIf="element.partner_typeID=== 2; else ambulanceIcon">
+                                    <img src="assets/Images/vmedo_labs_icon.png" alt="Lab Icon"
+                                        style="height:15%; width: 15%;" />
+                                </ng-container>
+    
+                            </ng-template>
+    
+                            <ng-template #ambulanceIcon>
+                                <ng-container *ngIf="element.partner_typeID=== 3; else homeHealthcareIcon">
+                                    <img src="assets/Images/vmedo_ambulance_icon.png" alt="Ambulance Icon"
+                                        style="height:15%; width: 15%;" />
+                                </ng-container>
+                            </ng-template>
+    
+                            <ng-template #homeHealthcareIcon>
+                                <img src="assets/Images/vmedo-home-healthcare-icon.png" alt="Home healthcare Icon"
+                                    style="height:15%; width: 15%;" />
+                            </ng-template>
+    
+                        </td>
+                    </ng-container>
+
+
+                    <!-- Enquired By Column -->
+                    <ng-container matColumnDef="partnerorg_name">
+                        <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Name</strong>
+                        </th>
+                        <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.partnerorg_name}}
+                        </td>
+                    </ng-container>
+
+
+                    <!-- Enquired By Column -->
+                    <ng-container matColumnDef="partnerorg_email">
+                        <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Email</strong>
+                        </th>
+                        <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.partnerorg_email}}
+                        </td>
+                    </ng-container>
+
+
+                    <!-- Enquired By Column -->
+                    <ng-container matColumnDef="partnerorg_primaryphone">
+                        <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Primary
+                                phone</strong>
+                        </th>
+                        <td mat-cell *matCellDef="let element" style="text-align: center;">
+                            {{element.partnerorg_primaryphone}} </td>
+                    </ng-container>
+
+                    <!-- Enquired By Column -->
+                    <ng-container matColumnDef="partnerorg_secondaryphone">
+                        <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Secondary
+                                phone</strong>
+                        </th>
+                        <td mat-cell *matCellDef="let element" style="text-align: center;">
+                            {{element.partnerorg_secondaryphone}} </td>
+                    </ng-container>
+
+                    <!-- Enquired By Column -->
+                    <ng-container matColumnDef="partnerorg_address">
+                        <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            <strong>Address</strong>
+                        </th>
+                        <td mat-cell *matCellDef="let element" style="text-align: center;">
+                            {{element.partnerorg_address}}
+                        </td>
+                    </ng-container>
+
+                    <!-- Enquired By Column -->
+                    <!-- <ng-container matColumnDef="partnerorg_services">
+                        <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Service
+                                details</strong>
+                        </th>
+                        <td mat-cell *matCellDef="let element" style="text-align: center;">
+                            {{element.partnerorg_services}}
+                        </td>
+                    </ng-container> -->
+
+                    <!-- Enquired By Column -->
+                    <ng-container matColumnDef="partner_distance">
+                        <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header>
+                            <strong>Distance</strong>
+                        </th>
+                        <td mat-cell *matCellDef="let element"
+                            style="text-align: center; font-weight: 500; color: #ce2424;"> {{element.partner_distance |
+                            number:'1.2-2'}}km
+                        </td>
+                    </ng-container>
+
+                    <!-- Enquired By Column -->
+                    <ng-container matColumnDef="partner_status">
+                        <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>
+                                Status</strong>
+                        </th>
+
+                        <td mat-cell *matCellDef="let element" [ngClass]="{
+                            'green-value': element.partner_status === 1,
+                            'red-value': element.partner_status === 2,
+                            'black-value': element.partner_status === 3
+                          }" style="font-weight: 500;">
+                            {{element.partner_status === 1 ? 'Registered' : element.partner_status === 2 ?
+                            'Unregistered' :
+                            'Blocked'}}
+                        </td>
+
+                    </ng-container>
+
+                    <ng-container [matColumnDef]="'actions'">
+                        <th class="headerstyle" mat-header-cell *matHeaderCellDef><strong>Actions</strong> </th>
+                        <td mat-cell *matCellDef="let element" style="text-align: center;">
+
+                            <button mat-raised-button type="submit" (click)="getVmedoPartnerDetails(element.id)"
+                                style="height: fit-content; background-color: #ce2424; color: white;"> Details</button>
+
+
+                        </td>
+                    </ng-container>
+
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                </table>
+
+                <table>
+                    <tr *ngIf="!dataSource?.data?.length">
+                        <td style="text-align: center;" [attr.colspan]="displayedColumns?.length">
+                            <div class="mt-2">
+                                <h3>Search for the partner to get the details</h3>
+                            </div>
+
+                        </td>
+                    </tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[50, 100, 250]" showFirstLastButtons
+                    aria-label="Select page of periodic elements">
+                </mat-paginator>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- map.component.html -->
+
+<div class="mb-3" [hidden]="!mapView">
+
+    <!-- [hidden]="!isDivVisible2" -->
+
+    <div class="container">
+
+        <div class="row mt-2 mb-2">
+
+            <div class="col-4">
+                <button type="button" mat-stroked-button color="primary" (click)="displayListView()">Click to
+                    display
+                    list view</button>
+            </div>
+
+
+
+            <div class="col mt-1" style="text-align: left;">
+                <h3 style="color:#0f4c76">"{{dataSource.data?.length}} results found in {{sourceRange}}km range"</h3>
+            </div>
+
+        </div>
+
+        <!-- <div class="row mt-2 mb-2 ml-2">
+
+            <button type="button" mat-stroked-button color="primary" (click)="toggleDivVisibility()">Click to display
+                list view</button>
+
+        </div> -->
+
+
+        <!-- AGM Map with icons -->
+         <div [hidden]="locations.length == 0">
+            <div #mapContainer id="map" style="height: 500px; width: 100%;"></div>      
+        </div>
+
+      
+        <!-- <agm-map [latitude]="sourceLatitude" [longitude]="sourceLongitude" [zoom]="11.1">
+
+            <agm-marker [latitude]="sourceLatitude" [longitude]="sourceLongitude"
+                [iconUrl]="'assets/Partner-Icons/source_marker.png'"></agm-marker>
+
+            <ng-container *ngFor="let location of locations">
+                <ng-container [ngSwitch]="location.partnerTypeId">
+
+
+                    <agm-marker [latitude]="location.latitude" [longitude]="location.longitude"
+                        [iconUrl]="getIconUrl(location.partnerStatus, location.partnerTypeId)"
+                        *ngIf="location.partnerTypeId === 1"  (markerClick)="agmWindow(infoWindow)">
+
+                        <agm-info-window #infoWindow [disableAutoPan]="false">
+
+                            <div>
+                                <span style="font-weight: 500;">{{ location.name }} ({{location.distance| number:'1.2-2'}} Km)
+                                </span> <br>
+        
+                                <span style="font-weight: 500;"
+                                    [ngClass]="{'registered-text': location.partnerStatus === 1, 'unregistered-text': location.partnerStatus === 2}">
+                                    {{ location.partnerStatus === 1 ? 'Registered' : 'Unregistered' }}
+                                </span>
+                                <br>
+                                <br>
+        
+                                <span style="font-weight: 500;" class="custom-margin">Primary
+                                    Phone</span> - {{location.primaryPhone}} <br>
+                                <span style="font-weight: 500;">Secondary phone</span> - {{location.secondaryPhone}} <br>
+                                <span style="font-weight: 500;">Email</span> - {{location.email}} <br>
+        
+                                <br>
+                                <span style="font-weight: 500;">Services</span> - {{location.services}} <br>
+        
+                                <br>
+        
+                        
+                            </div>
+                        </agm-info-window>
+                    </agm-marker>
+
+                    <agm-marker [latitude]="location.latitude" [longitude]="location.longitude"
+                        [iconUrl]="getIconUrl(location.partnerStatus, location.partnerTypeId)"
+                        *ngIf="location.partnerTypeId === 2"  (markerClick)="agmWindow(infoWindow)">
+
+                        <agm-info-window #infoWindow [disableAutoPan]="false">
+
+                            <div>
+                                <span style="font-weight: 500;">{{ location.name }} ({{location.distance| number:'1.2-2'}} Km)
+                                </span> <br>
+        
+                                <span style="font-weight: 500;"
+                                    [ngClass]="{'registered-text': location.partnerStatus === 1, 'unregistered-text': location.partnerStatus === 2}">
+                                    {{ location.partnerStatus === 1 ? 'Registered' : 'Unregistered' }}
+                                </span>
+                                <br>
+                                <br>
+        
+                                <span style="font-weight: 500;" class="custom-margin">Primary
+                                    Phone</span> - {{location.primaryPhone}} <br>
+                                <span style="font-weight: 500;">Secondary phone</span> - {{location.secondaryPhone}} <br>
+                                <span style="font-weight: 500;">Email</span> - {{location.email}} <br>
+        
+                                <br>
+                                <span style="font-weight: 500;">Services</span> - {{location.services}} <br>
+        
+                                <br>
+        
+                        
+                            </div>
+                        </agm-info-window>
+                    </agm-marker>
+
+                    <agm-marker [latitude]="location.latitude" [longitude]="location.longitude"
+                        [iconUrl]="getIconUrl(location.partnerStatus, location.partnerTypeId)"
+                        *ngIf="location.partnerTypeId === 3"   (markerClick)="agmWindow(infoWindow)">
+
+                        <agm-info-window #infoWindow [disableAutoPan]="false">
+
+                            <div>
+                                <span style="font-weight: 500;">{{ location.name }} ({{location.distance| number:'1.2-2'}} Km)
+                                </span> <br>
+        
+                                <span style="font-weight: 500;"
+                                    [ngClass]="{'registered-text': location.partnerStatus === 1, 'unregistered-text': location.partnerStatus === 2}">
+                                    {{ location.partnerStatus === 1 ? 'Registered' : 'Unregistered' }}
+                                </span>
+                                <br>
+                                <br>
+        
+                                <span style="font-weight: 500;" class="custom-margin">Primary
+                                    Phone</span> - {{location.primaryPhone}} <br>
+                                <span style="font-weight: 500;">Secondary phone</span> - {{location.secondaryPhone}} <br>
+                                <span style="font-weight: 500;">Email</span> - {{location.email}} <br>
+        
+                                <br>
+                                <span style="font-weight: 500;">Services</span> - {{location.services}} <br>
+        
+                                <br>
+        
+                        
+                            </div>
+                        </agm-info-window>
+                    </agm-marker>
+
+                    <agm-marker [latitude]="location.latitude" [longitude]="location.longitude"
+                        [iconUrl]="getIconUrl(location.partnerStatus, location.partnerTypeId)"
+                        *ngIf="location.partnerTypeId === 4"   (markerClick)="agmWindow(infoWindow)">
+
+                        <agm-info-window #infoWindow [disableAutoPan]="false">
+
+                            <div>
+                                <span style="font-weight: 500;">{{ location.name }} ({{location.distance| number:'1.2-2'}} Km)
+                                </span> <br>
+        
+                                <span style="font-weight: 500;"
+                                    [ngClass]="{'registered-text': location.partnerStatus === 1, 'unregistered-text': location.partnerStatus === 2}">
+                                    {{ location.partnerStatus === 1 ? 'Registered' : 'Unregistered' }}
+                                </span>
+                                <br>
+                                <br>
+        
+                                <span style="font-weight: 500;" class="custom-margin">Primary
+                                    Phone</span> - {{location.primaryPhone}} <br>
+                                <span style="font-weight: 500;">Secondary phone</span> - {{location.secondaryPhone}} <br>
+                                <span style="font-weight: 500;">Email</span> - {{location.email}} <br>
+        
+                                <br>
+                                <span style="font-weight: 500;">Services</span> - {{location.services}} <br>
+        
+                                <br>
+        
+                        
+                            </div>
+                        </agm-info-window>
+                    </agm-marker>
+
+                    
+                </ng-container>
+
+
+                
+            </ng-container>
+
+            <agm-circle [latitude]="sourceLatitude" [longitude]="sourceLongitude" [fillColor]="'grey'"
+                [circleDraggable]="false" [editable]="true" (radiusChange)="onRadiusChange($event)"
+                [radius]="sourceRange * 1000"></agm-circle>
+
+
+        </agm-map> -->
+
+
+
+        <!-- AGM Map with icons -->
+
+    </div>
+
+
+</div>

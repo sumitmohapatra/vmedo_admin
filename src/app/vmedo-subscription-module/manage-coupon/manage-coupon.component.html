@@ -1,0 +1,134 @@
+<div class="row mt-3 ml-1" style="width: 45%;">
+    <!-- <div class="col">
+      <h3>Manage Coupon Codes</h3>
+    </div> -->
+  
+    <div class="col mt-1 mb-3">
+      <button mat-raised-button type="submit" color="primary" class="btn btn-primary btn-sm ml-4"
+      (click)="onCreateCoupon()" style="" > + Add New Coupon</button>
+    </div>
+     
+    </div>
+  
+  
+    
+    <mat-divider></mat-divider>
+  
+    <div class="grid-container">
+  
+      <div class="vmedo-admin-enquiry-table">
+          <div style="box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;">
+  
+              <div class="row modal-header col-12  text-white vmedoadmintableheader">
+  
+                  <div class="col-6 mt-2">
+  
+                      <h2>Manage Coupon  - {{dataSource.data?.length}}</h2>
+  
+                  </div>
+  
+                  <div class="col-6 mt-2 mb-1 form-group" style="color:white;justify-content: flex-end;">
+                      <input class="form-control" fxFlex="50%" style="border-radius: 12px;" type="text"
+                          (keyup)="doFilter($event.target.value)" placeholder="Search...">
+                  </div>
+  
+              </div>
+  
+  
+              <table mat-table matSort [dataSource]="dataSource">
+  
+  
+                <ng-container matColumnDef="id">
+                  <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Sl no</strong>
+                  </th>
+                  <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+              </ng-container>
+                 
+                  <ng-container matColumnDef="couponName">
+                      <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Coupon Name</strong>
+                      </th>
+                      <td mat-cell *matCellDef="let element"> {{element.couponName}} </td>
+                  </ng-container>
+  
+  
+                  
+                  <ng-container matColumnDef="discountType">
+                      <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>
+                        Discount type</strong></th>
+                      <td mat-cell *matCellDef="let element"> {{element.discountType===1 ? 'Flat discount':'Percentage'}} </td>
+                  </ng-container>
+  
+  
+                  
+                  <ng-container matColumnDef="totalCoupon">
+                      <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Total coupon</strong>
+                      </th>
+                      <td mat-cell *matCellDef="let element"> {{element.couponUsed}} /  {{element.totalCoupon}}</td>
+                  </ng-container>
+  
+                
+                  <ng-container matColumnDef="couponDiscount">
+                      <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Coupon discount</strong>
+                      </th>
+                      <td mat-cell *matCellDef="let element"> {{element.couponDiscount}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="couponValidty">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Coupon validity</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.couponValidty | date : medium}}</td>
+                </ng-container>
+  
+                 
+                  <ng-container matColumnDef="couponStatus">
+                      <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Coupon Status</strong>
+                      </th>
+                      <td mat-cell *matCellDef="let element" [ngClass]="{'false-value': element.couponStatus === false, 'true-value': element.couponStatus === true}" style="font-weight: 500;"> {{element.couponStatus ? 'Active' : 'Inactive'}} </td>
+                  
+                    </ng-container>
+  
+                  <ng-container matColumnDef="added_on">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Created on</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.added_on | date : medium}} </td>
+                </ng-container>
+  
+  
+                  
+                  <ng-container [matColumnDef]="'actions'">
+                      <th class="headerstyle" mat-header-cell *matHeaderCellDef><strong>Actions</strong> </th>
+                      <td mat-cell *matCellDef="let element">
+                          
+                          <button mat-raised-button color="primary" [disabled]="element.couponStatus === true" (click)="onActivateCoupon(element.id,element.couponName)">Activate</button>
+  
+                          <button class="ml-2" mat-raised-button color="warn" [disabled]="element.couponStatus === false" (click)="onDeactivateCoupon(element.id,element.couponName)">Deactivate</button>
+                         
+
+                       
+                            <mat-icon mat-icon-button (click)="couponAccessed(element.couponName)" 
+                            class="ml-3"
+                            color='primary'
+                             style="font-size: 22px;">visibility</mat-icon>
+                        
+                          
+                      </td>
+                  </ng-container>
+  
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+              </table>
+  
+              <mat-paginator [pageSizeOptions]="[15, 30, 50]" showFirstLastButtons
+                  aria-label="Select page of periodic elements">
+              </mat-paginator>
+  
+  
+          </div>
+  
+      </div>
+  </div>
+  
+  <mat-divider></mat-divider>
+  
+  

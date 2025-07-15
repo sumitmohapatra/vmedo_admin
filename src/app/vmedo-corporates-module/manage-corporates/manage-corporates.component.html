@@ -1,0 +1,156 @@
+<div class="row mt-3 ml-1" style="width: 45%;">
+    <!-- <div class="col">
+      <h3>Manage Coupon Codes</h3>
+    </div> -->
+
+    <div class="col mt-1 mb-3">
+
+        <span style="font-weight: 500;">Create new corporate</span>
+        <button mat-raised-button type="submit" color="primary" class="btn-sm ml-4"
+            (click)="CreateCorporate()" style="box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;"> + create</button>
+    </div>
+
+    <!-- <div class="col mt-1 mb-3">
+        <button mat-raised-button type="submit"  class="btn btn-primary btn-sm ml-4"
+        routerLink="/admindashboard/manage-corporate-plan" routerLinkActive="active" style="height: fit-content; background-color: #cb4141;color: white;"> Manage Corporate Plans -></button>
+    </div> -->
+
+</div>
+
+
+<div class="grid-container">
+
+    <div class="vmedo-admin-enquiry-table">
+        <div style="box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;">
+
+            <div class="row modal-header col-12  text-white vmedoadmintableheader">
+
+                <div class="col-6 mt-2">
+
+                    <h2>Registered corporates - {{dataSource.data?.length}}</h2>
+
+                </div>
+
+                <div class="col-6 mt-2 mb-1 form-group" style="color:white;justify-content: flex-end;">
+                    <input class="form-control" fxFlex="50%" style="border-radius: 12px;" type="text"
+                        (keyup)="doFilter($event.target.value)" placeholder="Search corporate...">
+                </div>
+
+            </div>
+
+
+            <table mat-table matSort [dataSource]="dataSource" matSortActive='organisationID' matSort>
+
+                <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="organisationID">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>ID</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.organisationID}} </td>
+                </ng-container>
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="organisationLogo">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Logo
+                        </strong></th>
+                    <div class="profile-card">
+                        <td mat-cell *matCellDef="let element">
+
+                            <img class="imagestyle mb-2 mt-2" [src]="element.organisationLogo" alt="Profile photo"
+                                onerror="this.src='assets/Images/corporate-icon.png';" jLightbox />
+
+                            <!-- <img class="imagestyle mb-2 mt-2" [src]="element.profilePhoto" alt="Profile photo"> -->
+
+                        </td>
+                    </div>
+                </ng-container>
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="added_on">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Registered On
+                        </strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.added_on | date:medium}} </td>
+                </ng-container>
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="organisationName">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Corporate
+                            Name</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.organisationName}}
+                    </td>
+                </ng-container>
+
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="organisationEmail">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Email
+                        </strong></th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.organisationEmail}}
+                    </td>
+                </ng-container>
+
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="organisationShortcode">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        <strong>Short Code</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;">
+                        {{element.organisationShortcode}} </td>
+                </ng-container>
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="organisationType">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        <strong>Corporate Type</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{ getCorporateType(element.organisationType) }}
+                    </td>
+                </ng-container>
+
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="organisationStatus">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>
+                            Active Status</strong>
+                    </th>
+
+                    <td mat-cell *matCellDef="let element"
+                        [ngClass]="{'false-value': element.organisationStatus === false, 'true-value': element.organisationStatus === true}"
+                        style="font-weight: 500;"> {{element.organisationStatus ? 'Active' : 'Inactive'}} </td>
+
+                    <!-- <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.organisationStatus ? '&#10003;' :
+                        '&#10005;'}} </td> -->
+
+                </ng-container>
+
+
+                <!-- Users Details -->
+                <ng-container [matColumnDef]="'actions'" hidden>
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef><strong>Actions</strong> </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button class="mr-3" mat-icon-button matTooltip="Edit" style="width: auto;">
+                            <button type="button" class="btn btn-danger btn-sm"
+                                (click)="UpdateCorporate(element)">Edit details</button>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[50, 100, 250]" showFirstLastButtons
+                aria-label="Select page of periodic elements">
+            </mat-paginator>
+
+
+        </div>
+
+    </div>
+</div>

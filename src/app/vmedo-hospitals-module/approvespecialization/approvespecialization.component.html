@@ -1,0 +1,161 @@
+<!---------------------Approve or pending specialization------------------------>
+
+<div class="row mt-2">
+
+    <div class="col-12 text-align">
+
+        <div class="tablealign">
+
+            <div class="mat-elevation-z8">
+                <div class="example-header">
+
+                    <div class="row modal-header col-12  text-white hospitalbedstableheader">
+
+                        <div class="col mt-2">
+
+                            <h2>Approve specialization</h2>
+
+                        </div>
+
+
+                        <!-- <div class="col-6 mt-3 form-group" style="color:white;justify-content: flex-end;">
+                        <input class="form-control" fxFlex="50%" style="border-radius: 42px;" type="text"
+                            (keyup)="applyFilter($event.target.value)" placeholder="Search specialization...">
+
+                    </div> -->
+
+                    </div>
+
+                    <table mat-table [dataSource]="specializationDataSource" matSort class="col-md-12" matSort>
+
+                        <!-- Bed Type Column -->
+                        <ng-container matColumnDef="id">
+                            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>ID
+                                </strong>
+                            </th>
+                            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                        </ng-container>
+
+                        <!-- Total Beds Column -->
+                        <ng-container matColumnDef="hospitalID" > 
+                            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>
+                                hospitalID</strong> </th>
+                            <td mat-cell *matCellDef="let element"> {{element.hospitalID}} </td>
+                        </ng-container>
+
+                        <!-- Beds Available  Column -->
+                        <ng-container matColumnDef="hospitalName">
+                            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                <strong>Hospital Name
+                                </strong>
+                            </th>
+                            <td mat-cell *matCellDef="let element"> {{element.hospitalName}} </td>
+                        </ng-container>
+
+                        <!-- Beds Available  Column -->
+                        <ng-container matColumnDef="aStatus">
+                            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                <strong>Status
+                                </strong>
+                            </th>
+                            <td mat-cell *matCellDef="let element"> {{element.aStatus}} </td>
+                        </ng-container>
+
+                        <!-- Beds Available  Column -->
+                        <ng-container matColumnDef="spilizationName">
+                            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header>
+                                <strong>Specialization 
+                                </strong>
+                            </th>
+                            <td mat-cell *matCellDef="let element"> {{element.spilizationName}} </td>
+                        </ng-container>
+
+
+
+                        <!-- Edit and Delete On Column -->
+                        <ng-container [matColumnDef]="'actions'">
+                            <th class="headerstyle" mat-header-cell *matHeaderCellDef><strong> </strong> </th>
+                            <td mat-cell *matCellDef="let element">
+
+                                <div class="mt-3">
+
+                                    <form #approveHospitalSpecializationForm="ngForm"
+                                        (ngSubmit)="approveHospitalSpecializationData(approveHospitalSpecializationForm.value);approveHospitalSpecializationForm.reset();">
+
+                                        <div class="text-center mt-3 justify-content-center col-md-12" hidden>
+                                            <mat-form-field fxFlex="25">
+                                                <mat-label>Hospital ID</mat-label>
+                                                <input matInput placeholder="Enter Hospital ID" type="text"
+                                                    [(ngModel)]="element.hospitalID" name="HospitalID" required>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="text-center mt-3 justify-content-center col-md-12" hidden>
+                                            <mat-form-field fxFlex="25">
+                                                <mat-label>CHID</mat-label>
+                                                <input matInput placeholder="Enter CHID" type="text"
+                                                    [(ngModel)]="element.id" name="CHID" required>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="text-center mt-3 justify-content-center col-md-12" hidden>
+                                            <mat-form-field fxFlex="25">
+                                                <mat-label>Astatus</mat-label>
+                                                <input matInput placeholder="Enter AType" type="text"
+                                                    [(ngModel)]="SType" name="AType" required>
+                                            </mat-form-field>
+                                        </div>
+
+
+                                        <mat-form-field appearance="fill" class="mr-2">
+                                            <mat-label>Accept or pending</mat-label>
+                                            <mat-select ngModel name="AStatus">
+                                                <mat-option *ngFor="let status of specializationStatus" [value]="status.id">
+                                                    {{status.value}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+
+
+                                        <button mat-raised-button type="submit" color="warn"
+                                            class="btn btn-primary btn-sm ml-4"
+                                            style="height: fit-content;">submit</button>
+
+                                    </form>
+
+                                </div>
+
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedspecializationColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedspecializationColumns;"></tr>
+                    </table>
+
+                    <table>
+                        <tr *ngIf="!specializationDataSource?.data?.length">
+                            <td style="text-align: center;" [attr.colspan]="displayedspecializationColumns?.length">
+                                <div>
+                                    No Records Found !
+                                </div>
+
+                            </td>
+                        </tr>
+                    </table>
+
+                    <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons
+                        aria-label="Select page of periodic elements">
+                    </mat-paginator>
+
+
+                    <!-- <button mat-raised-button type="submit" class="btn btn-danger statusbutton" (click)="refreshList()">Refresh Table</button> -->
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

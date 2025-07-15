@@ -1,0 +1,161 @@
+<div class="text-right  modal-header bg-danger text-white" style="
+padding-bottom: 0px;display: flex;justify-content: center;text-align: center;margin: 0%;">
+  <h3>Edit subscription package</h3>
+  <button mat-icon-button style="position: relative;left: 110px;top: -5px;" aria-label="close dialog" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<mat-divider></mat-divider>
+
+
+
+
+<div class="container mt-2">
+  <form #editPackageSubscriptionForm="ngForm"
+    (ngSubmit)="editPackageSubscriptionData(editPackageSubscriptionForm.value);editPackageSubscriptionForm.reset();">
+
+    <div hidden>
+
+
+      <mat-form-field appearance="outline" fxFlex="60">
+        <mat-label>Package ID</mat-label>
+
+        <input matInput placeholder="Enter number of months" type="text" [(ngModel)]="editSubscriptionData.id" name="id"
+          required>
+      </mat-form-field>
+
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <div>
+
+          <mat-form-field appearance="outline" fxFlex="100">
+            <mat-label>Package name</mat-label>
+
+            <input matInput placeholder="Package name" [(ngModel)]="editSubscriptionData.packageName" type="text"
+              name="packageName" required>
+          </mat-form-field>
+
+        </div>
+      </div>
+      <div class="col-6">
+        <div>
+
+
+          <mat-form-field appearance="outline" fxFlex="100">
+            <mat-label>Package amount</mat-label>
+
+            <input matInput placeholder="Package amount" type="text" [(ngModel)]="editSubscriptionData.packageAmount"
+              name="packageAmount" required>
+          </mat-form-field>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+
+        <div>
+
+          <mat-form-field appearance="outline" fxFlex="100">
+            <mat-label>Discounted amount</mat-label>
+
+            <input matInput placeholder="Discounted amount" type="text"
+              [(ngModel)]="editSubscriptionData.packageDiscount" name="packageDiscount" required>
+          </mat-form-field>
+
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div>
+
+          <mat-form-field appearance="outline" fxFlex="100">
+            <mat-label>Number of cards</mat-label>
+
+            <input matInput placeholder="Number of cards" type="text" [(ngModel)]="editSubscriptionData.packageEmergencycard" name="packageEmergencycard" required>
+          </mat-form-field>
+
+        </div>
+      </div>
+
+
+      <div class="col-6">
+        <div>
+
+
+          <mat-form-field appearance="outline" fxFlex="100">
+            <mat-label>Validity in months</mat-label>
+
+            <input matInput placeholder="Enter number of months" type="text"
+              [(ngModel)]="editSubscriptionData.packageValidity" name="packageValidity" required>
+          </mat-form-field>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+    <div>
+
+
+      <mat-form-field appearance="outline" fxFlex="60" hidden>
+        <mat-label>Created on</mat-label>
+
+        <input matInput placeholder="Created on" type="text" [(ngModel)]="currentTime" name="added_On" required>
+      </mat-form-field>
+
+    </div>
+
+
+
+
+    <!-- <div>
+
+      <mat-form-field class="package-subscription-field" appearance="outline" style="height: 100px;" fxFlex="100">
+        <mat-label>Package description</mat-label>
+
+        <input matInput placeholder="Discounted amount" type="text"
+          [(ngModel)]="editSubscriptionData.packageDescription" name="packageDescription" required>
+      </mat-form-field>
+
+    </div> -->
+    <div class="NgxEditor__Wrapper">
+        <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+        <ngx-editor [editor]="editor" [ngModel]="editSubscriptionData.packageDescription" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
+      </div>
+
+
+
+    <div>
+
+      <div class="mt-3 ml-4 mb-4" style="display: flex;justify-content: center;">
+        <button mat-raised-button type="submit" color="primary">Update</button>
+
+
+
+
+
+      </div>
+
+    </div>
+
+    <!-- <button mat-raised-button type="submit" color="primary"
+            class="btn btn-primary btn-sm ml-4" style="height: fit-content;">Submit</button>
+  
+            <div class="text-right col-md-4">
+  
+                <mat-dialog-actions>
+                  <button class="btn  cancelbutton btn-sm" mat-dialog-close>
+                    Cancel
+                  </button>
+                </mat-dialog-actions>        
+              </div> -->
+  </form>
+
+</div>

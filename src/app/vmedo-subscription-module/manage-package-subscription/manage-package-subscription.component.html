@@ -1,0 +1,144 @@
+<div class="row mt-3 ml-3" style="width: 45%;">
+  <!-- <div class="col">
+    <h3>Manage Package Subscription</h3>
+  </div> -->
+
+  <div class="col mb-3">
+    <button mat-raised-button type="submit" color="primary" class="btn btn-primary btn-sm ml-4"
+    (click)="onCreatePackage()"> + Add New Package</button>
+  </div>
+   
+  </div>
+
+
+  <mat-divider></mat-divider>
+
+  <div class="grid-container">
+
+    <div class="vmedo-admin-enquiry-table">
+        <div style="box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;">
+
+            <div class="row modal-header col-12  text-white vmedoadmintableheader">
+
+                <div class="col-6 mt-2">
+
+                    <h2>Manage Package Subscription  - {{dataSource.data?.length}}</h2>
+
+                </div>
+
+                <div class="col-6 mt-2 mb-1 form-group" style="color:white;justify-content: flex-end;">
+                    <input class="form-control" fxFlex="50%" style="border-radius: 12px;" type="text"
+                        (keyup)="doFilter($event.target.value)" placeholder="Search...">
+                </div>
+
+            </div>
+
+
+            <table mat-table matSort [dataSource]="dataSource">
+
+
+              <ng-container matColumnDef="id">
+                <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Sl no</strong>
+                </th>
+                <td mat-cell *matCellDef="let element" > {{element.id}} </td>
+            </ng-container>
+               
+                <ng-container matColumnDef="packageName">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Package Name</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.packageName}} </td>
+                </ng-container>
+
+
+                
+                <ng-container matColumnDef="packageAmount">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>
+                      Package Amount</strong></th>
+                    <td mat-cell *matCellDef="let element">Rs {{element.packageAmount}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="packageEmergencycard">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>
+                      Number of cards</strong></th>
+                    <td mat-cell *matCellDef="let element"> {{element.packageEmergencycard}} </td>
+                </ng-container>
+
+
+                
+                <ng-container matColumnDef="packageDiscount">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Discounted Amount</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element">Rs {{element.packageDiscount}}</td>
+                </ng-container>
+
+              
+                <ng-container matColumnDef="packageValidity">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Package Validity</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.packageValidity}} Months</td>
+                </ng-container>
+
+                <ng-container matColumnDef="packageDescription" hidden>
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Description</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.packageDescription}}</td>
+                </ng-container>
+               
+                <ng-container matColumnDef="packageStatus">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Package Status</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element" [ngClass]="{'false-value': element.packageStatus === false, 'true-value': element.packageStatus === true}" style="font-weight: 500;"> {{element.packageStatus ? 'Active' : 'Inactive'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="added_On">
+                  <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Created on</strong>
+                  </th>
+                  <td mat-cell *matCellDef="let element"> {{element.added_On | date : medium}} </td>
+              </ng-container>
+
+
+                
+                <ng-container [matColumnDef]="'actions'">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef><strong>Actions</strong> </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;">
+                        
+                        <div class="mt-2">
+                            <button mat-raised-button color="primary" [disabled]="element.packageStatus === true" (click)="onActivatePackage(element.id,element.packageName)">Activate</button>
+
+                        </div>
+
+                        <div class="mt-2 mb-2">
+                            <button  mat-raised-button color="warn" [disabled]="element.packageStatus === false" (click)="onDeactivatePackage(element.id,element.packageName)">Deactivate</button>  
+                        </div>
+
+
+                        
+
+                            <button class="mr-3" mat-icon-button (click)="onEditPackage(element)"
+                                matTooltip="Update">
+                                <mat-icon mat-icon-button color='primary'>edit</mat-icon>
+                            </button>
+
+                       
+                       
+                     
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[7, 14, 21]" showFirstLastButtons
+                aria-label="Select page of periodic elements">
+            </mat-paginator>
+
+
+        </div>
+
+    </div>
+</div>
+
+<mat-divider></mat-divider>
+

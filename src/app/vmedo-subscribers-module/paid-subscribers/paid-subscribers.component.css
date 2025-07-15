@@ -1,0 +1,50 @@
+table {
+    width: 100%;
+    font-size: 12px;
+  }
+  
+  .vmedo-admin-enquiry-table{
+    padding:8px 8px 8px 8px;
+    font-size: 12px;
+   
+  }
+  
+  .headerstyle{
+    font-size: 13px;
+    background-color:#b3aeae29; font-weight: 400;
+  }
+
+  .vmedoadmintableheader{
+
+    padding-bottom: 0px;
+    margin: 0px;
+    padding-top: 0px;
+    background-color: #383131d9;
+
+  }
+
+
+  
+.profile-card{
+
+  text-align: center;
+  padding: 0px 20px 20px 20px;
+}
+
+.imagestyle{
+  height: 122px;
+    width: 122px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid rgb(238 237 237 / 25%);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+}
+
+.false-value {
+  color: #ce2424;
+ }
+ 
+ .true-value{
+   color: green;
+ }

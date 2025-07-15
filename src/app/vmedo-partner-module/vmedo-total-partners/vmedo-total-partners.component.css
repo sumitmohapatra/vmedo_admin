@@ -1,0 +1,86 @@
+table {
+  width: 100%;
+}
+
+.vmedo-admin-enquiry-table{
+  padding:8px 8px 8px 8px;
+ 
+}
+
+.headerstyle{
+  font-size: 14px;
+  background-color:#b3aeae29;
+}
+
+.vmedoadmintableheader{
+
+  padding-bottom: 0px;
+  margin: 0px;
+  padding-top: 0px;
+  background-color: #383131d9;
+
+}
+
+
+
+.profile-card{
+
+text-align: center;
+padding: 0px 20px 20px 20px;
+}
+
+.imagestyle{
+height: 47px;
+  width: 47px;
+object-fit: cover;
+border-radius: 50%;
+border: 3px solid rgb(238 237 237 / 25%);
+box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+}
+
+span {
+content: "\2705";
+}
+
+.mat-button, .mat-raised-button{
+background-color:#145395;
+} 
+
+th.mat-header-cell,
+td.mat-cell {
+text-align: center !important;
+}
+
+.custom-button.yellow-button {
+background: linear-gradient(to bottom, #ffd700, #e5b300);
+color: rgb(124, 84, 9);
+}
+
+.custom-button {
+
+color: rgb(255, 255, 255);
+}
+
+.false-value {
+color: #ce2424;
+}
+
+.true-value{
+ color: green;
+}
+
+/* Green text color for 'Registered' status */
+.green-value {
+  color: green;
+}
+
+/* Red text color for 'Unregistered' status */
+.red-value {
+  color: red;
+}
+
+/* You can define additional styles for 'Black' status if needed */
+.black-value {
+  color: black;
+}

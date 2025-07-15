@@ -1,0 +1,649 @@
+<div *ngIf="userRole === 1;">
+
+  <div class="grid-container">
+
+    <div class="vmedo-admin-enquiry-table">
+      <div style="box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;">
+
+        <div class="row modal-header col-12  text-white vmedoadmintableheader">
+
+          <div class="col-6 mt-2">
+
+            <h2>Emergency health cards</h2>
+
+          </div>
+
+          <div class="col-6 mt-2 mb-1 form-group" style="color:white;justify-content: flex-end;">
+
+            <div class="search" style="display: flex;align-items: center;justify-content: space-between;">
+              <input class="form-control" fxFlex="60%" style="border-radius: 12px;" type="text"
+                [(ngModel)]="searchValue" placeholder="Search by card number or mobile" (keydown.enter)="search()">
+              <button mat-raised-button type="submit" class="btn btn-primary btn-sm ml-2"
+                style=" background-color: rgb(175, 40, 40); color: white;"
+                (click)="search()">Search</button>
+
+              <button mat-raised-button class="btn btn-primary btn-sm ml-4"
+                style=" background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);"
+                (click)="adminClear()">Clear</button>
+            </div>
+
+            <!-- <span class="card-search">
+
+              <input class="form-control" fxFlex="50%" style="border-radius: 42px;" type="text" [(ngModel)]="searchValue"
+              placeholder="Search card.." (keydown.enter)="search()">
+
+            <button mat-raised-button type="submit" class="btn btn-primary btn-sm ml-2"
+              style="height: fit-content; background-color: rgb(175, 40, 40); color: white;"
+              (click)="search()">Search</button>
+
+            <button mat-raised-button class="btn btn-primary btn-sm ml-4"
+              style="height: fit-content; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);"
+              (click)="adminClear()">Clear</button>
+
+            </span>
+         
+            <span class="mobile-search">
+              <input class="form-control" fxFlex="50%" style="border-radius: 42px;" type="text"
+                [(ngModel)]="searchMobileValue" placeholder="Search by mobile number.."
+                (keydown.enter)="searchMobile()">
+
+              <button mat-raised-button type="submit" class="btn btn-primary btn-sm ml-3"
+                style="height: fit-content; background-color: rgb(175, 40, 40); color: white;"
+                (click)="searchMobile()">Search</button>
+
+              <button mat-raised-button class="btn btn-primary btn-sm ml-4"
+                style="height: fit-content; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);"
+                (click)="adminClear()">Clear</button>
+            </span> -->
+
+          </div>
+
+        </div>
+
+
+        <table mat-table matSort [dataSource]="dataSource" matSortActive='id' matSortDirection='desc' matSort>
+
+          <ng-container matColumnDef="id">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Card No</strong></th>
+            <td mat-cell *matCellDef="let element;"> {{element.id}} </td>
+
+          </ng-container>
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="profilepic">
+            <th class="headerstyle" style="text-align: center;" mat-header-cell *matHeaderCellDef mat-sort-header>
+              <strong>Profile Images</strong>
+            </th>
+            <div class="profile-card">
+              <td mat-cell *matCellDef="let element" style="text-align: center;">
+                <img class="imagestyle mb-2 mt-2" [src]="element.profilepic" alt="Profile pic"
+                  onerror="this.src='assets/Images/user_profile.png';" jLightbox />
+
+              </td>
+            </div>
+          </ng-container>
+
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="emid">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Emergency ID</strong></th>
+            <td mat-cell *matCellDef="let element"> {{element.emid}} </td>
+          </ng-container>
+
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="pname">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Username</strong> </th>
+            <td mat-cell *matCellDef="let element"> {{element.pname}} </td>
+          </ng-container>
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="card_type">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Card type</strong> </th>
+            <!-- <td mat-cell *matCellDef="let element"> {{element.card_type}} </td> -->
+            <td mat-cell *matCellDef="let element"> {{ element.card_type ? 'Individual': 'Corporate' }}
+          </ng-container>
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="emobile">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Phone</strong> </th>
+            <td mat-cell *matCellDef="let element"> {{element.emobile}} </td>
+          </ng-container>
+
+          <!-- Enquired By Column -->
+          <!-- <ng-container matColumnDef="createdBy">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>created By</strong></th>
+            <td mat-cell *matCellDef="let element"> {{element.createdBy}} </td>
+          </ng-container> -->
+
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="pDob">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>DOB</strong> </th>
+            <td mat-cell *matCellDef="let element"> {{element.pDob | date:medium}} </td>
+          </ng-container>
+
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="pbloodgroup">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Bloodgroup</strong></th>
+            <td mat-cell *matCellDef="let element"> {{element.pbloodgroup}} </td>
+          </ng-container>
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="pGender">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Gender</strong></th>
+            <td mat-cell *matCellDef="let element"> {{element.pGender}} </td>
+          </ng-container>
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="isPaidMember">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Premium Member</strong>
+            </th>
+            <td mat-cell *matCellDef="let element">
+
+
+              <span class="{{element.isPaidMember ? 'red' : ''}}">
+                {{element.isPaidMember ? '&#10003;' : '&#10005;'}}
+              </span>
+
+          </ng-container>
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="package_name">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Package</strong></th>
+            <td mat-cell *matCellDef="let element"> {{ element.package_name ? element.package_name : 'Basic (Free)' }}
+            </td>
+          </ng-container>
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="package_validity">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header>
+              <strong>Package Validity</strong>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <ng-container *ngIf="element.package_validity === '0001-01-01T00:00:00'; else packageValidity">
+                Lifetime
+              </ng-container>
+              <ng-template #packageValidity>
+                {{element.package_validity | date:'dd/MM/yy'}}
+              </ng-template>
+            </td>
+          </ng-container>
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="createdon">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Created On</strong></th>
+            <td mat-cell *matCellDef="let element"> {{element.createdon | date:'mediumDate'}} </td>
+          </ng-container>
+
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="eaddress">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Address</strong></th>
+            <td mat-cell *matCellDef="let element"> {{element.eaddress}} {{element.ehouseNo}} <br> {{element.ecity}} -
+              {{element.epostalcode}} <br> {{element.estate}} </td>
+          </ng-container>
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="ehouseNo" hidden>
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Landmark</strong></th>
+            <td mat-cell *matCellDef="let element"> {{element.ehouseNo}} </td>
+          </ng-container>
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="ecity" hidden>
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>City</strong></th>
+            <td mat-cell *matCellDef="let element"> {{element.ecity}} </td>
+          </ng-container>
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="estate" hidden>
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>State</strong></th>
+            <td mat-cell *matCellDef="let element"> {{element.estate}} </td>
+          </ng-container>
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="epostalcode" hidden>
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Pincode</strong></th>
+            <td mat-cell *matCellDef="let element"> {{element.epostalcode}} </td>
+          </ng-container>
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="is_active">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>
+                Status</strong>
+            </th>
+
+            <td mat-cell *matCellDef="let element"
+              [ngClass]="{'false-value': element.is_active === false, 'true-value': element.is_active === true}"
+              style="font-weight: 500;"> {{element.is_active ? 'Active' : 'Inactive'}} </td>
+
+            <!-- <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.organisationStatus ? '&#10003;' :
+                '&#10005;'}} </td> -->
+
+          </ng-container>
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="org_name">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Organization</strong>
+            </th>
+            <td mat-cell *matCellDef="let element" [ngClass]="{'corporate-text': element.org_name !== 'NA'}"> {{
+              element.org_name === 'NA' ? 'Individual' : element.org_name }}
+            </td>
+          </ng-container>
+
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="pin" hidden>
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> EID Pin</strong></th>
+            <td mat-cell *matCellDef="let element"> {{element.pin}} </td>
+          </ng-container>
+
+          <!-- created by user details -->
+
+          <ng-container matColumnDef="createdBy">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Created By
+              </strong>
+            </th>
+            <td mat-cell *matCellDef="let element" style="text-align: center;">
+
+
+              <mat-icon mat-icon-button color='primary' (click)="onUserDetails(element.createdBy)"
+                style="font-size: 22px;">visibility</mat-icon>
+
+          </ng-container>
+
+
+          <ng-container [matColumnDef]="'download'">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef><strong>EMID</strong> </th>
+            <td mat-cell *matCellDef="let element" style="text-align-last: justify;">
+
+
+              <mat-icon mat-icon-button color='primary' style="font-size: 22px; margin-right: -30px; 
+              padding-left: 7px; "
+                (click)="downloadEmid([element.emid,element.pin,element.pname,element.eaddress,
+              element.epostalcode,element.createdBy,element.id,element.isPaidMember,element.package_name,element.package_validity])">download</mat-icon>
+
+
+            </td>
+
+          </ng-container>
+
+
+          <!-- Hospital Details -->
+          <ng-container [matColumnDef]="'actions'">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef><strong>Accessed by</strong> </th>
+            <td mat-cell *matCellDef="let element">
+
+              <mat-icon mat-icon-button (click)="eIDAccessed(element.emid)" color='primary' style="    font-size: 22px;
+               padding-right: 29px;">visibility</mat-icon>
+
+
+            </td>
+
+          </ng-container>
+
+
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+
+        <table>
+          <tr *ngIf="!dataSource?.data?.length">
+            <td style="text-align: center;" [attr.colspan]="displayedColumns?.length">
+              <div class="mt-2">
+                <h3>Search for the card to get the details</h3>
+              </div>
+
+            </td>
+          </tr>
+        </table>
+
+
+        <div *ngIf="userRole === 1;">
+          <div class="mt-3 mb-3 mr-3" style="display: flex;align-items: center;justify-content: end;padding: 10px;">
+
+            <span style="font-size: 0.85rem; font-weight: 500;"> Page : {{currentPage + 1 }}</span>
+
+
+            <button class="mb-3 ml-3 mr-3" mat-stroked-button color="basic" (click)="handlePreviousClick()" style="margin: 0px 10px !important;">
+              <span style="font-size: 13px;">
+                <mat-icon style="vertical-align: middle;">keyboard_arrow_left</mat-icon>
+                Previous
+              </span>
+            </button>
+
+            <button mat-stroked-button color="basic" (click)="handleNextClick()">
+
+              <span style="font-size: 13px;">
+                Next
+                <mat-icon style="vertical-align: middle;">keyboard_arrow_right</mat-icon> </span>
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- <mat-paginator [length]="totalUsers" [pageSize]="pageSize" [pageIndex]="currentPage"
+              (page)="pageChanged($event)">
+          </mat-paginator> -->
+
+      </div>
+
+    </div>
+
+
+
+    <div *ngIf="userRole === 1;">
+      <button type="button" (click)="fileDownload()">Export Data</button>
+    </div>
+
+
+  </div>
+</div>
+
+
+
+
+<div *ngIf="userRole === 2;">
+  <div class="grid-container">
+
+    <div class="vmedo-admin-enquiry-table">
+      <div style="box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;">
+
+        <div class="row modal-header col-12  text-white vmedoadmintableheader">
+
+          <div class="col-6 mt-2">
+
+            <h2>Family health cards</h2>
+
+          </div>
+
+          <div class="col-6 mt-2 mb-1 form-group" style="color:white;justify-content: flex-end;">
+
+            <div class="search">
+              <input class="form-control" fxFlex="60%" style="border-radius: 12px;" type="text"
+                [(ngModel)]="searchValue" placeholder="Search by card number or mobile" (keydown.enter)="search()">
+              <button mat-raised-button type="submit" class="btn btn-primary btn-sm ml-2"
+                style="height: fit-content; background-color: rgb(175, 40, 40); color: white;"
+                (click)="search()">Search</button>
+
+              <button mat-raised-button class="btn btn-primary btn-sm ml-4"
+                style="height: fit-content; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);"
+                (click)="clear()">Clear</button>
+            </div>
+
+            <!-- <input class="form-control" fxFlex="50%" style="border-radius: 42px;" type="text" [(ngModel)]="searchValue"
+              placeholder="Search card.." (keydown.enter)="search()">
+            <button mat-raised-button type="submit" class="btn btn-primary btn-sm ml-4"
+              style="height: fit-content; background-color: rgb(175, 40, 40); color: white;"
+              (click)="search()">Search</button>
+
+            <button mat-raised-button class="btn btn-primary btn-sm ml-4"
+              style="height: fit-content; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);"
+              (click)="clear()">Clear</button> -->
+
+
+          </div>
+
+        </div>
+
+
+        <table mat-table matSort [dataSource]="dataSource" matSortActive='createdon' matSortDirection='desc' matSort>
+
+
+
+          <ng-container matColumnDef="id">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Card No</strong></th>
+            <td mat-cell *matCellDef="let element;"> {{element.id}} </td>
+
+          </ng-container>
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="profilepic">
+            <th class="headerstyle" style="text-align: center;" mat-header-cell *matHeaderCellDef mat-sort-header>
+              <strong>Profile Images</strong>
+            </th>
+            <div class="profile-card">
+              <td mat-cell *matCellDef="let element" style="text-align: center;">
+                <img class="imagestyle mb-2 mt-2" [src]="element.profilepic" alt="Profile pic"
+                  onerror="this.src='assets/Images/user_profile.png';" jLightbox />
+
+
+              </td>
+            </div>
+          </ng-container>
+
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="emid">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Emergency ID</strong></th>
+            <td mat-cell *matCellDef="let element"> {{element.emid}} </td>
+          </ng-container>
+
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="pname">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Username</strong> </th>
+            <td mat-cell *matCellDef="let element"> {{element.pname}} </td>
+          </ng-container>
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="emobile">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Phone</strong> </th>
+            <td mat-cell *matCellDef="let element"> {{element.emobile}} </td>
+          </ng-container>
+
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="pDob">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>DOB</strong> </th>
+            <td mat-cell *matCellDef="let element"> {{element.pDob | date:medium}} </td>
+          </ng-container>
+
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="pbloodgroup">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Bloodgroup</strong></th>
+            <td mat-cell *matCellDef="let element"> {{element.pbloodgroup}} </td>
+          </ng-container>
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="pGender">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Gender</strong></th>
+            <td mat-cell *matCellDef="let element"> {{element.pGender}} </td>
+          </ng-container>
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="isPaidMember">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Premium Member</strong>
+            </th>
+            <td mat-cell *matCellDef="let element">
+
+
+              <span class="{{element.isPaidMember ? 'red' : ''}}">
+                {{element.isPaidMember ? '&#10003;' : '&#10005;'}}
+              </span>
+
+          </ng-container>
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="package_name">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Package</strong></th>
+            <td mat-cell *matCellDef="let element"> {{ element.package_name ? element.package_name : 'Basic (Free)' }}
+            </td>
+          </ng-container>
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="package_validity">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header>
+              <strong>Package Validity</strong>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <ng-container *ngIf="element.package_validity === '0001-01-01T00:00:00'; else packageValidity">
+                Lifetime
+              </ng-container>
+              <ng-template #packageValidity>
+                {{element.package_validity | date:'dd/MM/yy'}}
+              </ng-template>
+            </td>
+          </ng-container>
+
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="createdon">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Created On</strong></th>
+            <td mat-cell *matCellDef="let element"> {{element.createdon | date:'mediumDate'}} </td>
+          </ng-container>
+
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="eaddress">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Address</strong></th>
+            <td mat-cell *matCellDef="let element"> {{element.eaddress}} {{element.ehouseNo}} <br> {{element.ecity}}
+              {{element.estate}} <br> {{element.epostalcode}} </td>
+          </ng-container>
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="epostalcode">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Pincode</strong></th>
+            <td mat-cell *matCellDef="let element"> {{element.epostalcode}} </td>
+          </ng-container>
+
+
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="pin" hidden>
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> EID Pin</strong></th>
+            <td mat-cell *matCellDef="let element"> {{element.pin}} </td>
+          </ng-container>
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="org_name">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Organization</strong>
+            </th>
+            <td mat-cell *matCellDef="let element" [ngClass]="{'corporate-text': element.org_name !== 'NA'}"> {{
+              element.org_name === 'NA' ? 'Individual' : element.org_name }}
+            </td>
+          </ng-container>
+
+          <!-- Enquired By Column -->
+          <ng-container matColumnDef="is_active">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>
+                Status</strong>
+            </th>
+
+            <td mat-cell *matCellDef="let element"
+              [ngClass]="{'false-value': element.is_active === false, 'true-value': element.is_active === true}"
+              style="font-weight: 500;"> {{element.is_active ? 'Active' : 'Inactive'}} </td>
+
+
+          </ng-container>
+
+
+          <ng-container [matColumnDef]="'download'">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef><strong>EMID</strong> </th>
+            <td mat-cell *matCellDef="let element" style="text-align-last: justify;">
+
+
+              <mat-icon mat-icon-button color='primary' style="font-size: 22px; margin-right: -30px; 
+            padding-left: 7px; "
+                (click)="downloadEmid([element.emid,element.pin,element.pname,element.eaddress,
+            element.epostalcode,element.createdBy,element.id,element.isPaidMember,element.package_name,element.package_validity])">download</mat-icon>
+
+
+            </td>
+
+          </ng-container>
+
+
+          <!-- created by user details -->
+
+          <!-- <ng-container matColumnDef="createdBy">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Created By
+              </strong>
+            </th>
+            <td mat-cell *matCellDef="let element" style="text-align: center;">
+
+
+              <mat-icon mat-icon-button color='primary' (click)="onUserDetails(element.createdBy)"
+                style="font-size: 22px;">visibility</mat-icon>
+
+          </ng-container> -->
+
+          <!-- EID Accessed -->
+          <ng-container [matColumnDef]="'actions'">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef><strong>Accessed by</strong> </th>
+            <td mat-cell *matCellDef="let element">
+
+              <mat-icon mat-icon-button (click)="eIDAccessed(element.emid)" color='primary' style="    font-size: 22px;
+             padding-right: 29px;">visibility</mat-icon>
+
+            </td>
+
+          </ng-container>
+
+
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+
+        </table>
+
+        <table>
+          <tr *ngIf="!dataSource?.data?.length">
+            <td style="text-align: center;" [attr.colspan]="displayedColumns2?.length">
+              <div class="mt-2">
+                <h3>Search for the card to get the details</h3>
+              </div>
+
+            </td>
+          </tr>
+        </table>
+
+
+        <div *ngIf="userRole === 1;">
+          <div class="mt-3 mb-3 mr-3" style="display: flex;align-items: center;justify-content: end;padding: 10px;">
+
+            <span style="font-size: 0.85rem; font-weight: 500;"> Page : {{currentPage + 1 }}</span>
+
+
+            <button class="mb-3 ml-3" mat-stroked-button color="basic" (click)="handlePreviousClick()" style="margin: 0px 10px !important;">
+              <span>
+                <mat-icon style="vertical-align: middle;">keyboard_arrow_left</mat-icon>
+                Previous
+              </span>
+            </button>
+
+            <button mat-stroked-button color="basic" (click)="handleNextClick()">
+
+              <span>
+                Next
+                <mat-icon style="vertical-align: middle;">keyboard_arrow_right</mat-icon>
+              </span>
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+
+    <div *ngIf="userRole === 1;">
+      <button type="button" (click)="fileDownload()">Export Data</button>
+    </div>
+
+
+  </div>
+</div>

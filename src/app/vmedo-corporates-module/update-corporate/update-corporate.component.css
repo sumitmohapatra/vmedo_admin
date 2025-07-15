@@ -1,0 +1,17 @@
+.cancelbutton{
+    margin-top: -17%;
+    background-color: #e7e7e7;
+}
+.mat-dialog-container {
+    padding: 0px !important;
+}
+
+
+.mat-dialog-actions {
+margin-bottom: 0px;
+}
+
+.toast-success {
+    background-color: #bb2534 !important;
+    top: 60px;
+}

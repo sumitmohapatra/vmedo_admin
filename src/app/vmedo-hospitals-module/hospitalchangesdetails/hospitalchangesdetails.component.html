@@ -1,0 +1,252 @@
+<!-- {{hospitalChangesDetails | json}} -->
+
+<div class="mt-3 ml-3">
+    <h1>Hospital changes requests</h1>
+</div>
+
+<mat-divider></mat-divider>
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-3">
+
+            <div class="headerfontstyle">
+                <h3>Properties</h3>
+            </div>
+
+
+        </div>
+
+
+        <div class="col-4">
+            <div class="headerfontstyle">
+                <h3>Previous data</h3>
+            </div>
+
+        </div>
+        <div class="col-4">
+            <div class="headerfontstyle" >
+                <h3>Requested data</h3>
+            </div>
+
+
+        </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <!--------------hospital image ------------------------------------------------>
+
+    <div class="row mt-3">
+        <div class="col-3">
+
+            <div class="headerfontstyle">
+                <h4>Hospital Image</h4>
+            </div>
+
+        </div>
+
+
+        <div class="col-4">
+
+            <div> <img class="imagestyle" [src]="previousHospitalDetails.hImage" alt="Hospital Image"></div>
+
+        </div>
+        <div class="col-4">
+
+            <div> <img class="imagestyle" [src]="hospitalChangesDetails.hImage" alt="Hospital Image"></div>
+        </div>
+    </div>
+
+    <!------------------------- hospital name ----------------------------->
+
+    <div class="row mt-4">
+        <div class="col-3">
+
+            <div class="headerfontstyle">
+                <h4>Hospital Name -</h4>
+            </div>
+
+        </div>
+
+
+        <div class="col-4">
+
+            <div>{{previousHospitalDetails.hospitalName}} </div>
+
+        </div>
+        <div class="col-4">
+
+            <div> {{hospitalChangesDetails.hospitalName}}</div>
+        </div>
+    </div>
+
+    <!------------------------- hospital address ----------------------------->
+
+    <div class="row mt-2">
+        <div class="col-3">
+
+            <div class="headerfontstyle">
+                <h4>Hospital Address - </h4>
+            </div>
+
+        </div>
+
+
+        <div class="col-4">
+
+            <div>{{previousHospitalDetails.hAddress}} </div>
+
+        </div>
+        <div class="col-4">
+
+            <div> {{hospitalChangesDetails.hAddress}}</div>
+        </div>
+    </div>
+
+    <!------------------------- date ----------------------------->
+
+    <div class="row mt-2">
+        <div class="col-3">
+
+            <div class="headerfontstyle">
+                <h4>Date requested -</h4>
+            </div>
+
+        </div>
+
+
+        <div class="col-4">
+
+            <div>{{previousHospitalDetails.createdon}} </div>
+
+        </div>
+        <div class="col-4">
+
+            <div> {{hospitalChangesDetails.createdon}}</div>
+        </div>
+    </div>
+
+
+    <div class="row mt-2">
+        <div class="col-3">
+
+            <div class="headerfontstyle">
+                <h4>City -</h4>
+            </div>
+
+        </div>
+
+
+        <div class="col-4">
+
+            <div>{{previousHospitalDetails.hCity}} </div>
+
+        </div>
+        <div class="col-4">
+
+            <div> {{hospitalChangesDetails.hCity}}</div>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-3">
+
+            <div class="headerfontstyle">
+                <h4>Emergency contact number -</h4>
+            </div>
+
+        </div>
+
+
+        <div class="col-4">
+
+            <div>{{previousHospitalDetails.emergencyDContact}} </div>
+
+        </div>
+        <div class="col-4">
+
+            <div> {{hospitalChangesDetails.emergencyDContact}}</div>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-3">
+
+            <div class="headerfontstyle">
+                <h4>General contact number -</h4>
+            </div>
+
+        </div>
+
+
+        <div class="col-4">
+
+            <div>{{previousHospitalDetails.generalDContact}} </div>
+
+        </div>
+        <div class="col-4">
+
+            <div> {{hospitalChangesDetails.generalDContact}}</div>
+        </div>
+    </div>
+
+
+    <mat-divider></mat-divider>
+
+    <div class="mt-3 ml-3 mb-2">
+        <h2>Accept or reject hospital request</h2>
+    </div>
+    
+
+    <div class="mt-3"> 
+        <form #approveHospitalChangesForm="ngForm"
+        (ngSubmit)="approveHospitalChangesData(approveHospitalChangesForm.value);approveHospitalChangesForm.reset();">
+
+        <div class="text-center mt-3 justify-content-center col-md-12" hidden>
+            <mat-form-field fxFlex="25">
+                <mat-label>Hospital ID</mat-label>
+                <input matInput placeholder="Enter Hospital ID" type="text" [(ngModel)]="hospital_id"
+                    name="HospitalID" required>
+            </mat-form-field>
+        </div>
+
+
+        <div class="text-center mt-3 justify-content-center col-md-12" hidden>
+            <mat-form-field fxFlex="25">
+                <mat-label>CHID</mat-label>
+                <input matInput placeholder="Enter Hospital ID" type="text" [(ngModel)]="id" name="CHID" required>
+            </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="fill" class="mr-2">
+            <mat-label>Accept or reject</mat-label>
+            <mat-select ngModel name="AStatus">
+                <mat-option *ngFor="let status of updateStatus" [value]="status.id">
+                    {{status.value}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="30" class="ml-3">
+            <mat-label>Description</mat-label>
+            <input matInput placeholder="Enter Description" type="text" ngModel name="Description">
+        </mat-form-field>
+
+
+
+
+
+        <button mat-raised-button type="submit" color="primary" class="btn btn-primary btn-sm ml-4"
+            style="height: fit-content;">Submit</button>
+
+
+    </form>
+
+
+
+</div>
+
+
+
+</div>

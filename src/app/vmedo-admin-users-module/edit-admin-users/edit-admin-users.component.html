@@ -1,0 +1,145 @@
+<div class="text-right  modal-header bg-danger text-white" style="
+padding-bottom: 0px;display: flex;justify-content: center;text-align: center;margin: 0%;">
+    <h3>Edit admin user</h3>
+    <button mat-icon-button style="position: relative;left: 180px;top: -5px;" aria-label="close dialog" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+<mat-divider></mat-divider>
+
+
+
+
+<div class="container mt-2">
+    <form #EditAdminUserForm="ngForm" (ngSubmit)="EditAdminUserData(EditAdminUserForm.value);EditAdminUserForm.reset();">
+
+        <div>
+
+            <mat-form-field appearance="outline" fxFlex="100" hidden>
+                <mat-label>User ID</mat-label>
+
+                <input matInput placeholder="Enter user ID" type="text" [(ngModel)]="editAdminUsersData.userId"  name="userId" required>
+            </mat-form-field>
+
+        </div>
+     
+        <div>
+
+            <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>User name</mat-label>
+
+                <input matInput placeholder="Enter user name" type="text" [(ngModel)]="editAdminUsersData.userName"  name="userName" required>
+            </mat-form-field>
+
+        </div>
+
+     
+        <div>
+
+            <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>User Email</mat-label>
+
+                <input matInput placeholder="Enter Email" type="email" [(ngModel)]="editAdminUsersData.userEmail" name="userEmail" required>
+            </mat-form-field>
+
+        </div>
+
+        <div>
+
+            <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>User mobile</mat-label>
+
+                <input matInput placeholder="Enter mobile number" type="text" [(ngModel)]="editAdminUsersData.userMobile" name="userMobile" required>
+            </mat-form-field>
+
+        </div>
+
+     
+
+        <!-- <div>
+
+
+            <mat-form-field appearance="outline" fxFlex="60">
+                <mat-label>User password</mat-label>
+
+                <input matInput placeholder="Enter user password" type="password" [(ngModel)]="editAdminUsersData.userName" name="userPassword" required>
+            </mat-form-field>
+
+        </div> -->
+
+        <div>
+
+
+            <mat-form-field appearance="outline" fxFlex="100">
+                <mat-label>Role type</mat-label>
+      
+                <mat-select ngModel [(ngModel)]="selectedUserRole" name="roleType">
+                  <mat-option *ngFor="let adminList of adminRoleListData" [value]="adminList.roleID">
+                      {{adminList.roleName}}
+                  </mat-option>
+                </mat-select>
+
+              </mat-form-field>
+
+
+        </div>
+
+
+        <div>
+
+            <mat-form-field appearance="outline" fxFlex="100" class="mr-2">
+                <mat-label>{{editAdminUsersData.astatus ? 'Active' : 'Deactive'}}</mat-label>
+                <mat-select ngModel [(ngModel)]="editAdminUsersData.astatus" name="AStatus">
+                    <mat-option *ngFor="let status of adminUserStatus" [value]="status.id">
+                        {{status.value}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+
+            <!-- <mat-form-field appearance="fill" class="mr-2" fxFlex="100">
+                <mat-label>{{adminUserStatus ? 'Active' : 'Deactive'}}</mat-label>
+                <mat-select ngModel name="AStatus">
+                    <mat-option *ngFor="let status of adminUserStatus" [value]="status.id">
+                        {{status.value}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field> -->
+        </div>
+
+
+        <div>
+
+            <mat-form-field appearance="outline" fxFlex="100" hidden>
+                <mat-label>Created on</mat-label>
+
+                <input matInput placeholder="Created on" type="text" [(ngModel)]="currentTime" name="createdontime"
+                    required>
+            </mat-form-field>
+
+        </div>
+
+
+        <div>
+
+            <div class="mt-3 ml-4 mb-4" style="display: flex;justify-content: center;">
+                <button mat-raised-button type="submit" color="primary">Submit</button>
+
+            </div>
+
+        </div>
+
+        <!-- <button mat-raised-button type="submit" color="primary"
+            class="btn btn-primary btn-sm ml-4" style="height: fit-content;">Submit</button>
+  
+            <div class="text-right col-md-4">
+  
+                <mat-dialog-actions>
+                  <button class="btn  cancelbutton btn-sm" mat-dialog-close>
+                    Cancel
+                  </button>
+                </mat-dialog-actions>        
+              </div> -->
+    </form>
+
+</div>

@@ -1,0 +1,80 @@
+.grid-container {
+    margin: 20px;
+}
+
+.cardpadding{
+  padding: 18px;
+}
+
+  .dashboard-card {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+  }
+  
+  .more-button {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+  }
+  
+  .dashboard-card-content {
+    text-align: center;
+  }
+  
+  
+  .example-form mat-slide-toggle {
+    margin: 8px 0;
+    display: block;
+    font-weight: 500;
+  }
+  
+  .statusbutton{
+    font-size: 12px;
+    padding: 0px 10px !important;
+  }
+  
+  :host ::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+    background-color: #941e1e ;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  .vmedo-admin-enquiry-table{
+    padding:8px 8px 8px 8px;
+  }
+  
+   /* mat-grid-tile {
+     background: lightblue;
+    
+  } */
+  
+  .countstyle{
+    font-size: 30px;
+    
+    margin-left: 27px;
+  }
+  
+  
+  .classheading{
+    margin-bottom: 8px;
+  }
+  
+  .cardstyle{
+    border-radius: 5px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  }
+  
+  .cardheader{
+    margin-left: 17px;
+  }
+  
+  #dashboardcard:hover {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
+    border: 1px solid #ce2424;
+    color: #ce2424;
+  }

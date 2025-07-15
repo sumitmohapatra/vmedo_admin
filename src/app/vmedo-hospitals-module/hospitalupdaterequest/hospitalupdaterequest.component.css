@@ -1,0 +1,9 @@
+.mat-tab-group {
+    margin-bottom: 48px;
+  }
+
+  .generalDetailsRequestBadgeColor
+.mat-badge-content {
+  background: rgb(19, 117, 134);
+  color: rgb(255, 255, 255);
+}

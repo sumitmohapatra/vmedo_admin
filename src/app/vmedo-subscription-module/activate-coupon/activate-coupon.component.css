@@ -1,0 +1,22 @@
+
+.mat-dialog-container {
+    padding: 0px !important;
+}
+
+
+.mat-dialog-actions {
+margin-bottom: 0px;
+}
+
+.toast-success {
+    background-color: #bb2534 !important;
+    top: 60px;
+}
+
+
+
+  .headerstyle{
+    font-size: 13px;
+    background-color:#b3aeae29; font-weight: 400;
+  }
+

@@ -1,0 +1,32 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@import '~ngx-toastr/toastr';
+
+/* 
+.mat-drawer-container {
+    background-color: #a1a1a1ab;
+    color: rgba(0,0,0,.87);
+} */
+
+/* .mat-sort-header-container {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    letter-spacing: normal;
+    outline: 0;
+    justify-content: flex-end;
+} */
+
+td.mat-cell {
+    text-align: center !important;
+    font-size: 12px;
+  }
+  
+  th.mat-header-cell{
+    text-align: center !important;
+    font-size: 13px;
+    font-weight: 400;
+  }

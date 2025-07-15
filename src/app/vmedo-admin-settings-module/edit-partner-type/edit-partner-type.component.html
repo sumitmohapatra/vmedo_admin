@@ -1,0 +1,42 @@
+<div class="text-right  modal-header bg-danger text-white" style="
+padding-bottom: 0px;">
+  <h3>Update partner type</h3>
+</div>
+<mat-divider></mat-divider>
+<br>
+
+<div class="mt-2">
+    <form #updatePartnerTypeForm="ngForm" (ngSubmit)="updatePartnerTypeData(updatePartnerTypeForm.value);updatePartnerTypeForm.reset();">
+
+        <mat-form-field appearance="legacy" fxFlex="50" hidden>
+            <mat-label> ID</mat-label>
+
+            <input matInput placeholder="ID" [(ngModel)]="partnerTypeData.id" type="text" name="id" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="legacy" fxFlex="40" class="ml-3">
+            <mat-label>Enter partner type</mat-label>
+
+            <input matInput placeholder="Enter partner type" type="text" [(ngModel)]="partnerTypeData.type_name" name="type_name" required>
+      
+    
+          </mat-form-field>
+
+
+
+        <button mat-raised-button type="submit" color="primary"
+            class="btn btn-primary btn-sm ml-4" style="height: fit-content;">Submit</button>
+
+
+
+            <div class="text-right col-md-4">
+
+                <mat-dialog-actions>
+                  <button class="btn  cancelbutton btn-sm" mat-dialog-close>
+                    Cancel
+                  </button>
+                </mat-dialog-actions>        
+              </div>
+    </form>
+
+</div>

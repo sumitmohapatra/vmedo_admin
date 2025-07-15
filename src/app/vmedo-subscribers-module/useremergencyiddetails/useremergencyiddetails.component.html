@@ -1,0 +1,100 @@
+<div class="text-right  modal-header bg-danger text-white" style="
+padding-bottom: 0px;">
+  <h3>Emergency health card</h3>
+  <button mat-icon-button aria-label="close dialog" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<mat-divider></mat-divider>
+<br>
+
+
+<!-- <div mat-dialog-title class="dialog-title">
+  <h3>Emergency ID's</h3>
+  <button mat-icon-button aria-label="close dialog" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</div> -->
+
+
+
+
+<div class="container" style="overflow-y: scroll; height: auto;">
+
+  <div class="row" style="padding: 10px; overflow: auto;">
+
+
+    <mat-card class="example-card col-md-12 mb-3 mat-elevation-z4" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;" *ngFor="let item of emergencyidDetails?.objret">
+
+      <!-- <div class="row">
+        <div class="text-left col-md-5 mb-1">
+          <h4>General details</h4>
+          </div>
+
+
+      </div> -->
+
+
+      <div class="row">
+      
+    
+        <div class="text-left col-md-5 mb-1">
+
+          <h5><strong style="font-weight:500">EMID</strong> : {{item.emid}}</h5>
+
+          <h5><strong style="font-weight:500">Date of birth</strong> : {{item.pDob}}</h5>
+
+          <h5><strong style="font-weight:500">Gender</strong> : {{item.pGender}}</h5>
+
+          <h5><strong style="font-weight:500">Primary contact name</strong> : {{item.pcontName}}</h5>
+
+          <h5><strong style="font-weight:500">Primary number</strong> : {{item.pcontMobile}}</h5>
+
+          <h5><strong style="font-weight:500">Primary contact relation</strong> -{{item.pcontRelation}}</h5>
+
+
+          <h5><strong style="font-weight:500">Insurance provider</strong> -{{item.insuranceprovider}}</h5>
+
+
+         
+          <h5><strong style="font-weight:500">Is organ donor</strong> : {{item.organdoner}}</h5>
+
+
+          <!-- <h5><strong style="font-weight:500">Created by</strong> -{{item.createdBy}}</h5> -->
+        </div>
+
+        <div class="text-left col-md-4 mb-1">
+
+          <h5><strong style="font-weight:500">Name</strong> : {{item.pname}}</h5>
+
+          <h5><strong style="font-weight:500">Blood group</strong> -{{item.pbloodgroup}}</h5>
+
+          <h5><strong style="font-weight:500">&nbsp;</strong></h5>
+    
+
+
+          <h5><strong style="font-weight:500">Secondary contact name</strong> : {{item.scontName}}</h5>
+          <h5><strong style="font-weight:500">seconday  mobile</strong> : {{item.scontMobile}}</h5>
+
+          <h5><strong style="font-weight:500">secondary contact relation</strong> : {{item.scontRelation}}</h5>
+
+          <h5><strong style="font-weight:500">Policy number</strong> : {{item.policynumber}}</h5>
+    
+
+          <h5><strong style="font-weight:500">Created on</strong> : {{item.createdon | date:'medium'}}</h5>
+
+          <!-- <h5><strong style="font-weight:500">Created by</strong> -{{item.createdBy}}</h5> -->
+        </div>
+
+        
+        <div class="text-center col-md-3">
+
+          <img class="imagestyle" [src]="item.profilepic"  onerror="this.src='assets/Images/user_profile.png';" jLightbox >
+
+        </div>
+
+      </div>
+    </mat-card>
+
+  </div>
+</div>

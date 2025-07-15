@@ -1,0 +1,435 @@
+<div class="mt-3 ml-3 mb-3">
+    <h2>Approved hospital data</h2>
+</div>
+
+<mat-divider></mat-divider>
+
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-3">
+
+            <div class="headerfontstyle">
+                <h3>Properties</h3>
+            </div>
+
+
+        </div>
+
+
+        <div class="col-4">
+            <div class="headerfontstyle">
+                <h3>Details</h3>
+            </div>
+
+        </div>
+
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <!--------------hospital image ------------------------------------------------>
+
+    <div class="row mt-3">
+        <div class="col-3">
+
+            <div class="headerfontstyle">
+                <h4>Hospital Image</h4>
+            </div>
+
+        </div>
+
+
+        <div class="col-4">
+
+           <div>
+            <img class="imagestyle" [src]="hospitalDetails?.hImage"  alt="Hospital Image" 
+            onerror="this.src='assets/Images/welcome_hospital_icon3.png';" jLightbox />
+           </div> 
+
+            <!-- <div> <img class="imagestyle" [src]="hospitalDetails.hImage" alt="Hospital Image"></div> -->
+
+        </div>
+
+    </div>
+
+    <!------------------------- hospital name ----------------------------->
+
+    <div class="row mt-4">
+        <div class="col-3">
+
+            <div class="headerfontstyle">
+                <h4>Hospital Name -</h4>
+            </div>
+
+        </div>
+
+
+        <div class="col-4">
+
+            <div>{{hospitalDetails?.hospitalName}} </div>
+
+        </div>
+
+    </div>
+
+        <!------------------------- hospital email ----------------------------->
+
+        <div class="row mt-4">
+            <div class="col-3">
+    
+                <div class="headerfontstyle">
+                    <h4>Hospital Email -</h4>
+                </div>
+    
+            </div>
+    
+    
+            <div class="col-4">
+    
+                <div>{{hospitalDetails?.hEmail}} </div>
+    
+            </div>
+    
+        </div>
+
+        
+            <!------------------------- hospital rating ----------------------------->
+
+    <div class="row mt-4">
+        <div class="col-3">
+
+            <div class="headerfontstyle">
+                <h4>Hospital Rating -</h4>
+            </div>
+
+        </div>
+
+
+        <div class="col-4">
+
+            <div>{{hospitalDetails?.hRating}} </div>
+
+        </div>
+
+    </div>
+
+    <!------------------------- hospital address ----------------------------->
+
+    <div class="row mt-2">
+        <div class="col-3">
+
+            <div class="headerfontstyle">
+                <h4>Hospital Address - </h4>
+            </div>
+
+        </div>
+
+
+        <div class="col-4">
+
+            <div>{{hospitalDetails?.hAddress}} </div>
+
+        </div>
+
+    </div>
+
+    <!------------------------- date ----------------------------->
+
+    <div class="row mt-2">
+        <div class="col-3">
+
+            <div class="headerfontstyle">
+                <h4>Date created -</h4>
+            </div>
+
+        </div>
+
+
+        <div class="col-4">
+
+            <div>{{hospitalDetails?.createdon}} </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="row mt-2">
+        <div class="col-3">
+
+            <div class="headerfontstyle">
+                <h4>City -</h4>
+            </div>
+
+        </div>
+
+
+        <div class="col-4">
+
+            <div>{{hospitalDetails?.hCity}} </div>
+
+        </div>
+
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-3">
+
+            <div class="headerfontstyle">
+                <h4>Emergency contact number -</h4>
+            </div>
+
+        </div>
+
+
+        <div class="col-4">
+
+            <div>{{hospitalDetails?.emergencyDContact}} </div>
+
+        </div>
+
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-3">
+
+            <div class="headerfontstyle">
+                <h4>General contact number -</h4>
+            </div>
+
+        </div>
+
+
+        <div class="col-4">
+
+            <div>{{hospitalDetails?.generalDContact}} </div>
+
+        </div>
+
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-3">
+
+            <div class="headerfontstyle">
+                <h4>Show hospital on search -</h4>
+            </div>
+
+        </div>
+
+
+        <div class="col-4">
+
+            <div>{{hospitalDetails?.astatus}} </div>
+
+        </div>
+
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-3">
+
+            <div class="headerfontstyle">
+                <h4>Accept emergencies currently -</h4>
+            </div>
+
+        </div>
+
+
+        <div class="col-4">
+
+            <div>{{hospitalDetails?.emergencyHandelStatus}} </div>
+
+        </div>
+
+    </div>
+
+    <!-- <div class="row mt-2">
+        <div class="col-3">
+
+            <div class="headerfontstyle">
+                <h4>Emergencies Handeled -</h4>
+            </div>
+
+        </div>
+
+
+        <div class="col-4">
+
+            <div>{{hospitalDetails?.emergencyHandeled}} </div>
+
+        </div>
+
+    </div> -->
+
+    <div class="mt-3 ml-3 mb-3">
+        <h2>Hospital Emergency Handled</h2>
+    </div>
+
+    <mat-card class="col-md-10">
+
+        <table mat-table [dataSource]="emergencyHandledSource" matSort class="col-md-12">
+
+            <!-- Bed Type Column -->
+            <ng-container matColumnDef="eName">
+                <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Emergency Handled</strong>
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.eName}} </td>
+            </ng-container>
+
+            <!-- Total Beds Column -->
+            <ng-container matColumnDef="eStatus">
+                <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Status</strong> </th>
+                <td mat-cell *matCellDef="let element"> {{element.eStatus}} </td>
+            </ng-container>
+
+        
+
+            <tr mat-header-row *matHeaderRowDef="emergencyHandledColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: emergencyHandledColumns;"></tr>
+        </table>
+
+    </mat-card>
+
+    <div class="mt-3 ml-3 mb-3">
+        <h2>Hospital Specialization</h2>
+    </div>
+
+    <mat-card class="col-md-10">
+
+        <table mat-table [dataSource]="specializationDetails" matSort class="col-md-12">
+
+            <!-- Bed Type Column -->
+            <ng-container matColumnDef="eName">
+                <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Specialization</strong>
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.eName}} </td>
+            </ng-container>
+
+            <!-- Total Beds Column -->
+            <ng-container matColumnDef="eStatus">
+                <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Status</strong> </th>
+                <td mat-cell *matCellDef="let element"> {{element.eStatus}} </td>
+            </ng-container>
+
+        
+
+            <tr mat-header-row *matHeaderRowDef="specializationColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: specializationColumns;"></tr>
+        </table>
+
+    </mat-card>
+
+
+    <!-- <div class="row mt-2">
+        <div class="col-3">
+
+            <div class="headerfontstyle">
+                <h4>Hospital Specialization -</h4>
+            </div>
+
+        </div>
+
+
+        <div class="col-4">
+
+            <div>{{hospitalDetails?.lSpelization?.ename}} </div>
+
+        </div>
+
+    </div> -->
+
+    <div class="mt-3 ml-3 mb-3">
+        <h2>Hospital bed details</h2>
+    </div>
+
+    <mat-card class="col-md-10">
+
+        <table mat-table [dataSource]="bedDataSource" matSort class="col-md-12">
+
+            <!-- Bed Type Column -->
+            <ng-container matColumnDef="bedType">
+                <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Bed Type </strong>
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.bedType}} </td>
+            </ng-container>
+
+            <!-- Total Beds Column -->
+            <ng-container matColumnDef="totalBedAvalibale">
+                <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Total
+                        Beds</strong> </th>
+                <td mat-cell *matCellDef="let element"> {{element.totalBedAvalibale}} </td>
+            </ng-container>
+
+            <!-- Beds Available  Column -->
+            <ng-container matColumnDef="bedAvalibale">
+                <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Beds Available
+                    </strong>
+                </th>
+                <td mat-cell *matCellDef="let element"> {{element.bedAvalibale}} </td>
+            </ng-container>
+
+            <!-- Updated On Column -->
+            <ng-container matColumnDef="updated_on">
+                <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Last
+                        Updated</strong> </th>
+                <td mat-cell *matCellDef="let element"> {{element.updated_on | date:'medium'}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedBedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedBedColumns;"></tr>
+        </table>
+
+    </mat-card>
+
+
+    <mat-divider></mat-divider>
+
+    <div class="mt-3 ml-3 mb-2">
+        <h2>Block Hospital</h2>
+    </div>
+
+
+    <div class="mt-3">
+
+        <form #approveHospitalForm="ngForm"
+            (ngSubmit)="approveHospitalData(approveHospitalForm.value);approveHospitalForm.reset();">
+
+            <div class="text-center mt-3 justify-content-center col-md-12" hidden>
+                <mat-form-field fxFlex="25">
+                    <mat-label>Hospital ID</mat-label>
+                    <input matInput placeholder="Enter Hospital ID" type="text" [(ngModel)]="hospitalID"
+                        name="HospitalID" required>
+                </mat-form-field>
+            </div>
+
+
+            <div class="text-center justify-content-center mt-3 mb-3 col-md-12" hidden>
+
+                <mat-form-field fxFlex="25">
+                    <mat-label>Status</mat-label>
+                    <input matInput placeholder="Enter Status" type="text" [(ngModel)]="statusFalse" name="AStatus"
+                        required>
+                </mat-form-field>
+
+            </div>
+
+            <div class="text-center mt-3 justify-content-center col-md-12">
+                <mat-form-field fxFlex="25">
+                    <mat-label>Description</mat-label>
+                    <input matInput placeholder="Enter Description" type="text" ngModel name="Description">
+                </mat-form-field>
+            </div>
+
+            <div class="text-center col-md-12 mb-4">
+                <button type="submit" class="btn btn-danger btn-lg ml-3">Block hospital</button>
+            </div>
+
+        </form>
+
+    </div>
+
+
+
+</div>

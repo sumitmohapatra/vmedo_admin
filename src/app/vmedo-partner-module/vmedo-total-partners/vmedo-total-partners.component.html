@@ -1,0 +1,198 @@
+<div class="row mt-3 ml-3" style="width: 45%;">
+<!-- Add the mat-select here -->
+<!-- Update the mat-select to work with string values -->
+<div class="col-6 mt-2 mb-1 form-group" style="color: white; justify-content: flex-end;">
+    <mat-form-field appearance="outline">
+        <mat-label>Filter Partner Type</mat-label>
+        <mat-select [(value)]="selectedPartnerType" (selectionChange)="filterDataByPartnerType()">
+            <mat-option *ngFor="let partnerType of partnerTypes" [value]="partnerType.value">
+                {{ partnerType.viewValue }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+
+<!-- Add the partner status filter dropdown -->
+<div class="col-6 mt-2 mb-1 form-group" style="color: white; justify-content: flex-end;">
+    <mat-form-field appearance="outline">
+      <mat-label>Filter Partner Status</mat-label>
+      <mat-select [(value)]="selectedPartnerStatus" (selectionChange)="filterData()">
+        <mat-option *ngFor="let partnerStatus of partnerStatuses" [value]="partnerStatus.value">
+          {{ partnerStatus.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  
+</div>
+
+<div class="grid-container">
+
+    <div class="vmedo-admin-enquiry-table">
+        <div style="box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;">
+
+            <div class="row modal-header col-12  text-white vmedoadmintableheader">
+
+                <div class="col-6 mt-2">
+
+                    <h2>VMEDO partners list - {{dataSource.data?.length}}</h2>
+
+                </div>
+
+                <div class="col-6 mt-2 mb-1 form-group" style="color:white;justify-content: flex-end;">
+                    <input class="form-control" fxFlex="50%" style="border-radius: 12px;" type="text"
+                        (keyup)="doFilter($event.target.value)" placeholder="Search VMEDO partner...">
+                </div>
+
+            </div>
+
+
+            <table mat-table matSort [dataSource]="dataSource" matSortActive='registered_on' matSortDirection='desc'
+                matSort>
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="id">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Sl no
+                        </strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container>
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="partner_type">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Partner
+                            type</strong></th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center; width: 15%;">
+
+                        <ng-container *ngIf="element.partner_type === 'Hospital'; else labIcon">
+                            <img src="assets/Images/vmedo_hospital_icon.png" alt="Hospital Icon"
+                                style="height:15%; width: 15%;" />
+                        </ng-container>
+
+                        <ng-template #labIcon>
+                            <ng-container *ngIf="element.partner_type === 'Lab'; else ambulanceIcon">
+                                <img src="assets/Images/vmedo_labs_icon.png" alt="Lab Icon"
+                                    style="height:15%; width: 15%;" />
+                            </ng-container>
+
+                        </ng-template>
+
+                        <ng-template #ambulanceIcon>
+                            <ng-container *ngIf="element.partner_type === 'Ambulance'; else homeHealthcareIcon">
+                                <img src="assets/Images/vmedo_ambulance_icon.png" alt="Ambulance Icon"
+                                    style="height:15%; width: 15%;" />
+                            </ng-container>
+                        </ng-template>
+
+                        <ng-template #homeHealthcareIcon>
+                            <img src="assets/Images/vmedo-home-healthcare-icon.png" alt="Home healthcare Icon"
+                                style="height:15%; width: 15%;" />
+                        </ng-template>
+
+                    </td>
+                </ng-container>
+
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="partnerorg_name">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Name</strong></th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.partnerorg_name}}
+                    </td>
+                </ng-container>
+
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="partnerorg_email">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Email</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.partnerorg_email}}
+                    </td>
+                </ng-container>
+
+                <!-- Enquired By Column --> 
+                <ng-container matColumnDef="partnerorg_primaryphone">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Primary
+                            phone</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;">
+                        {{element.partnerorg_primaryphone}} </td>
+                </ng-container>
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="partnerorg_secondaryphone">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Secondary
+                            phone</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;">
+                        {{element.partnerorg_secondaryphone}} </td>
+                </ng-container>
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="partnerorg_address">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Address</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.partnerorg_address}}
+                    </td>
+                </ng-container>
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="partnerorg_services">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Service
+                            details</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.partnerorg_services}}
+                    </td>
+                </ng-container>
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="partner_status">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Status</strong>
+                    </th>
+
+                    <td mat-cell *matCellDef="let element" [ngClass]="{
+                          'green-value': element.partner_status === 1,
+                          'red-value': element.partner_status === 2,
+                          'black-value': element.partner_status === 3
+                        }" style="font-weight: 500;">
+                        {{element.partner_status === 1 ? 'Registered' : element.partner_status === 2 ? 'Unregistered' :
+                        'Blocked'}}
+                    </td>
+                </ng-container>
+
+                <ng-container [matColumnDef]="'actions'">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef><strong>Actions</strong> </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;">
+
+                        <button mat-raised-button type="submit" (click)="getVmedoPartnerDetails(element.id)"
+                            style="background-color: #ce2424; color: white;"> Manage partner</button>
+
+                        <!-- <button mat-raised-button type="submit" color="primary" class="btn btn-primary btn-sm ml-4"
+                            (click)="onEditVmedoPartner(element.id)" style="height: fit-content;"> Edit</button> -->
+
+                        <!-- <button class="mr-3" mat-icon-button (click)="onEditVmedoPartner(element.id)"
+                            matTooltip="Update details">
+                            <mat-icon mat-icon-button color='primary'>edit</mat-icon>
+                        </button> -->
+
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[50, 100, 250]" showFirstLastButtons
+                aria-label="Select page of periodic elements">
+            </mat-paginator>
+
+
+        </div>
+
+    </div>
+</div>
+
+<div *ngIf="userRole === 1;">
+    <button mat-raised-button color="Primary" style="color: white;" (click)="fileDownload()">Export Data</button>
+</div>

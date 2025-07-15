@@ -1,0 +1,93 @@
+table {
+    width: 100%;
+  
+  }
+  
+  .vmedo-admin-enquiry-table{
+    padding:8px 8px 8px 8px;
+    width: 100%;
+   
+   
+  }
+  
+  .headerstyle{
+    font-size: 13px;
+    background-color:#b3aeae29; font-weight: 400;
+  }
+  
+  .vmedoadmintableheader{
+  
+    padding-bottom: 0px;
+    margin: 0px;
+    padding-top: 0px;
+    background-color: #383131d9;
+  
+  }
+  
+  .red {
+    color: red;
+    font-size: 19px;
+    font-weight: 600;
+  }
+  
+  .profile-card{
+  
+  text-align: center;
+  padding: 0px 20px 20px 20px;
+  }
+  
+  .imagestyle{
+  height: 47px;
+    width: 47px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid rgb(238 237 237 / 25%);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  
+  }
+  
+  .mat-dialog-container {
+    padding: 0px !important;
+  }
+  
+  
+  .mat-dialog-actions {
+  margin-bottom: 0px;
+  }
+  
+  .toast-success {
+    background-color: #bb2534 !important;
+    top: 60px;
+  }
+  
+  .mat-button, .mat-raised-button{
+    background-color:#ce2424;
+  } 
+  
+  th.mat-header-cell,
+  td.mat-cell {
+    text-align: center !important;
+    font-size: 12px;
+  }
+  
+  .mat-row, .mat-header-row {  
+    min-width: 2800px;  
+    width: 100%;  
+  }  
+  
+  .mat-column-createdBy{
+    width: 0% !important;      
+  }
+  
+  .false-value {
+    color: #b62929;
+   }
+   
+   .true-value{
+     color: green;
+   }
+
+   .corporate-text {
+    font-weight: 500;
+    color: rgb(22, 90, 135);
+  }

@@ -1,0 +1,13 @@
+<body>
+    <div class="container">
+        <img src="assets/Images/vmedologo.png" style="width: 250px;" />
+        <div class="error-code">404</div>
+        <div class="error-message">Page Not Found</div>
+
+        <a *ngIf="userRole === 1;" [routerLink]="'/admin-dashboard/vmedo-admin-module/dashboard'" class="return-home">Return to Home</a>
+
+        <a *ngIf="userRole === 2;" [routerLink]="'/admin-dashboard/vmedo-subscribers-module/subscribers'" class="return-home">Return to Home</a>
+
+        <a *ngIf="userRole === 3;" [routerLink]="'/admin-dashboard/vmedo-hospitals-module/hospitallist/registeredhospital'" class="return-home">Return to Home</a>
+    </div>
+</body>

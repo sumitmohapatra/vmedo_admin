@@ -1,0 +1,154 @@
+<div>
+
+
+    <div class="mt-1 ml-3">
+        <h2 style="color: rgb(11, 100, 160);;">Add Partner Address</h2>
+    </div>
+
+
+    <mat-divider></mat-divider>
+
+    
+    <div class="col-12 mb-3 mt-3">
+
+
+        <form #addVmedoPartnerAddressForm="ngForm"
+            (ngSubmit)="addVmedoPartnersAddressData(addVmedoPartnerAddressForm.value);addVmedoPartnerAddressForm.reset()">
+
+
+            <div class="row" style="display: flex;justify-content: center;">
+
+
+                <div class="col-2" hidden>
+
+
+                    <mat-form-field appearance="outline" fxFlex="90">
+                        <mat-label>ID</mat-label>
+                        <input matInput placeholder="Partner ID" [(ngModel)]="vmedoPartnerID" type="text" name="partner_id" required>
+                    </mat-form-field>
+
+                </div>
+
+
+                <div class="col-12">
+
+
+                    <mat-form-field appearance="outline" fxFlex="100">
+                        <input type="text" placeholder="Enter partner address" matInput [formControl]="inputValue"
+                            [matAutocomplete]="address" required>
+                        <mat-autocomplete #address="matAutocomplete">
+                            <mat-option *ngFor="let location of filteredLocations | async"
+                                [value]="location.description" ngModel name="partnerorg_address"
+                                (onSelectionChange)="optionSelected(location)">
+                                {{ location.description }}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+
+
+                </div>
+
+
+            </div>
+
+
+            <div class="row" style="display: flex;justify-content: center;">
+
+
+                <div class="col-4">
+
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Select City</mat-label>
+                        <input type="text"
+                               placeholder="Select city"
+                               aria-label="Number"
+                               matInput
+                               [formControl]="myControl"
+                               [matAutocomplete]="auto" (click)="onClickButton()" required>
+              
+                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"  >
+                          <mat-option *ngFor="let option of filteredOptions | async" ngDefaultControl  ngModel name="partner_city" (onSelectionChange)="optionCitySelected(option)" [value]="option">
+                            {{option}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+
+
+
+
+                </div>
+
+
+                <div class="col-4">
+
+
+                    <mat-form-field appearance="outline" fxFlex="100">
+                        <mat-label>Area</mat-label>
+                        <input matInput placeholder="Enter area" ngModel type="text" name="partner_area" required>
+                    </mat-form-field>
+
+
+                </div>
+
+
+                <div class="col-4">
+
+
+                    <mat-form-field appearance="outline" fxFlex="100">
+                        <mat-label>Pincode</mat-label>
+                        <input matInput placeholder="Enter pincode" ngModel type="text" name="partner_pincode" required>
+                    </mat-form-field>
+
+
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="row" style="display: flex;justify-content: center;">
+                <div class="col-6">
+                    <mat-form-field appearance="outline" fxFlex="100">
+                        <mat-label>Latitude</mat-label>
+                        <input matInput placeholder="Enter latitude" [(ngModel)]="latitude" name="latitude" required>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field appearance="outline" fxFlex="100">
+                        <mat-label>Longitude</mat-label>
+                        <input matInput placeholder="Enter Longitude" [(ngModel)]="longitude" name="longitude" required>
+                    </mat-form-field>
+                </div>
+            </div>
+
+
+            <div class="row" style="display: flex;justify-content: center;">
+                <div class="col-3" style="text-align: center;">
+                  <button mat-raised-button color="primary" class="btn-sm ml-4" style="height: fit-content;" type="submit"
+                    [disabled]="!addVmedoPartnerAddressForm.valid">Add Partner Address</button>
+                </div>
+        
+        
+                <div class="col-5" style="text-align: center;">
+                  <button mat-raised-button color="warn" mat-dialog-close class="ml-3">
+                    Cancel
+                  </button>
+                </div>
+        
+        
+              </div>
+
+        </form>
+
+
+
+    </div>
+
+
+</div>
+
+
+
+

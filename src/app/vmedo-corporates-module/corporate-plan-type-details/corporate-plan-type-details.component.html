@@ -1,0 +1,105 @@
+<div class="row mt-3 ml-1" style="width: 100%;">
+    <!-- <div class="col">
+      <h3>Manage Coupon Codes</h3>
+    </div> -->
+
+
+    <div class="col mt-1 mb-3">
+
+        <span style="font-weight: 500;">Create new plan type</span>
+        <button mat-raised-button type="submit" color="primary" class="btn-sm ml-4"
+            (click)="CreateCorporatePlanType()"  style="color: white; box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;"> + create </button>
+    </div>
+
+
+</div>
+
+
+
+<div class="grid-container">
+
+    <div class="vmedo-admin-enquiry-table">
+        <div style="box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;">
+
+            <div class="row modal-header col-12  text-white vmedoadmintableheader">
+
+                <div class="col-6 mt-2">
+
+                    <h2>Corporate plan type list - {{dataSource.data?.length}}</h2>
+
+                </div>
+
+                <div class="col-6 mt-2 mb-1 form-group" style="color:white;justify-content: flex-end;">
+                    <input class="form-control" fxFlex="50%" style="border-radius: 12px;" type="text"
+                        (keyup)="doFilter($event.target.value)" placeholder="Search corporate plan...">
+                </div>
+
+            </div>
+
+            <table mat-table matSort [dataSource]="dataSource" matSortActive='added_on' matSort>
+
+                <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="planID" hidden>
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>ID</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.planID}} </td>
+                </ng-container>
+
+
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="added_on">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Created on
+                        </strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.added_on | date:medium}} </td>
+                </ng-container>
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="planName">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Plan name
+                            </strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.planName}}
+                    </td>
+                </ng-container>
+
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="planDescription">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Description
+                        </strong></th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.planDescription}}
+                    </td>
+                </ng-container>
+
+
+                <!-- Enquired By Column -->
+                <ng-container matColumnDef="planStatus">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header>
+                        <strong>Plan Status</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element"
+                    [ngClass]="{'false-value': element.planStatus === false, 'true-value': element.planStatus === true}"
+                    style="font-weight: 500;"> {{element.planStatus ? 'Active' : 'Inactive'}} </td>
+                </ng-container>
+
+    
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[50, 100, 250]" showFirstLastButtons
+                aria-label="Select page of periodic elements">
+            </mat-paginator>
+
+
+        </div>
+
+    </div>
+</div>
