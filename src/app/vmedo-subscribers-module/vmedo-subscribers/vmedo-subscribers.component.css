@@ -65,6 +65,10 @@ th.mat-header-cell{
 }
 
 .custom-button {
- 
   color: rgb(255, 255, 255);
+}
+
+.free-member{
+  background-color: #145395 !important;
+  color: #fff !important;
 }

@@ -4,6 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { environment } from 'src/environments/environment';
 
 interface Status {
   id: number;
@@ -58,7 +59,7 @@ export class HospitalupdatedetailsComponent implements OnInit {
   dropdownEmergencySettings: IDropdownSettings = {};
 
   getEmergencyData(): void {
-    this.http.get<any>('https://api.vmedo.com/api/hospital/GetAllHospitalSpelizationandEmergency?Rtype=2').subscribe(data => {
+    this.http.get<any>(`${environment.baseUrl}hospital/GetAllHospitalSpelizationandEmergency?Rtype=2`).subscribe(data => {
       this.dropdownEmergencyList = data;
     });
   }
@@ -80,7 +81,7 @@ export class HospitalupdatedetailsComponent implements OnInit {
   dropdownSpecializationSettings: IDropdownSettings = {};
 
   getSpecializationData(): void {
-    this.http.get<any>('https://api.vmedo.com/api/hospital/GetAllHospitalSpelizationandEmergency?Rtype=1').subscribe(data => {
+    this.http.get<any>(`${environment.baseUrl}hospital/GetAllHospitalSpelizationandEmergency?Rtype=1`).subscribe(data => {
       this.dropdownSpecializationList = data;
     });
   }

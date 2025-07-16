@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ServicesService } from 'src/app/adminservice/services.service';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -34,13 +35,26 @@ export class CreateCorporateComponent implements OnInit {
     }
 
     const formData = new FormData();
-    formData.append('organisationName', myForm.value.organisationName);
-    formData.append('organisationEmail', myForm.value.organisationEmail);
-    formData.append('organisationShortcode', myForm.value.organisationShortcode);
-    formData.append('organisationType', myForm.value.organisationType);
+    // formData.append('organisationName', myForm.value.organisationName);
+    // formData.append('organisationEmail', myForm.value.organisationEmail);
+    // formData.append('organisationShortcode', myForm.value.organisationShortcode);
+    // formData.append('organisationType', myForm.value.organisationType);
+    // formData.append('file', this.selectedFile);
+
+    const myObj = {
+      organisationName: myForm.value.organisationName,
+      organisationEmail: myForm.value.organisationEmail,
+      organisationShortcode: myForm.value.organisationShortcode,
+      organisationType: myForm.value.organisationType
+    };
+    
+    // Append the stringified object as "MyObj"
+    formData.append('MyObj', JSON.stringify(myObj));
+    
+    // Append the file
     formData.append('file', this.selectedFile);
 
-    this.http.post('https://api.vmedo.com/api/vadmin/Addorganisation_details', formData).subscribe(
+    this.http.post(`${environment.baseUrl}vadmin/Addorganisation_details`, formData).subscribe(
       response => {
         console.log('Success:', response);
         this.onClose();

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ServicesService } from 'src/app/adminservice/services.service';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 interface Status {
@@ -74,7 +75,7 @@ export class UpdateCorporateComponent implements OnInit {
 
     console.log(myObj);
 
-    this.http.post('https://api.vmedo.com/api/vadmin/Updateorganisation_details', formData).subscribe(
+    this.http.post(`${environment.baseUrl}vadmin/Updateorganisation_details`, formData).subscribe(
       response => {
 
         this.onClose();

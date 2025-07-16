@@ -10,6 +10,7 @@ import { MatSort } from '@angular/material/sort';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { HospitalProperties } from '../../vmedo-hospitals-module/hospitallist/hospitalProperties';
 import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-userhomepagebanners',
@@ -83,7 +84,7 @@ export class UserhomepagebannersComponent implements OnInit, OnDestroy {
       frmData.append("File", this.myFiles[i]);
     }
 
-    this.httpService.post('https://api.vmedo.com/api/vadmin/Addsitebanner', frmData).subscribe(
+    this.httpService.post(`${environment.baseUrl}vadmin/Addsitebanner`, frmData).subscribe(
       data => {
         this.sMsg = data;
         if (this.sMsg.statusCode === 200) {

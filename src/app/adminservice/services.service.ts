@@ -234,12 +234,12 @@ export class ServicesService {
   }
   
   getLocationDetailsByPlaceId(placeId: string) {
-    const url = `https://api.vmedo.com/api/user/GetLocationDetailsByPlaceID?placeId=${placeId}`;
+    const url = `${environment.baseUrl}user/GetLocationDetailsByPlaceID?placeId=${placeId}`;
     return this.http.get(url);
   }
 
   getLocationsByInput(inputValue: string): Observable<any> {
-    const apiUrl = `https://api.vmedo.com/api/user/GetLocationsBYInput?inputvalue=${inputValue}`;
+    const apiUrl = `${environment.baseUrl}user/GetLocationsBYInput?inputvalue=${inputValue}`;
     return this.http.get(apiUrl);
   }
 

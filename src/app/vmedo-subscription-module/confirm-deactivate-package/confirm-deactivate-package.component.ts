@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -33,7 +34,7 @@ export class ConfirmDeactivatePackageComponent implements OnInit {
       updated_on: formattedTime // add the current date to the data to be sent to the API
     };
 
-    return this.http.post<any>('https://api.vmedo.com/api/Vadmin/AdminApproveSubscriptionStatus', requestdata)
+    return this.http.post<any>(`${environment.baseUrl}Vadmin/AdminApproveSubscriptionStatus`, requestdata)
       .subscribe((res: any) => {
         this.onClose();
         this.successNotification();

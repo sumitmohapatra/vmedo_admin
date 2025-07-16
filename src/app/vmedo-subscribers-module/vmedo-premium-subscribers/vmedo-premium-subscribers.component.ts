@@ -12,6 +12,7 @@ import { BlooddonordetailsComponent } from '../../adminmodule/blooddonordetails/
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
 import { PremiumSubscriberData } from './PremiumSubscribersData';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-vmedo-premium-subscribers',
@@ -29,7 +30,7 @@ export class VmedoPremiumSubscribersComponent {
   userRole: any;
 
   dataSource: MatTableDataSource<PremiumSubscriberData>;
-  displayedColumns: string[] = ['profilePhoto', 'registered_on', 'uName', 'uMobile', 'uEmail', 'mobileVerified', 'emailVerified', 'isDoner', 'hasEID', 'isPaidMember','packagevalid_till'];
+  displayedColumns: string[] = ['profile_pic','uName', 'uMobile','packageName','registered_on','hasEID','validity'];
 
   // Pagination variables
   totalUsers = 0;
@@ -77,8 +78,32 @@ export class VmedoPremiumSubscribersComponent {
     });
   }
 
+ calculateDaysLeft1(dateString: string): number {
+  const today = new Date();
+  const validTill = new Date(dateString);
+
+  // Ignore time portion
+  today.setHours(0, 0, 0, 0);
+  validTill.setHours(0, 0, 0, 0);
+
+  const timeDiff = validTill.getTime() - today.getTime();
+  return Math.ceil(timeDiff / (1000 * 3600 * 24));
+}
+
+getDaysLeftStyles1(daysLeft: any) {
+  if (daysLeft < 15) {
+    return { color: 'red' };
+  } else if (daysLeft <= 30) {
+    return { color: 'orange' };
+  } else {
+    return { color: 'black' };
+  }
+}
+
+
+
   search() {
-    const apiUrl = `https://api.vmedo.com/api/vadmin/SearchAdminUserRegisteredListPage?Svalue=${this.searchValue}`;
+    const apiUrl = `${environment.baseUrl}vadmin/SearchPaidUserRegistered?Svalue=${this.searchValue}`;
 
     this.http.get<any>(apiUrl).subscribe(
       (response) => {
@@ -145,24 +170,7 @@ export class VmedoPremiumSubscribersComponent {
 }
 
   
-getDaysLeftStyles(validityDate: string): { [key: string]: any } {
-  const daysLeftOrStatus = this.calculateDaysLeft(validityDate);
 
-  // Check if it's lapsed
-  if (daysLeftOrStatus === 'Lapsed') {
-      return {
-          'color': '#ce2424', // Red color for lapsed status
-          'font-weight': 'bold'
-      };
-  } else {
-      const daysLeft = parseInt(daysLeftOrStatus); // Parse the days left from the string
-      // Define styles based on the number of days left
-      return {
-          'color': daysLeft < 40 ? '#ce2424' : 'inherit',
-          'font-weight': daysLeft < 40 ? '500' : 'normal'
-      };
-  }
-}
 
  
   successNotification() {
@@ -170,10 +178,10 @@ getDaysLeftStyles(validityDate: string): { [key: string]: any } {
   }
 
   fetchUsers(pageNumber: number) {
-    let apiUrl = `https://api.vmedo.com/api/vadmin/GetAllPaidUserlist`//`https://api.vmedo.com/api/vadmin/AdminSubscribedRegisteredListPage?PNO=${pageNumber + 1}`;
+    let apiUrl = `${environment.baseUrl}vadmin/GetAllPaidUserlist`//`${environment.baseUrl}vadmin/AdminSubscribedRegisteredListPage?PNO=${pageNumber + 1}`;
 
     if (this.searchValue) {
-      apiUrl = `https://api.vmedo.com/api/vadmin/SearchAdminUserRegisteredListPage?Svalue=${this.searchValue}`;
+      apiUrl = `${environment.baseUrl}vadmin/SearchPaidUserRegistered?Svalue=${this.searchValue}`;
     }
 
     this.http.get<any>(apiUrl).subscribe((response) => {

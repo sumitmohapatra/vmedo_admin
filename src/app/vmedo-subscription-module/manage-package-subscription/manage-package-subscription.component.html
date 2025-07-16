@@ -81,7 +81,7 @@
                 <ng-container matColumnDef="packageDescription" hidden>
                     <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Description</strong>
                     </th>
-                    <td mat-cell *matCellDef="let element"> {{element.packageDescription}}</td>
+                    <td mat-cell *matCellDef="let element">  <div [innerHTML]="element.packageDescription"></div></td>
                 </ng-container>
                
                 <ng-container matColumnDef="packageStatus">

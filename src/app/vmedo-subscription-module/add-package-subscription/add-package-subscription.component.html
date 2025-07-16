@@ -110,9 +110,11 @@ padding-bottom: 0px;display: flex;justify-content: center;text-align: center;mar
       </mat-form-field> -->
 
       <div class="NgxEditor__Wrapper">
-        <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
-        <ngx-editor [editor]="editor" [ngModel]="html" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
+        <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
+        <ngx-editor [editor]="editor" ngModel name="packageDescription" [placeholder]="'Type here...'"></ngx-editor>
       </div>
+
+
 
     </div>
 

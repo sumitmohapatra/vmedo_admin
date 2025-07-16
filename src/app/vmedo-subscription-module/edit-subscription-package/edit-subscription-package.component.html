@@ -126,8 +126,8 @@ padding-bottom: 0px;display: flex;justify-content: center;text-align: center;mar
 
     </div> -->
     <div class="NgxEditor__Wrapper">
-        <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
-        <ngx-editor [editor]="editor" [ngModel]="editSubscriptionData.packageDescription" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
+        <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"> </ngx-editor-menu>
+        <ngx-editor [editor]="editor" [(ngModel)]="editSubscriptionData.packageDescription" name="packageDescription" [disabled]="false" [placeholder]="'Type here...'"></ngx-editor>
       </div>
 
 

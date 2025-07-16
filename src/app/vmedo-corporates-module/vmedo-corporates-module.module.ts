@@ -54,6 +54,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   ],
   imports: [
     CommonModule,
+    MatDialogModule,
     MatDividerModule,
     MatFormFieldModule,
     FormsModule,
@@ -76,7 +77,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSortModule,
     MatTooltipModule,
     MatCheckboxModule,
-    MatDialogModule,
     MatBadgeModule,
     // NgMultiSelectDropDownModule,
 

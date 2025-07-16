@@ -11,6 +11,8 @@ import { UseremergencyiddetailsComponent } from '../useremergencyiddetails/usere
 import { BlooddonordetailsComponent } from '../../adminmodule/blooddonordetails/blooddonordetails.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-vmedo-subscribers',
@@ -27,7 +29,7 @@ export class VmedoSubscribersComponent implements OnInit {
   userRole: any;
 
   dataSource: MatTableDataSource<SubscriberData>;
-  displayedColumns: string[] = ['profilePhoto', 'registered_on', 'uName', 'uMobile', 'uEmail', 'mobileVerified', 'emailVerified', 'isDoner', 'hasEID', 'isPaidMember'];
+  displayedColumns: string[] = ['profilePhoto', 'registered_on', 'uName','uMobile','packagevalid_till','packageName', 'isDoner', 'hasEID', 'isPaidMember'];
 
   // Pagination variables
   totalUsers = 0;
@@ -37,7 +39,7 @@ export class VmedoSubscribersComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private http: HttpClient, private adminservice: ServicesService, private dialog: MatDialog,private modalService: NgbModal) {}
+  constructor(private http: HttpClient, private adminservice: ServicesService, private dialog: MatDialog,private modalService: NgbModal,private datePipe:DatePipe) {}
 
   ngOnInit() {
     this.userRole = JSON.parse(sessionStorage.getItem('role'));
@@ -76,7 +78,7 @@ export class VmedoSubscribersComponent implements OnInit {
   }
 
   search() {
-    const apiUrl = `https://api.vmedo.com/api/vadmin/SearchAdminUserRegisteredListPage?Svalue=${this.searchValue}`;
+    const apiUrl = `${environment.baseUrl}vadmin/SearchAdminUserRegisteredListPage?Svalue=${this.searchValue}`;
 
     this.http.get<any>(apiUrl).subscribe(
       (response) => {
@@ -117,10 +119,10 @@ export class VmedoSubscribersComponent implements OnInit {
   }
 
   fetchUsers(pageNumber: number) {
-    let apiUrl = `https://api.vmedo.com/api/vadmin/AdminUserRegisteredListPage?PNO=${pageNumber + 1}`;
+    let apiUrl = `${environment.baseUrl}vadmin/AdminUserRegisteredListPage?PNO=${pageNumber + 1}`;
 
     if (this.searchValue) {
-      apiUrl = `https://api.vmedo.com/api/vadmin/SearchAdminUserRegisteredListPage?Svalue=${this.searchValue}`;
+      apiUrl = `${environment.baseUrl}vadmin/SearchAdminUserRegisteredListPage?Svalue=${this.searchValue}`;
     }
 
     this.http.get<any>(apiUrl).subscribe((response) => {
@@ -219,5 +221,13 @@ export class VmedoSubscribersComponent implements OnInit {
         callback();
       }
     });
+  }
+
+  formatValidTillDate(dateStr: string): string {
+    if (dateStr === '0001-01-01T00:00:00') {
+      return 'N/A';
+    }
+    return this.datePipe.transform(dateStr, 'MMM d, y') || 'N/A';
+    // or use Angular DatePipe if needed
   }
 }

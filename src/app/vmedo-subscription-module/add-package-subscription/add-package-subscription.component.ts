@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ServicesService } from 'src/app/adminservice/services.service';
 import Swal from 'sweetalert2';
-import { Editor } from 'ngx-editor';
+import { Editor, Toolbar } from 'ngx-editor';
 
 @Component({
   selector: 'app-add-package-subscription',
@@ -16,6 +16,13 @@ export class AddPackageSubscriptionComponent implements OnInit,OnDestroy {
   currentTime: any;
   editor: Editor;
   html = '';
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['ordered_list', 'bullet_list'], 
+    ['underline', 'strike'],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
 
   constructor(private adminservice: ServicesService, private datePipe: DatePipe, public dialogRef: MatDialogRef<AddPackageSubscriptionComponent>) {
     const currentTime = new Date();

@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 import { CreateduserdetailsComponent } from '../createduserdetails/createduserdetails.component';
 import { ngxCsv } from 'ngx-csv/ngx-csv';
 import { interval } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-corporate-cards',
@@ -95,7 +96,7 @@ export class CorporateCardsComponent implements OnInit {
   }
 
   search() {
-    const apiUrl = `https://api.vmedo.com/api/vadmin/SearchALLEmergencyIDPagination?Svalue=${this.searchValue}&column=id&CaseSensitive=true`;
+    const apiUrl = `${environment.baseUrl}vadmin/SearchALLEmergencyIDPagination?Svalue=${this.searchValue}&column=id&CaseSensitive=true`;
 
     this.http.get<any>(apiUrl).subscribe(response => {
       if (response.statusCode === 404) {
@@ -110,10 +111,10 @@ export class CorporateCardsComponent implements OnInit {
   }
 
   fetchUsers(pageNumber: number) {
-    let apiUrl = `https://api.vmedo.com/api/vadmin/FetchALLEmergencyIDPagination?PNO=${pageNumber + 1}&&Ctype=2`;
+    let apiUrl = `${environment.baseUrl}vadmin/FetchALLEmergencyIDPagination?PNO=${pageNumber + 1}&&Ctype=2`;
 
     if (this.searchValue) {
-      apiUrl = `https://api.vmedo.com/api/vadmin/SearchALLEmergencyIDPagination?Svalue=${this.searchValue}`;
+      apiUrl = `${environment.baseUrl}vadmin/SearchALLEmergencyIDPagination?Svalue=${this.searchValue}`;
     }
 
     this.http.get<any>(apiUrl).subscribe(response => {

@@ -51,14 +51,29 @@
                 <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
 
+
+
+            <ng-container matColumnDef="registered_on">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Subscribed On
+                        </strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.created_on | date:medium}} </td>
+                </ng-container>
+
                 <!-- Enquired By Column -->
-                <ng-container matColumnDef="profilePhoto">
+                <ng-container matColumnDef="uName">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Username</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: left;"> {{element.userName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="profile_pic">
                     <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Profile
                             photo</strong></th>
                     <div class="profile-card">
                         <td mat-cell *matCellDef="let element">
 
-                            <img class="imagestyle mb-2 mt-2" [src]="element.profilePhoto" alt="Profile photo"
+                            <img class="imagestyle mb-2 mt-2" [src]="element.profile_pic" alt="Profile photo"
                                 onerror="this.src='assets/Images/user_profile.png';" jLightbox />
 
                             <!-- <img class="imagestyle mb-2 mt-2" [src]="element.profilePhoto" alt="Profile photo"> -->
@@ -67,76 +82,85 @@
                     </div>
                 </ng-container>
 
-                <!-- Enquired By Column -->
-                <ng-container matColumnDef="registered_on">
-                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Registered On
-                        </strong>
-                    </th>
-                    <td mat-cell *matCellDef="let element"> {{element.registered_on | date:medium}} </td>
-                </ng-container>
-
-                <!-- Enquired By Column -->
-                <ng-container matColumnDef="uName">
-                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Username</strong>
-                    </th>
-                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.uName}} </td>
-                </ng-container>
 
 
                 <!-- Enquired By Column -->
                 <ng-container matColumnDef="uMobile">
                     <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Mobile
                             Number</strong></th>
-                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.uMobile}} </td>
+                    <td mat-cell *matCellDef="let element" style="text-align: left;"> {{element.userMobile}} </td>
                 </ng-container>
 
 
-                <!-- Enquired By Column -->
-                <ng-container matColumnDef="uEmail">
-                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Email</strong>
+                <ng-container matColumnDef="couponCode">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Coupon code used</strong>
                     </th>
-                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.uEmail}} </td>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.couponCode}} </td>
                 </ng-container>
 
-                <!-- Enquired By Column -->
-                <ng-container matColumnDef="uType">
-                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Type</strong>
+                <ng-container matColumnDef="packageName">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Package Name</strong>
                     </th>
-                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.uType}} </td>
+                    <td mat-cell *matCellDef="let element" style="text-align: left;"> {{element.packageName}} </td>
                 </ng-container>
 
-
-                <!-- Enquired By Column -->
-                <ng-container matColumnDef="uStatus">
-                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Status</strong>
+                <ng-container matColumnDef="packageAmount">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Amount paid</strong>
                     </th>
-                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.uStatus ? '&#10003;' :
-                        '&#10005;'}} </td>
-
+                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.packageAmount}} </td>
                 </ng-container>
 
-
-                <!-- Enquired By Column -->
-                <ng-container matColumnDef="mobileVerified">
-                    <th class="headerstyle" style="text-align: center;" mat-header-cell *matHeaderCellDef
-                        mat-sort-header><strong> Mobile verified
-                        </strong></th>
-                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.mobileVerified ?
-                        '&#10003;' : '&#10005;'}} </td>
+                 <ng-container matColumnDef="validity">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Expired Since</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element" [ngStyle]="getDaysLeftStyles1(element.renewaldaysleft)">
+                        <b>{{element.renewaldaysleft }} days</b>
+                    </td>
+                
                 </ng-container>
 
-                <!-- Enquired By Column -->
-                <ng-container matColumnDef="emailVerified">
-                    <th class="headerstyle" style="text-align: center;" mat-header-cell *matHeaderCellDef
-                        mat-sort-header><strong> Email Verified
+                <ng-container matColumnDef="hasEID">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Emergency ID
                         </strong>
                     </th>
-                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.emailVerified ?
-                        '&#10003;' : '&#10005;'}} </td>
+                    <td mat-cell *matCellDef="let element" style="text-align: left;">
+
+                        <button mat-stroked-button color="primary" class="btn-sm"
+                            style="height: fit-content; font-size: 12px;" type="submit"
+                            (click)="onEmergencyID(element.userID)">
+                            {{element.cards}}
+                        </button>
+
+                    </td>
                 </ng-container>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+               
+
+               
                 <!-- Enquired By Column -->
-                <ng-container matColumnDef="isPaidMember">
+                <!-- <ng-container matColumnDef="isPaidMember">
                     <th class="headerstyle" style="text-align: center;" mat-header-cell *matHeaderCellDef
                         mat-sort-header><strong> User type
                         </strong>
@@ -144,17 +168,13 @@
 
                     <td mat-cell *matCellDef="let element" style="text-align: center;">
 
-                        <!-- <button mat-raised-button color="warn"> 
-                            {{element.isPaidMember ? 'Premium' : 'Default'}}
-                        </button> -->
-
                         <button mat-raised-button style="font-size: 12px;" class="custom-button"
                             [ngClass]="{'yellow-button': element.isPaidMember}">
                             {{element.isPaidMember ? element.packageName : 'Default'}}
 
                         </button>
 
-                </ng-container>
+                </ng-container> -->
 
 
                 <!-- <ng-container matColumnDef="packageName">
@@ -164,46 +184,14 @@
                 </ng-container> -->
 
                 <!-- Enquired By Column -->
-                <ng-container matColumnDef="isDoner">
-                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Is Blood donor
-                        </strong>
-                    </th>
-                    <td mat-cell *matCellDef="let element" style="text-align: center;">
-
-                        <button mat-stroked-button color="primary" class="btn-sm"
-                            style=" font-size: 12px;" type="submit"
-                            (click)="onBloodDonation(element.userID)">
-                            {{element.isDoner ? 'yes' : 'no'}}
-                        </button>
-
-                </ng-container>
+               
 
                 <!-- Enquired By Column -->
-                <ng-container matColumnDef="hasEID">
-                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Emergency ID
-                        </strong>
-                    </th>
-                    <td mat-cell *matCellDef="let element" style="text-align: center;">
+               
 
-                        <button mat-stroked-button color="primary" class="btn-sm"
-                            style=" font-size: 12px;" type="submit"
-                            (click)="onEmergencyID(element.userID)">
-                            {{element.hasEID ? 'yes' : 'no'}}
-                        </button>
-
-                    </td>
-                </ng-container>
-
+                 
                 <!-- Users Details -->
-                <ng-container [matColumnDef]="'actions'" hidden>
-                    <th class="headerstyle" mat-header-cell *matHeaderCellDef><strong>Actions</strong> </th>
-                    <td mat-cell *matCellDef="let element">
-                        <button class="mr-3" mat-icon-button matTooltip="Details">
-                            <button type="button" class="btn btn-danger btn-sm"
-                                (click)="emergencyID(element.userID)">Details</button>
-                        </button>
-                    </td>
-                </ng-container>
+               
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

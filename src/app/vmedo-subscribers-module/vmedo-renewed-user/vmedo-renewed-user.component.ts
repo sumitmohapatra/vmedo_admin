@@ -11,6 +11,7 @@ import { UseremergencyiddetailsComponent } from '../useremergencyiddetails/usere
 import { BlooddonordetailsComponent } from '../../adminmodule/blooddonordetails/blooddonordetails.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-vmedo-renewed-user',
@@ -27,7 +28,7 @@ export class VmedoRenewedUserComponent implements OnInit {
   userRole: any;
 
   dataSource: MatTableDataSource<notRenewedUserData>;
-  displayedColumns: string[] = ['profilePhoto', 'registered_on', 'uName', 'uMobile', 'uEmail', 'mobileVerified', 'emailVerified', 'isDoner', 'hasEID', 'isPaidMember'];
+  displayedColumns: string[] = ['profile_pic','uName', 'uMobile','packageName','registered_on','hasEID','validity'];
 
   // Pagination variables
   totalUsers = 0;
@@ -66,6 +67,30 @@ export class VmedoRenewedUserComponent implements OnInit {
     });
   }
 
+  calculateDaysLeft1(dateString: string): number {
+  const today = new Date();
+  const validTill = new Date(dateString);
+
+  // Ignore time portion
+  today.setHours(0, 0, 0, 0);
+  validTill.setHours(0, 0, 0, 0);
+
+  const timeDiff = validTill.getTime() - today.getTime();
+  return Math.ceil(timeDiff / (1000 * 3600 * 24));
+}
+
+getDaysLeftStyles1(daysLeft: any) {
+  // let daysLeft: any = this.calculateDaysLeft1(dateString);
+  // daysLeft = parseInt(daysLeft.split('Days')[0].trim())
+
+  if (daysLeft < 15) {
+    return { color: 'red' };
+  } else if (daysLeft <= 30) {
+    return { color: 'orange' };
+  } else {
+    return { color: 'black' };
+  }
+}
   clear() {
     this.showConfirmationDialog('Confirmation', 'Are you sure you want to clear the records?', () => {
       this.searchValue = '';
@@ -76,7 +101,7 @@ export class VmedoRenewedUserComponent implements OnInit {
   }
 
   search() {
-    const apiUrl = `https://api.vmedo.com/api/vadmin/SearchAdminUserRegisteredListPage?Svalue=${this.searchValue}`;
+    const apiUrl = `${environment.baseUrl}vadmin/SearchPaidUserRegistered?Svalue=${this.searchValue}`;
 
     this.http.get<any>(apiUrl).subscribe(
       (response) => {
@@ -117,10 +142,10 @@ export class VmedoRenewedUserComponent implements OnInit {
   }
 
   fetchUsers(pageNumber: number) {
-    let apiUrl = `https://api.vmedo.com/api/vadmin/AdminSubscribedRegisteredListPage?PNO=${pageNumber + 1}`
+    let apiUrl = `${environment.baseUrl}vadmin/GetAllExpireduserList`
 
     if (this.searchValue) {
-      apiUrl = `https://api.vmedo.com/api/vadmin/SearchAdminUserRegisteredListPage?Svalue=${this.searchValue}`;
+      apiUrl = `${environment.baseUrl}vadmin/SearchPaidUserRegistered?Svalue=${this.searchValue}`;
     }
 
     this.http.get<any>(apiUrl).subscribe((response) => {
