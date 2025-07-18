@@ -535,5 +535,12 @@ export class ServicesService {
     this.emergencyID = JSON.parse(sessionStorage.getItem('emergencyID'));
     return this.http.get(this.emergencyIdAccessedURl + this.emergencyID);
   }
-  
+
+  getAllAgents() {
+    return this.http.get(`${environment.baseUrl}vadmin/GetAllRegisteredAgents`);
+  }
+
+  createAgent(createAgentRequest:any) {
+    return this.http.post(`${environment.baseUrl}vadmin/AddNewAgent`,createAgentRequest);
+  }
 }

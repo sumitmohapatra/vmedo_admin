@@ -1,0 +1,29 @@
+<div class="col-12">
+    <nav mat-tab-nav-bar>
+
+        <a mat-tab-link [routerLink]="['/admin-dashboard/vmedo-agent/manage-vmedo-agent/manage-agent']" routerLinkActive
+            #rla2="routerLinkActive" [active]="rla2.isActive">
+
+            <span class="pendingBadgeColor" matBadgeOverlap="false" matBadgePosition="after"
+                matBadgeColor="primary">Manage agents</span>
+        </a>
+
+        <!-- <a mat-tab-link [routerLink]="['/admin-dashboard/vmedo-corporate-modules/manage-vmedo-corporates/manage-corporate-plan']"
+            routerLinkActive #rla5="routerLinkActive" [active]="rla5.isActive">
+
+            <span class="emergencyHandledBadge" matBadgeOverlap="false" matBadgePosition="after"
+                matBadgeColor="primary">Manage corporates plans</span>
+        </a>
+
+        <a mat-tab-link [routerLink]="['/admin-dashboard/vmedo-corporate-modules/manage-vmedo-corporates/corporate-plan-types']" routerLinkActive
+            #rla6="routerLinkActive" [active]="rla6.isActive">
+
+            <span class="emergencyHandledBadge" matBadgeOverlap="false" matBadgePosition="after"
+                matBadgeColor="primary">Manage plan types</span>
+        </a> -->
+
+    </nav>
+</div>
+<div class="mt-3">
+    <router-outlet></router-outlet>
+</div>

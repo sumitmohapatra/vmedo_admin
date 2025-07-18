@@ -1,0 +1,124 @@
+<div class="row mt-3 ml-1" style="width: 45%;">
+    <!-- <div class="col">
+      <h3>Manage Coupon Codes</h3>
+    </div> -->
+
+    <div class="col mt-1 mb-3">
+
+        <span style="font-weight: 500;">Create new agent</span>
+        <button mat-raised-button type="submit" color="primary" class="btn-sm ml-4"
+            (click)="CreateCorporate()" style="box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;"> + create</button>
+    </div>
+
+    <!-- <div class="col mt-1 mb-3">
+        <button mat-raised-button type="submit"  class="btn btn-primary btn-sm ml-4"
+        routerLink="/admindashboard/manage-corporate-plan" routerLinkActive="active" style="height: fit-content; background-color: #cb4141;color: white;"> Manage Corporate Plans -></button>
+    </div> -->
+
+</div>
+
+
+<div class="grid-container">
+
+    <div class="vmedo-admin-enquiry-table">
+        <div style="box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;">
+
+            <div class="row modal-header col-12  text-white vmedoadmintableheader">
+
+                <div class="col-6 mt-2">
+
+                    <h2>Registered agents - {{dataSource.data?.length}}</h2>
+
+                </div>
+
+                <div class="col-6 mt-2 mb-1 form-group" style="color:white;justify-content: flex-end;">
+                    <input class="form-control" fxFlex="50%" style="border-radius: 12px;" type="text"
+                        (keyup)="doFilter($event.target.value)" placeholder="Search agent...">
+                </div>
+
+            </div>
+
+
+            <table mat-table matSort [dataSource]="dataSource" matSortActive="agentName" matSort>
+
+                <!-- Agent Name Column -->
+                <ng-container matColumnDef="agentName">
+                  <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Agent Name</strong></th>
+                  <td mat-cell *matCellDef="let element" style="text-align: left;">{{ element.agentName }}</td>
+                </ng-container>
+              
+                <!-- Mobile Column -->
+                <ng-container matColumnDef="agentMobile">
+                  <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Mobile</strong></th>
+                  <td mat-cell *matCellDef="let element" style="text-align: left;">{{ element.agentMobile }}</td>
+                </ng-container>
+              
+                <!-- Email Column -->
+                <ng-container matColumnDef="agentEmail">
+                  <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Email</strong></th>
+                  <td mat-cell *matCellDef="let element" style="text-align: left;">{{ element.agentEmail }}</td>
+                </ng-container>
+              
+                <!-- City Column -->
+                <ng-container matColumnDef="agentCity">
+                  <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>City</strong></th>
+                  <td mat-cell *matCellDef="let element" style="text-align: left;">{{ element.agentCity }}</td>
+                </ng-container>
+              
+                <!-- Address Column -->
+                <ng-container matColumnDef="agentAddress">
+                  <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Address</strong></th>
+                  <td mat-cell *matCellDef="let element" style="text-align: left;">{{ element.agentAddress }}</td>
+                </ng-container>
+              
+                <!-- ZIP Column -->
+                <ng-container matColumnDef="agentZip">
+                  <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>ZIP</strong></th>
+                  <td mat-cell *matCellDef="let element" style="text-align: left;">{{ element.agentZip }}</td>
+                </ng-container>
+              
+                <!-- Created On Column -->
+                <ng-container matColumnDef="createdOn">
+                  <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Created On</strong></th>
+                  <td mat-cell *matCellDef="let element">{{ element.createdOn | date: 'medium' }}</td>
+                </ng-container>
+              
+                <!-- Actions Column -->
+                <ng-container matColumnDef="actions">
+                  <th class="headerstyle" mat-header-cell *matHeaderCellDef><strong>Actions</strong></th>
+                  <td mat-cell *matCellDef="let element">
+                    <!-- <button type="button"
+                            class="btn btn-primary btn-sm mr-2"
+                            (click)="editAgent(element)">
+                      Edit
+                    </button>
+                    <button type="button"
+                            class="btn btn-danger btn-sm"
+                            (click)="deleteAgent(element)">
+                      Delete
+                    </button> -->
+                    <span matTooltip="Edit">
+                        <button type="button"
+                                class="btn btn-danger btn-sm mr-3"
+                                (click)="editAgent(element)">
+                          Edit details
+                        </button>
+                      </span>
+                  </td>
+                </ng-container>
+              
+                <!-- Header & Row Definitions -->
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              
+
+            <mat-paginator [pageSizeOptions]="[50, 100, 250]" showFirstLastButtons
+                aria-label="Select page of periodic elements">
+            </mat-paginator>
+
+
+        </div>
+
+    </div>
+</div>

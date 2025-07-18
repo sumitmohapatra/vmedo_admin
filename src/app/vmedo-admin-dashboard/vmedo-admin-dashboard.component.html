@@ -37,6 +37,15 @@
         </a>
       </mat-nav-list>
 
+      <mat-nav-list>
+
+        <a mat-list-item routerLink="/admin-dashboard/vmedo-agent/manage-vmedo-agent/manage-agent"
+          [ngClass]="{ 'highlighted-icon': isCurrentModule('/admin-dashboard/vmedo-agent') }"
+          routerLinkActive="active" style="font-size: 98%;">
+          <img src="assets/Images/corporates.png" />&nbsp; &nbsp;<span class="menuTextfont">Manage Agents</span>
+        </a>
+      </mat-nav-list>
+
 
       <mat-nav-list>
 

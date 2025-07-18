@@ -39,6 +39,9 @@ const routes: Routes = [
       },
       {
         path: 'vmedo-subscription-module', loadChildren: () => import('./vmedo-subscription-module/vmedo-subscription-module.module').then(m => m.VmedoSubscriptionModuleModule)
+      },
+      {
+        path: 'vmedo-agent', loadChildren: () => import('./agent/agent.module').then(m => m.AgentModule)
       }
 
     ]
