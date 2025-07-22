@@ -1,0 +1,66 @@
+<div class="modal-header bg-warning text-white d-flex justify-content-between align-items-center" style="padding-bottom: 0px;">
+    <h3 style="margin:0px !important">Edit Agent</h3>
+    <button mat-icon-button aria-label="close dialog" mat-dialog-close (click)="onClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  
+  <mat-divider></mat-divider>
+  
+  <div class="container mt-4 d-flex justify-content-center">
+    <form #editForm="ngForm"
+          (ngSubmit)="onSubmit(editForm)"
+          style="width: 100%; max-width: 600px;">
+  
+      <mat-form-field appearance="outline" class="w-100 mb-3">
+        <mat-label>Agent Name</mat-label>
+        <input matInput [(ngModel)]="agent.agentName" name="AgentName" required>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="w-100 mb-3">
+        <mat-label>Agent Mobile</mat-label>
+        <input matInput [(ngModel)]="agent.agentMobile" name="AgentMobile" required>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="w-100 mb-3">
+        <mat-label>Agent Email</mat-label>
+        <input matInput [(ngModel)]="agent.agentEmail" name="AgentEmail" required>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="w-100 mb-3">
+        <mat-label>Agent Address</mat-label>
+        <textarea matInput [(ngModel)]="agent.agentAddress" name="AgentAddress" required></textarea>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="w-100 mb-3">
+        <mat-label>City</mat-label>
+        <input matInput [(ngModel)]="agent.agentCity" name="AgentCity" required>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="w-100 mb-1">
+        <mat-label>ZIP Code</mat-label>
+        <input matInput [(ngModel)]="agent.agentZip" name="AgentZip" required>
+      </mat-form-field>
+  
+      <div class="d-flex align-items-center mb-3">
+        <mat-checkbox [(ngModel)]="agent.isActive" name="isActive" color="primary">
+          Active
+        </mat-checkbox>
+      </div>
+      
+  
+      <div class="mt-4 d-flex justify-content-center gap-3 mb-4">
+        <button mat-raised-button type="submit" color="primary" class="w-50">Save</button>
+        <button mat-raised-button 
+        color="warn" 
+        type="button" 
+        mat-dialog-close 
+        (click)="onClose()" 
+        class="ml-3 w-50">
+  Cancel
+</button>
+      </div>
+  
+    </form>
+  </div>
+  

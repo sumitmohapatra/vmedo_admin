@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AuthenticationService } from '../_services/authentication.service';
@@ -30,8 +30,11 @@ export class JwtInterceptor implements HttpInterceptor {
             tap(
               () => {},
               error => {
-                if (error && error.message === "ERROR Unknown Error") {
-                  // Token expired, perform logout
+                // if (error && error.message === "ERROR Unknown Error") {
+                //   // Token expired, perform logout
+                //   this.handleLogout();
+                // }
+                if (error instanceof HttpErrorResponse && error.status === 0) {
                   this.handleLogout();
                 }
               }

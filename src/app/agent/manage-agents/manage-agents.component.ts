@@ -7,6 +7,7 @@ import { ServicesService } from 'src/app/adminservice/services.service';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { corporatesData } from 'src/app/vmedo-corporates-module/manage-corporates/corporatesData';
+import { EditVmedoAgentComponent } from '../edit-vmedo-agent/edit-vmedo-agent.component';
 
 @Component({
   selector: 'app-manage-agents',
@@ -14,7 +15,7 @@ import { corporatesData } from 'src/app/vmedo-corporates-module/manage-corporate
   styleUrls: ['./manage-agents.component.css']
 })
 export class ManageAgentsComponent {
- id: any;
+  id: any;
 
   displayedColumns: String[] = ['agentName', 'agentMobile', 'agentEmail', 'agentCity', 'agentAddress', 'agentZip', 'createdOn', 'actions'];
 
@@ -37,7 +38,7 @@ export class ManageAgentsComponent {
 
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -79,12 +80,28 @@ export class ManageAgentsComponent {
     this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
 
-  CreateCorporate() {
-    this.dialog.open(CreateVmedoAgentComponent, this.dialogConfig27Percent80);
+  createAgent() {
+    this.dialog.open(CreateVmedoAgentComponent, this.dialogConfig27Percent80)
+      .afterClosed()
+      .subscribe(result => {
+        if (result) {
+          this.getAllAgents();
+        }
+      });;
   }
 
-  UpdateCorporate(corporateData: any) {
-    // sessionStorage.setItem("corporateData", JSON.stringify(corporateData));
-    // this.dialog.open(UpdateCorporateComponent, this.dialogConfig27Percent80);
+  updateAgent(agentData: any): void {
+    console.log(agentData)
+    this.dialog.open(EditVmedoAgentComponent, {
+      disableClose: true,
+      autoFocus: false,
+      width: '27%',
+      height: '80%',
+      data: { agentId: agentData.agentId }
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        this.getAllAgents();
+      }
+    });
   }
 }

@@ -7,7 +7,7 @@
 
         <span style="font-weight: 500;">Create new agent</span>
         <button mat-raised-button type="submit" color="primary" class="btn-sm ml-4"
-            (click)="CreateCorporate()" style="box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;"> + create</button>
+            (click)="createAgent()" style="box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;"> + create</button>
     </div>
 
     <!-- <div class="col mt-1 mb-3">
@@ -80,7 +80,7 @@
                 <!-- Created On Column -->
                 <ng-container matColumnDef="createdOn">
                   <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Created On</strong></th>
-                  <td mat-cell *matCellDef="let element">{{ element.createdOn | date: 'medium' }}</td>
+                  <td mat-cell *matCellDef="let element">{{ element.createdOn | date: 'mediumDate' }}</td>
                 </ng-container>
               
                 <!-- Actions Column -->
@@ -100,7 +100,7 @@
                     <span matTooltip="Edit">
                         <button type="button"
                                 class="btn btn-danger btn-sm mr-3"
-                                (click)="editAgent(element)">
+                                (click)="updateAgent(element)">
                           Edit details
                         </button>
                       </span>

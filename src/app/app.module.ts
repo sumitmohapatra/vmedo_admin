@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
 import { AuthGuard } from './authentication-services/_helpers';
 import { JwtInterceptor } from './authentication-services/_helpers';
 import { ErrorInterceptor } from './authentication-services/_helpers';
-import { appInitializer } from './authentication-services/_helpers/app.initializer';
+// import { appInitializer } from './authentication-services/_helpers/app.initializer';
 import { AuthenticationService } from './authentication-services/_services';
 import { TokenExpiredInterceptor } from './authentication-services/_services/HttpInterceptor';
 // import { AgmCoreModule } from '@agm/core';
@@ -115,7 +115,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 
   ],
   providers: [AuthGuard, { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AuthenticationService] },
+    // { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AuthenticationService] },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     {
       provide: HTTP_INTERCEPTORS,

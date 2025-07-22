@@ -21,12 +21,12 @@ export class CreateVmedoAgentComponent {
     if (form.invalid) return;
 
     const agentData = {
-      AgentName: form.value.AgentName,
-      AgentMobile: form.value.AgentMobile,
-      AgentEmail: form.value.AgentEmail,
-      AgentAddress: form.value.AgentAddress,
-      AgentCity: form.value.AgentCity,
-      AgentZip: form.value.AgentZip,
+      agentName: form.value.agentName,
+      agentMobile: form.value.agentMobile,
+      agentEmail: form.value.agentEmail,
+      agentAddress: form.value.agentAddress,
+      agentCity: form.value.agentCity,
+      agentZip: form.value.agentZip,
     };
 
     this.adminservice.createAgent(agentData)
@@ -37,7 +37,6 @@ export class CreateVmedoAgentComponent {
         },
         error: (err) => {
           console.error('Error creating agent:', err);
-          alert('Failed to create agent. Please try again.');
         }
       });
   }

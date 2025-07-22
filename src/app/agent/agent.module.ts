@@ -27,6 +27,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CreateVmedoAgentComponent } from './create-vmedo-agent/create-vmedo-agent.component';
+import { EditVmedoAgentComponent } from './edit-vmedo-agent/edit-vmedo-agent.component';
 
 
 
@@ -34,7 +35,8 @@ import { CreateVmedoAgentComponent } from './create-vmedo-agent/create-vmedo-age
   declarations: [
     ManageAgentsComponent,
     ManageVmedoAgentsComponent,
-    CreateVmedoAgentComponent
+    CreateVmedoAgentComponent,
+    EditVmedoAgentComponent
   ],
   imports: [
     CommonModule,
