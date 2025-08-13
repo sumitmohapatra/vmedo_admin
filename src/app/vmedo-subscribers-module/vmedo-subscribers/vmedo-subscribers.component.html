@@ -153,6 +153,13 @@
                     <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.uType}} </td>
                 </ng-container>
 
+                <ng-container matColumnDef="registered_by">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Registered By</strong>
+                    </th>
+                    <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.registered_by}} </td>
+                </ng-container>
+
+
 
                 <!-- Enquired By Column -->
                 <ng-container matColumnDef="uStatus">
@@ -209,7 +216,7 @@
                 </ng-container> -->
 
                 <!-- Enquired By Column -->
-                <ng-container matColumnDef="isDoner">
+                <!-- <ng-container matColumnDef="isDoner">
                     <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Is Blood donor
                         </strong>
                     </th>
@@ -221,7 +228,9 @@
                             {{element.isDoner ? 'yes' : 'no'}}
                         </button>
 
-                </ng-container>
+                </ng-container> -->
+
+
 
                 <!-- Enquired By Column -->
                 <ng-container matColumnDef="hasEID">

@@ -33,6 +33,15 @@
                 <span class="emergencyHandledBadge" matBadgeOverlap="false" matBadgePosition="after"
                     matBadgeColor="primary">Not Renewed User</span>
             </a>
+
+            
+            <a mat-tab-link
+                [routerLink]="['/admin-dashboard/vmedo-subscribers-module/manage-subscribers/paid-subscribers']"
+                routerLinkActive #rla7="routerLinkActive" [active]="rla7.isActive">
+    
+                <span class="emergencyHandledBadge" matBadgeOverlap="false" matBadgePosition="after"
+                    matBadgeColor="primary">Payment details</span>
+            </a>
             <!-- <a mat-tab-link
                 [routerLink]="['/admin-dashboard/vmedo-subscribers-module/manage-subscribers/vmedo-premium-subscribers']"
                 routerLinkActive #rla5="routerLinkActive" [active]="rla5.isActive">

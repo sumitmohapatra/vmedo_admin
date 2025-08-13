@@ -29,7 +29,7 @@ export class VmedoSubscribersComponent implements OnInit {
   userRole: any;
 
   dataSource: MatTableDataSource<SubscriberData>;
-  displayedColumns: string[] = ['profilePhoto', 'registered_on', 'uName','uMobile','packagevalid_till','packageName', 'isDoner', 'hasEID', 'isPaidMember'];
+  displayedColumns: string[] = ['profilePhoto', 'registered_on', 'uName','uMobile','packagevalid_till','packageName', 'registered_by', 'hasEID', 'isPaidMember'];
 
   // Pagination variables
   totalUsers = 0;
@@ -44,6 +44,27 @@ export class VmedoSubscribersComponent implements OnInit {
   ngOnInit() {
     this.userRole = JSON.parse(sessionStorage.getItem('role'));
     this.dataSource = new MatTableDataSource<SubscriberData>();
+    this.dataSource.sortingDataAccessor = (item, property) => {
+      switch (property) {
+        case 'packagevalid_till':
+          // Handle "N/A" dates by pushing them to bottom
+          if (!item.packagevalid_till || item.packagevalid_till.startsWith("0001-01-01")) {
+            // Return extreme future timestamp so it sorts last in ascending, and we’ll reverse for descending
+            return Number.MAX_SAFE_INTEGER;
+          }
+          return new Date(item.packagevalid_till).getTime();
+    
+        case 'isPaidMember':
+          return item.isPaidMember ? 1 : 0;
+    
+        case 'registered_by':
+          return item.registered_by?.toLowerCase() || '';
+    
+        default:
+          return item[property];
+      }
+    };
+    
     this.dataSource.paginator = this.paginator;
     if (this.userRole !== 2) {
       this.fetchUsers(0);

@@ -28,7 +28,7 @@ export class VmedoRenewedUserComponent implements OnInit {
   userRole: any;
 
   dataSource: MatTableDataSource<notRenewedUserData>;
-  displayedColumns: string[] = ['profile_pic','uName', 'uMobile','packageName','registered_on','hasEID','validity'];
+  displayedColumns: string[] = ['profile_pic','uName', 'uMobile','packageName','registered_on','registered_by','hasEID','renewaldaysleft'];
 
   // Pagination variables
   totalUsers = 0;

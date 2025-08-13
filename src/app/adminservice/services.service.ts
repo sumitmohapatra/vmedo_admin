@@ -306,7 +306,8 @@ export class ServicesService {
   }
 
   GetPaidUsersData() {
-    return this.http.get(this.FetchPaidMembersUrl);
+    const url=`${environment.baseUrl}vadmin/GetAllPaymentHistoryUserlist`
+    return this.http.get(url);
   }
 
   EditAdminUserData(data: any) {

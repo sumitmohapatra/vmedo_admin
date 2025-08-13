@@ -19,7 +19,7 @@ export class PaidSubscribersComponent implements OnInit {
   intervalId: any;
   userRole: any;
 
-  displayedColumns: string[] = ['userName', 'userMobile', 'couponCode', 'packageName', 'packageAmount', 'created_on', 'valid_till'];
+  displayedColumns: string[] = ['userName', 'userMobile', 'couponCode', 'packageName', 'packageAmount', 'created_on', 'registered_by','cards'];
 
   public dataSource = new MatTableDataSource<paidSubscribersDetails>();
 

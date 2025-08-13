@@ -2,7 +2,7 @@
 
     <div class="row mt-4 ml-3" style="width: 100%;">
 
-        <div class="col mb-3">
+        <!-- <div class="col mb-3">
 
             <span style="font-size: 18px;">
                 Subscription details
@@ -11,7 +11,7 @@
             <button mat-raised-button type="submit" color="primary" class="btn btn-primary btn-sm ml-4"
                 [routerLink]="['/admin-dashboard/vmedo-subscribers-module/paid-subscribers']"
                 style=" background-color: rgb(175, 40, 40); color: white;"> View </button>
-        </div>
+        </div> -->
 
         <div class="col mb-3 mr-4" style="text-align: end;">
 
@@ -70,7 +70,8 @@
             </div>
 
 
-            <table mat-table matSort [dataSource]="dataSource" matSortActive='registered_on' matSortDirection='desc'
+            <table mat-table matSort [dataSource]="dataSource" matSortActive='registered_on'  matSortActive="renewaldaysleft"
+            matSortDirection="asc"
                 matSort>
 
                 <!--- Note that these columns can be defined in any order.
@@ -126,7 +127,11 @@
                             Number</strong></th>
                     <td mat-cell *matCellDef="let element" style="text-align: left;"> {{element.userMobile}} </td>
                 </ng-container>
-
+                
+                <ng-container matColumnDef="registered_by">
+                    <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Registered By</strong></th>
+                    <td mat-cell *matCellDef="let element" style="text-align: left;"> {{element.registered_by}} </td>
+                </ng-container>
 
                 <ng-container matColumnDef="couponCode">
                     <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Coupon code used</strong>
@@ -146,7 +151,7 @@
                     <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.packageAmount}} </td>
                 </ng-container>
 
-                 <ng-container matColumnDef="validity">
+                 <ng-container matColumnDef="renewaldaysleft">
                     <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Valid till</strong>
                     </th>
                     <td mat-cell *matCellDef="let element" [ngStyle]="getDaysLeftStyles1(element.renewaldaysleft)">

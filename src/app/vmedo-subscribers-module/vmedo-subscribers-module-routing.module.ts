@@ -18,7 +18,6 @@ import { VmedoRenewedUserComponent } from './vmedo-renewed-user/vmedo-renewed-us
 const routes: Routes = [
   { path: 'registeredusers', component: RegisteredusersComponent },
   { path: 'subscribers', component: VmedoSubscribersComponent },
-  { path: 'paid-subscribers', component: PaidSubscribersComponent },
   { path: 'emergency-cards', component: EmergencyCardsComponent },
   { path: 'emergencyid', component: EmergencyidComponent },
   { path: 'useremergencyid', component: UseremergencyiddetailsComponent },
@@ -41,6 +40,7 @@ const routes: Routes = [
       },
       { path: 'paid-subscribers', component: PaidSubscribersComponent },
       { path: 'vmedo-renewed-user', component: VmedoRenewedUserComponent },
+      { path: 'paid-subscribers', component: PaidSubscribersComponent }
     ],
   },
 ];

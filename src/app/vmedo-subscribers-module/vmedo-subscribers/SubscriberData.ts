@@ -14,6 +14,7 @@ export interface SubscriberData {
     hasEID: string,
     isPaidMember: string,
     packageName: string,
-    packagevalid_till: string
+    packagevalid_till: string,
+    registered_by:string
 
 }
