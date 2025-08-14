@@ -28,6 +28,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CreateVmedoAgentComponent } from './create-vmedo-agent/create-vmedo-agent.component';
 import { EditVmedoAgentComponent } from './edit-vmedo-agent/edit-vmedo-agent.component';
+import { AgentSummaryComponent } from './agent-summary/agent-summary.component';
+import { VmedoSubscribersComponent } from '../vmedo-subscribers-module/vmedo-subscribers/vmedo-subscribers.component';
+import { VmedoSubscribersModuleModule } from '../vmedo-subscribers-module/vmedo-subscribers-module.module';
 
 
 
@@ -36,7 +39,8 @@ import { EditVmedoAgentComponent } from './edit-vmedo-agent/edit-vmedo-agent.com
     ManageAgentsComponent,
     ManageVmedoAgentsComponent,
     CreateVmedoAgentComponent,
-    EditVmedoAgentComponent
+    EditVmedoAgentComponent,
+    AgentSummaryComponent
   ],
   imports: [
     CommonModule,
@@ -65,6 +69,7 @@ import { EditVmedoAgentComponent } from './edit-vmedo-agent/edit-vmedo-agent.com
     MatCardModule,
     MatSelectModule,
     MatSlideToggleModule,
+    VmedoSubscribersModuleModule
   ]
 })
 export class AgentModule { }

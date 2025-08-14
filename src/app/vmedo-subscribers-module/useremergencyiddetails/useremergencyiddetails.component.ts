@@ -34,4 +34,15 @@ export class UseremergencyiddetailsComponent implements OnInit {
     // You can pass data back to the parent component if needed
     this.dialogRef.close();
   }
+
+  downloadEmid(userData: any) {
+    var items = [];
+    for (var i = 0; i < userData.length; i++) {
+      items.push(userData[i]);
+    }
+
+    window.sessionStorage.setItem("userData", JSON.stringify(items));
+
+    window.open("/admin-dashboard/vmedo-subscribers-module/downloademid", "_blank");
+  }
 }

@@ -1,4 +1,4 @@
-<!-- <div class="col-12">
+<div class="col-12">
     <nav mat-tab-nav-bar>
 
         <a mat-tab-link [routerLink]="['/admin-dashboard/vmedo-agent/manage-vmedo-agent/manage-agent']" routerLinkActive
@@ -8,8 +8,15 @@
                 matBadgeColor="primary">Manage agents</span>
         </a>
 
+        <a mat-tab-link [routerLink]="['/admin-dashboard/vmedo-agent/manage-vmedo-agent/agent-summary']" routerLinkActive
+        #rla3="routerLinkActive" [active]="rla3.isActive">
+
+        <span class="pendingBadgeColor" matBadgeOverlap="false" matBadgePosition="after"
+            matBadgeColor="primary">Agent Summary</span>
+    </a>
+
     </nav>
-</div> -->
+</div>
         <!-- <a mat-tab-link [routerLink]="['/admin-dashboard/vmedo-corporate-modules/manage-vmedo-corporates/manage-corporate-plan']"
             routerLinkActive #rla5="routerLinkActive" [active]="rla5.isActive">
 

@@ -1,0 +1,157 @@
+<div class="grid-container">
+
+    <!-- Agent Select Dropdown -->
+    <div class="form-group p-2">
+      <select [(ngModel)]="agentId" (ngModelChange)="getAllRegisteredUsersByAgent()" class="form-control">
+        <option *ngFor="let agent of agents" [value]="agent.agentId">
+          {{ agent.agentName }}
+        </option>
+      </select>
+    </div>
+  
+    <div class="vmedo-admin-enquiry-table">
+      <div style="box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;">
+  
+        <!-- Table Header -->
+        <div class="row modal-header col-12 text-white vmedoadmintableheader">
+          <div class="col-6 mt-2">
+            <h2>Registered users - {{ dataSource.data?.length }}</h2>
+          </div>
+          <div class="col-6 mt-2 mb-1 form-group" style="color:white; justify-content: flex-end;">
+            <input 
+              class="form-control" 
+              fxFlex="50%" 
+              style="border-radius: 12px;" 
+              type="text"
+              (keyup)="doFilter($event.target.value)" 
+              placeholder="Search user..."
+            />
+          </div>
+        </div>
+  
+        <!-- Table -->
+        <table mat-table matSort [dataSource]="dataSource">
+
+            <ng-container matColumnDef="profilePhoto">
+                <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Profile
+                        photo</strong></th>
+                <div class="profile-card">
+                    <td mat-cell *matCellDef="let element">
+
+                        <img class="imagestyle mb-2 mt-2" [src]="element.profilePhoto" alt="Profile photo"
+                            onerror="this.src='assets/Images/user_profile.png';" jLightbox />
+
+                        <!-- <img class="imagestyle mb-2 mt-2" [src]="element.profilePhoto" alt="Profile photo"> -->
+
+                    </td>
+                </div>
+            </ng-container>
+  
+          <!-- uName -->
+          <ng-container matColumnDef="uName">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header>
+              <strong>Name</strong>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.uName }}
+            </td>
+          </ng-container>
+  
+          <!-- uMobile -->
+          <ng-container matColumnDef="uMobile">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header>
+              <strong>Mobile</strong>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.uMobile }}
+            </td>
+          </ng-container>
+  
+          <!-- uEmail -->
+          <ng-container matColumnDef="uEmail">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header>
+              <strong>Email</strong>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.uEmail }}
+            </td>
+          </ng-container>
+  
+          <!-- registered_on -->
+          <ng-container matColumnDef="registered_on">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header>
+              <strong>Registered On</strong>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.registered_on | date: 'mediumDate' }}
+            </td>
+          </ng-container>
+  
+          <!-- isPaidMember -->
+          <ng-container matColumnDef="isPaidMember">
+            <th class="headerstyle" style="text-align: left;" mat-header-cell *matHeaderCellDef
+                mat-sort-header><strong> User type
+                </strong>
+            </th>
+
+            <td mat-cell *matCellDef="let element" style="text-align: center;">
+
+
+                <button mat-raised-button style="font-size: 12px; width: 5rem;" class="custom-button"
+                    [ngClass]="{'yellow-button': element.isPaidMember, 'free-member': !element.isPaidMember}">
+                    {{element.isPaidMember ? "Premium": 'Free'}}
+
+                </button>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="hasEID">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong> Emergency ID
+                </strong>
+            </th>
+            <td mat-cell *matCellDef="let element" style="text-align: center;">
+
+                <button mat-stroked-button color="primary" class="btn-sm"
+                    style=" font-size: 12px;" type="submit"
+                    (click)="onEmergencyID(element.userID)">
+                    {{element.hasEID}}
+                </button>
+
+            </td>
+        </ng-container>
+  
+          <!-- packageName -->
+          <ng-container matColumnDef="packageName">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header>
+              <strong>Plan</strong>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.packageName }}
+            </td>
+          </ng-container>
+  
+          <!-- packagevalid_till -->
+          <ng-container matColumnDef="packagevalid_till">
+            <th class="headerstyle" mat-header-cell *matHeaderCellDef mat-sort-header><strong>Valid Till</strong>
+            </th>
+            <td mat-cell *matCellDef="let element" style="text-align: left;">   {{ formatValidTillDate(element.packagevalid_till) }}
+            </td>
+        </ng-container>
+  
+          <!-- Header & Rows -->
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+  
+        <!-- Paginator -->
+        <mat-paginator 
+          [pageSizeOptions]="[50, 100, 250]" 
+          showFirstLastButtons
+          aria-label="Select page of periodic elements">
+        </mat-paginator>
+  
+      </div>
+    </div>
+  
+  </div>
+  

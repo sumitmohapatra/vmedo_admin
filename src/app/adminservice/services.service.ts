@@ -541,6 +541,11 @@ export class ServicesService {
     return this.http.get(`${environment.baseUrl}vadmin/GetAllRegisteredAgents`);
   }
 
+  getAllRegisteredUserByAgent(agentId:string){
+   const url =  `${environment.baseUrl}vadmin/GetAllUserRegisteredbyAgent?AgentId=${agentId}`;
+   return this.http.get(url);
+  }
+
   createAgent(createAgentRequest:any) {
     return this.http.post(`${environment.baseUrl}vadmin/AddNewAgent`,createAgentRequest);
   }

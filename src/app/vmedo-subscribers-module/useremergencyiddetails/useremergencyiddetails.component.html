@@ -34,6 +34,13 @@ padding-bottom: 0px;">
 
       </div> -->
 
+      <div class="w-full text-right mt-2" style="cursor: pointer;">
+        <mat-icon mat-icon-button color='primary' style="font-size: 26px; "
+        (click)="downloadEmid([item.emid,item.pin,item.pname,item.eaddress,
+      item.epostalcode,item.createdBy,item.id,item.isPaidMember,item.package_name,item.package_validity])">download</mat-icon>
+      </div>
+
+
 
       <div class="row">
       
