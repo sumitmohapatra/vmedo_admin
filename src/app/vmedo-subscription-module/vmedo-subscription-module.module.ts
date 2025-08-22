@@ -33,7 +33,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
-import { QRCodeModule } from 'angular2-qrcode';
 import { MatSortModule } from '@angular/material/sort';
 import { NgxEditorModule } from 'ngx-editor';
 
