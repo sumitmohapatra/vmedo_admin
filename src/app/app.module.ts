@@ -44,7 +44,6 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatTabsModule } from '@angular/material/tabs';
 // import { NgImageFullscreenViewModule } from 'ng-image-fullscreen-view';
-import { QRCodeModule } from 'angular2-qrcode';
 // import { JustLightboxModule } from 'just-lightbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
