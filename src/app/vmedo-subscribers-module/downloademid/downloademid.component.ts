@@ -3,6 +3,7 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { Router } from '@angular/router';
 import { ServicesService } from 'src/app/adminservice/services.service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -83,7 +84,7 @@ this.subscribedDate = subscriptionDate.toISOString();
 
  
 
-    this.qrCodeVal = "https://vmedo.com/emid?id="+this.emid+"&pin="+this.pin;
+    this.qrCodeVal = `${environment.applicationUrl}emid?id=${this.emid}`;
 
     this.adminservice.GetCreatedUserDetailsData().subscribe(x => {
       this.createdUserData= x['objret']['userName'];

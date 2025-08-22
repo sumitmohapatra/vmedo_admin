@@ -38,6 +38,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { ManageVmedoSubscribersComponent } from './manage-vmedo-subscribers/manage-vmedo-subscribers.component';
 import { VmedoPremiumSubscribersComponent } from './vmedo-premium-subscribers/vmedo-premium-subscribers.component';
 import { VmedoRenewedUserComponent } from './vmedo-renewed-user/vmedo-renewed-user.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 
 @NgModule({
@@ -82,7 +83,8 @@ import { VmedoRenewedUserComponent } from './vmedo-renewed-user/vmedo-renewed-us
     MatSortModule,
     // QRCodeModule,
     MatAutocompleteModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    QRCodeModule
   ]
 })
 export class VmedoSubscribersModuleModule { }

@@ -22,7 +22,7 @@
 
             <p style="font-weight: 600;">Hello {{username}},</p>
 
-            <p>Welcome to VMEDO! You are now covered under the VMEDO Emergency Subscription. Now you have ensured
+            <p>Welcome to VMEDO! You are now covered under the VMEDO Suraksha Subscription. Now you have ensured
               guaranteed Emergency assistance 24x7 across India.</p>
 
             <!-- Information Table -->
@@ -344,7 +344,7 @@
 
             <p style="font-weight: 600;">Hello {{username}},</p>
 
-            <p>Welcome to VMEDO! You are now covered under the VMEDO Emergency Subscription. Now you have ensured
+            <p>Welcome to VMEDO! You are now covered under the VMEDO Suraksha Subscription. Now you have ensured
               guaranteed Emergency assistance 24x7 across India.</p>
 
             <!-- Information Table -->
@@ -693,7 +693,7 @@
                   <div class="col-7" style="display: flex; align-items: center; justify-content: center; color: white;">
 
                     <div style="font-size: 11px; text-align: center; margin-top: 3%;">
-                      EMERGENCY HEALTH CARD
+                      SURAKSHA CARD
                     </div>
 
                   </div>
@@ -749,9 +749,9 @@
 
                     </div>
 
-                    <div class="row" style="display: flex; align-items: center; justify-content: center; margin-top: 6%;">
-                      <qr-code [value]="qrCodeVal" [backgroundAlpha]="0" size="90">
-                      </qr-code>
+                    <div class="row" style="display: flex; align-items: center; justify-content: center;margin-top: 5px;">
+                      <qrcode [qrdata]="qrCodeVal" [width]="100"></qrcode>
+
                     </div>
 
                   </div>
@@ -1004,7 +1004,7 @@
                   <div class="col-7" style="display: flex; align-items: center; justify-content: center; color: white;">
 
                     <div style="font-size: 11px; text-align: center;">
-                      EMERGENCY HEALTH CARD
+                      SURAKSHA CARD
                     </div>
 
                   </div>
@@ -1012,7 +1012,7 @@
 
                 <div class="row Main-content" style="height: 30mm;">
 
-                  <div class="col-7 member-details" style="font-size: 11px; padding-left: 31px; padding-top: 17px;">
+                  <div class="col-7 member-details" style="font-size: 11px; padding-left: 25px; padding-top: 17px;">
 
                     <div class="row member-name" style="height: 6mm; font-weight: 600; color: #a11e1e;">
 
@@ -1051,10 +1051,9 @@
                     </div> -->
                     
                
+                      <div class="row" style="display: flex; align-items: center; justify-content: center;margin-top: 20px;">
+                        <qrcode [qrdata]="qrCodeVal" [width]="100"></qrcode>
 
-                      <div class="row" style="display: flex; align-items: center; justify-content: center;">
-                        <qr-code [value]="qrCodeVal" [backgroundAlpha]="0" size="90">
-                        </qr-code>
                       </div>
 
                  
@@ -1064,9 +1063,9 @@
 
                 </div>
 
-                <div class="row Description" style="height: 11mm;">
+                <div class="row" style="height: 11mm;">
 
-                  <div class="col-9" style="font-size: 11px; padding-top: 4px;">
+                  <div class="col-9" style="font-size: 10px; padding-top: 2px;margin-left:-5px;">
                     In case of emergency, Scan the QR Code and get the emergency details of the user
                   </div>
 
