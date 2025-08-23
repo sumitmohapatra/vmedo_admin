@@ -703,15 +703,21 @@
 
                   <div class="col-8 member-details" style="font-size: 11px; padding-left: 31px; padding-top: 24px;">
 
-                    <div class="row member-name" style="height: 5mm; font-weight: 600; color: #a11e1e;">
+                    <div class="row member-name" style=" font-weight: 600; color: #a11e1e;">
 
                       Name -  {{username}}
 
                     </div>
 
-                    <div class="row Card-No" style="height: 5mm; font-weight: 600; color: #a11e1e;">
+                    <div class="row Card-No" style="font-weight: 600; color: #a11e1e;margin-top: 2px;">
 
                       Card No - {{createdSlNo}}
+
+                    </div>
+
+                    <div class="row Validity" style="font-weight: 600; color: #a11e1e;">
+
+                      Validity - {{ valid_till | date:'dd/MM/yyyy'}}
 
                     </div>
 
@@ -1010,31 +1016,25 @@
                   </div>
                 </div>
 
-                <div class="row Main-content" style="height: 30mm;">
+                <div class="row Main-content" style="height: 30mm;display: flex; align-items: center;">
 
                   <div class="col-7 member-details" style="font-size: 11px; padding-left: 25px; padding-top: 17px;">
 
-                    <div class="row member-name" style="height: 6mm; font-weight: 600; color: #a11e1e;">
+                    <div class="row member-name" style="font-weight: 600; color: #a11e1e;">
 
                       Name -  {{username}}
 
                     </div>
 
-                    <div class="row Card-No" style="height: 6mm; font-weight: 600; color: #a11e1e;">
+                    <div class="row Card-No" style=" font-weight: 600; color: #a11e1e;margin-top: 2px;">
 
                       Card No - {{createdSlNo}}
 
                     </div>
 
-                    <div class="row Validity" style="height: 6mm; font-weight: 600; color: #a11e1e;">
+                    <div class="row Validity" style="font-weight: 600; color: #a11e1e;">
 
                       Validity - {{ isPaidMember ? (valid_till | date:'dd/MM/yyyy') : 'Lifetime'}}
-
-                    </div>
-
-                    <div class="row Card-Type" style="height: 6mm; font-weight: 600; color: #a11e1e;">
-
-                      Card Type - {{ isPaidMember ? packageName : 'Basic subscription' }}
 
                     </div>
 
@@ -1063,9 +1063,9 @@
 
                 </div>
 
-                <div class="row" style="height: 11mm;">
+                <div class="row" style="height: 9mm;margin-top:8px">
 
-                  <div class="col-9" style="font-size: 10px; padding-top: 2px;margin-left:-5px;">
+                  <div class="col-12" style="font-size: 11px;margin-left:-5px;">
                     In case of emergency, Scan the QR Code and get the emergency details of the user
                   </div>
 
