@@ -79,16 +79,13 @@ export class VmedoRenewedUserComponent implements OnInit {
   return Math.ceil(timeDiff / (1000 * 3600 * 24));
 }
 
-getDaysLeftStyles1(daysLeft: any) {
-  // let daysLeft: any = this.calculateDaysLeft1(dateString);
-  // daysLeft = parseInt(daysLeft.split('Days')[0].trim())
-
-  if (daysLeft < 15) {
-    return { color: 'red' };
-  } else if (daysLeft <= 30) {
-    return { color: 'orange' };
+getDaysLeftStyles1(days: number): any {
+  if (days <= 30) {
+    return { 'color': 'red' };
+  } else if (days > 30 && days <= 45) {
+    return { 'color': 'yellow' };
   } else {
-    return { color: 'black' };
+    return { 'color': 'orange' };
   }
 }
   clear() {

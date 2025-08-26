@@ -756,8 +756,14 @@
                     </div>
 
                     <div class="row" style="display: flex; align-items: center; justify-content: center;margin-top: 5px;">
-                      <qrcode [qrdata]="qrCodeVal" [width]="100" [margin]="0"></qrcode>
-
+                      <qrcode 
+                      [qrdata]="qrCodeVal" 
+                      [width]="100" 
+                      [margin]="0"
+                      [colorDark]="'#000000'" 
+                      [colorLight]="'#fce303'"> 
+                    </qrcode>
+                    
                     </div>
 
                   </div>
@@ -1052,7 +1058,13 @@
                     
                
                       <div class="row" style="display: flex; align-items: center; justify-content: center;margin-top: 20px;">
-                        <qrcode [qrdata]="qrCodeVal" [width]="100" [margin]="0"></qrcode>
+                        <qrcode 
+                          [qrdata]="qrCodeVal" 
+                          [width]="100" 
+                          [margin]="0"
+                          [colorDark]="'#000000'" 
+                          [colorLight]="'#fce303'"> 
+                        </qrcode>
 
                       </div>
 

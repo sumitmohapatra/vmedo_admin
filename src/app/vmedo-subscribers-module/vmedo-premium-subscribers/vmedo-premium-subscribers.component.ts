@@ -90,17 +90,15 @@ export class VmedoPremiumSubscribersComponent {
   return Math.ceil(timeDiff / (1000 * 3600 * 24));
 }
 
-getDaysLeftStyles1(daysLeft: any) {
-  if (daysLeft < 15) {
-    return { color: 'red' };
-  } else if (daysLeft <= 30) {
-    return { color: 'orange' };
+getDaysLeftStyles1(days: number): any {
+  if (days <= 30) {
+    return { 'color': 'red' };
+  } else if (days > 30 && days <= 45) {
+    return { 'color': 'yellow' };
   } else {
-    return { color: 'black' };
+    return { 'color': 'orange' };
   }
 }
-
-
 
   search() {
     const apiUrl = `${environment.baseUrl}vadmin/SearchPaidUserRegistered?Svalue=${this.searchValue}`;
