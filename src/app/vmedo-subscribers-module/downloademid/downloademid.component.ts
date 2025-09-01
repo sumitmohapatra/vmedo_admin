@@ -132,13 +132,14 @@ this.subscribedDate = subscriptionDate.toISOString();
 
 public openPDF2(): void {
   let DATA2: any = document.getElementById('htmlData2');
-  html2canvas(DATA2, { scale: 4 }).then((canvas) => {
+  html2canvas(DATA2, { scale: 1 }).then((canvas) => {
     let fileWidth = 208;
     let fileHeight = (canvas.height * fileWidth) / canvas.width;
     const FILEURI = canvas.toDataURL('image/png');
     let PDF = new jsPDF('p', 'mm', 'a4',true);
     let position = 0;
-    PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+    let bottomMargin = 20;
+    PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight - bottomMargin);
      PDF.save(this.createdSlNo+'-'+this.username+'-Welcome-letter');
   });
 }
