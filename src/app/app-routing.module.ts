@@ -42,6 +42,9 @@ const routes: Routes = [
       },
       {
         path: 'vmedo-agent', loadChildren: () => import('./agent/agent.module').then(m => m.AgentModule)
+      },
+       {
+        path: 'tez', loadChildren: () => import('./vmedo-category/vmedo-category.module').then(m => m.VmedoCategoryModule)
       }
 
     ]

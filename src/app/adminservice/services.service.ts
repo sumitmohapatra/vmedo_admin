@@ -141,21 +141,29 @@ export class ServicesService {
   getVmedoPartnerCitiesUrl = environment.baseUrl + "vadmin/FetchCity_details";
 
   editVmedoPartnerCityUrl = environment.baseUrl + "vadmin/AdminUpdateCity";
- 
-  getVmedoPartnerSkillsUrl= environment.baseUrl + "vadmin/FetchSkills_details";
 
-  createVmedoPartnerSkillsUrl= environment.baseUrl + "vadmin/AdminCreateSkills";
+  getVmedoPartnerSkillsUrl = environment.baseUrl + "vadmin/FetchSkills_details";
 
-  editVmedoPartnerSkillsUrl= environment.baseUrl + "vadmin/AdminUpdateSkills";
+  createVmedoPartnerSkillsUrl = environment.baseUrl + "vadmin/AdminCreateSkills";
 
-  createVmedoPartnerUrl=environment.baseUrl + "vadmin/AddPartnerAddress";
+  editVmedoPartnerSkillsUrl = environment.baseUrl + "vadmin/AdminUpdateSkills";
 
-  updateVmedoPartnerAddressUrl=environment.baseUrl + "vadmin/UpdatePartnerAddress";
+  createVmedoPartnerUrl = environment.baseUrl + "vadmin/AddPartnerAddress";
 
-  UpdateVmedoPartnerAddressByIdUrl= environment.baseUrl + "vadmin/Fetchpartneraddressby_id?ID=";
+  updateVmedoPartnerAddressUrl = environment.baseUrl + "vadmin/UpdatePartnerAddress";
 
-  updateSubscriptionDetailsUrl= environment.baseUrl + "vadmin/UpdateSubscriptionDate_details";
+  UpdateVmedoPartnerAddressByIdUrl = environment.baseUrl + "vadmin/Fetchpartneraddressby_id?ID=";
 
+  updateSubscriptionDetailsUrl = environment.baseUrl + "vadmin/UpdateSubscriptionDate_details";
+
+  fetchCategoryDetails = environment.baseUrl + 'tez/FetchCategoryDetails';
+  saveCategory = environment.baseUrl + 'tez/SaveCategory';
+  saveProducts = environment.baseUrl + 'tez/SaveProducts';
+  fetchProductsDetails = environment.baseUrl + 'tez/FetchProductsDetails';
+  saveProductsVariant = environment.baseUrl + 'tez/SaveProductsVariant';
+  updateProductsVariant = environment.baseUrl + 'tez/UpdateProductsVariant';
+  fetchAllVarients = environment.baseUrl + 'tez/FetchAllVarients';
+  updateProduct = environment.baseUrl + 'tez/UpdateProduct';
 
   hospitalsID: any;
   emergencyUserID: any;
@@ -173,66 +181,99 @@ export class ServicesService {
   emergencySubcategoryID: any;
   couponName: any;
   VmedoPartnerDetails: any;
-  VmedoPartnerAddressDetails:any;
+  VmedoPartnerAddressDetails: any;
 
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  updateSubscriptionDetailsData(){
+  addCategory(data: any) {
+    return this.http.post(this.saveCategory, data);
+  }
+
+  addProduct(data: any) {
+    return this.http.post(this.saveProducts, data);
+  }
+
+  addProductVariant(data: any) {
+    return this.http.post(this.saveProductsVariant, data);
+  }
+
+  updateProductVariant(data: any) {
+    return this.http.post(this.updateProductsVariant, data);
+  }
+
+   updateProductDetails(data: any) {
+    return this.http.post(this.updateProduct, data);
+  }
+
+  getProducts() {
+    return this.http.get(this.fetchProductsDetails);
+  }
+
+   getAllVariants() {
+    return this.http.get(this.fetchAllVarients);
+  }
+
+  getCategoryDetails() {
+    return this.http.get(this.fetchCategoryDetails);
+  }
+
+
+  updateSubscriptionDetailsData() {
     return this.http.get(this.updateSubscriptionDetailsUrl);
   }
 
   getVmedoPartnerAddressDataById() {
     this.VmedoPartnerAddressDetails = JSON.parse(sessionStorage.getItem('vmedoPartnerAddressID'));
     return this.http.get(this.UpdateVmedoPartnerAddressByIdUrl + this.VmedoPartnerAddressDetails);
-  }  
+  }
 
-  updateVmedoPartnerAddressData(data:any){
-    return this.http.post(this.updateVmedoPartnerAddressUrl,data);
+  updateVmedoPartnerAddressData(data: any) {
+    return this.http.post(this.updateVmedoPartnerAddressUrl, data);
   }
 
 
-  createVmedoPartnerData(data:any){
-    return this.http.post(this.createVmedoPartnerUrl,data);
+  createVmedoPartnerData(data: any) {
+    return this.http.post(this.createVmedoPartnerUrl, data);
   }
 
   getVmedoPartnerCityDetails() {
     return this.http.get(this.getVmedoPartnerCitiesUrl);
   }
 
-  createVmedoPartnerCityData(data:any){
-    return this.http.post(this.createVmedoPartnerCityUrl,data);
+  createVmedoPartnerCityData(data: any) {
+    return this.http.post(this.createVmedoPartnerCityUrl, data);
   }
 
-  editVmedoPartnerCityData(data:any){
-    return this.http.post(this.editVmedoPartnerCityUrl,data);
+  editVmedoPartnerCityData(data: any) {
+    return this.http.post(this.editVmedoPartnerCityUrl, data);
   }
 
 
 
 
-  createVmedoPartnerSkills(data:any){
-    return this.http.post(this.createVmedoPartnerSkillsUrl,data);
+  createVmedoPartnerSkills(data: any) {
+    return this.http.post(this.createVmedoPartnerSkillsUrl, data);
   }
 
-  editVmedoPartnersSkills(data:any){
-    return this.http.post(this.editVmedoPartnerSkillsUrl,data);
+  editVmedoPartnersSkills(data: any) {
+    return this.http.post(this.editVmedoPartnerSkillsUrl, data);
   }
-  
+
 
   getVmedoPartnerSkillsDetails() {
     return this.http.get(this.getVmedoPartnerSkillsUrl);
   }
 
 
-  createPartnerTypeData(data:any){
-    return this.http.post(this.createPartnerTypeUrl,data);
+  createPartnerTypeData(data: any) {
+    return this.http.post(this.createPartnerTypeUrl, data);
   }
 
-  searchVmedoPartnerData(data:any){
-    return this.http.post(this.searchVmedoPartnerUrl,data);
+  searchVmedoPartnerData(data: any) {
+    return this.http.post(this.searchVmedoPartnerUrl, data);
   }
-  
+
   getLocationDetailsByPlaceId(placeId: string) {
     const url = `${environment.baseUrl}user/GetLocationDetailsByPlaceID?placeId=${placeId}`;
     return this.http.get(url);
@@ -244,18 +285,18 @@ export class ServicesService {
   }
 
 
-  editVmedoPartnersData(data:any){
-    return this.http.post(this.editVmedoPartnerDetailsUrl,data);
+  editVmedoPartnersData(data: any) {
+    return this.http.post(this.editVmedoPartnerDetailsUrl, data);
   }
-  
+
 
   getVmedoPartnerDataById() {
     this.VmedoPartnerDetails = JSON.parse(sessionStorage.getItem('vmedoPartnerID'));
     return this.http.get(this.getVmedoPartnerDetailsByIdUrl + this.VmedoPartnerDetails);
   }
 
-  addVmedoPartnersData(data:any){
-    return this.http.post(this.addVmedoPartnerUrl,data);
+  addVmedoPartnersData(data: any) {
+    return this.http.post(this.addVmedoPartnerUrl, data);
   }
 
   getVmedoPartnerTypeDetails() {
@@ -306,7 +347,7 @@ export class ServicesService {
   }
 
   GetPaidUsersData() {
-    const url=`${environment.baseUrl}vadmin/GetAllPaymentHistoryUserlist`
+    const url = `${environment.baseUrl}vadmin/GetAllPaymentHistoryUserlist`
     return this.http.get(url);
   }
 
@@ -541,12 +582,12 @@ export class ServicesService {
     return this.http.get(`${environment.baseUrl}vadmin/GetAllRegisteredAgents`);
   }
 
-  getAllRegisteredUserByAgent(agentId:string){
-   const url =  `${environment.baseUrl}vadmin/GetAllUserRegisteredbyAgent?AgentId=${agentId}`;
-   return this.http.get(url);
+  getAllRegisteredUserByAgent(agentId: string) {
+    const url = `${environment.baseUrl}vadmin/GetAllUserRegisteredbyAgent?AgentId=${agentId}`;
+    return this.http.get(url);
   }
 
-  createAgent(createAgentRequest:any) {
-    return this.http.post(`${environment.baseUrl}vadmin/AddNewAgent`,createAgentRequest);
+  createAgent(createAgentRequest: any) {
+    return this.http.post(`${environment.baseUrl}vadmin/AddNewAgent`, createAgentRequest);
   }
 }

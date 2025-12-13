@@ -1,0 +1,37 @@
+<!-- <mat-tab-group mat-align-tabs="start">
+
+    <mat-tab label="Manage corporates"> <app-manage-corporates></app-manage-corporates> </mat-tab>
+    <mat-tab label="Manage corporates plans"><app-manage-corporate-plans></app-manage-corporate-plans></mat-tab>
+    <mat-tab label="Manage plan types"><app-corporate-plan-type-details></app-corporate-plan-type-details></mat-tab>
+
+</mat-tab-group> -->
+
+
+<div class="col-12">
+    <nav mat-tab-nav-bar>
+
+        <a mat-tab-link [routerLink]="['/admin-dashboard/tez/manage-category']" routerLinkActive
+            #rla2="routerLinkActive" [active]="rla2.isActive">
+
+            <span class="pendingBadgeColor" matBadgeOverlap="false" matBadgePosition="after"
+                matBadgeColor="primary">Manage Category</span>
+        </a>
+
+         <a mat-tab-link [routerLink]="['/admin-dashboard/tez/manage-product']" routerLinkActive
+            #rla3="routerLinkActive" [active]="rla3.isActive">
+
+            <span class="pendingBadgeColor" matBadgeOverlap="false" matBadgePosition="after"
+                matBadgeColor="primary">Manage Product</span>
+        </a>
+
+         <a mat-tab-link [routerLink]="['/admin-dashboard/tez/manage-product-variant']" routerLinkActive
+            #rla4="routerLinkActive" [active]="rla4.isActive">
+
+            <span class="pendingBadgeColor" matBadgeOverlap="false" matBadgePosition="after"
+                matBadgeColor="primary">Manage Product Variant</span>
+        </a>
+    </nav>
+</div>
+<div class="mt-3">
+    <router-outlet></router-outlet>
+</div>

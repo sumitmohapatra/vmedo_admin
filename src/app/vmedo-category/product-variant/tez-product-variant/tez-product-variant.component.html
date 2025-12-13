@@ -1,0 +1,80 @@
+<div class="row mt-3 ml-1" style="width: 45%;">
+  <div class="col mt-1 mb-3">
+    <span style="font-weight: 500;">Create product variants</span>
+    <button mat-raised-button color="primary" class="btn-sm ml-4"
+      (click)="CreateVariant()">
+      + create
+    </button>
+  </div>
+</div>
+
+<div class="grid-container">
+  <div class="vmedo-admin-enquiry-table">
+    <div style="box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;">
+
+      <div class="row modal-header col-12 text-white vmedoadmintableheader">
+        <div class="col-6 mt-2">
+          <h2>Product Variants - {{dataSource.data?.length}}</h2>
+        </div>
+
+        <div class="col-6 mt-2 mb-1">
+          <input class="form-control" type="text" (keyup)="doFilter($event.target.value)"
+            placeholder="Search product variant...">
+        </div>
+      </div>
+
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <!-- Product Image -->
+        <ng-container matColumnDef="imageUrl">
+          <th mat-header-cell *matHeaderCellDef> Image </th>
+          <td mat-cell *matCellDef="let element">
+            <img class="imagestyle" [src]="element.imageUrl"
+              onerror="this.src='assets/Images/corporate-icon.png';">
+          </td>
+        </ng-container>
+
+        <!-- Product Name -->
+        <ng-container matColumnDef="productName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Product</th>
+          <td mat-cell *matCellDef="let element">{{element.productName}}</td>
+        </ng-container>
+
+        <!-- Variant Name -->
+        <ng-container matColumnDef="variantName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Variant</th>
+          <td mat-cell *matCellDef="let element">{{element.variantName}}</td>
+        </ng-container>
+
+        <!-- Price -->
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+          <td mat-cell *matCellDef="let element">₹{{element.price}}</td>
+        </ng-container>
+
+        <!-- Discount Price -->
+        <ng-container matColumnDef="discountPrice">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Discount Price</th>
+          <td mat-cell *matCellDef="let element">₹{{element.discountPrice}}</td>
+        </ng-container>
+
+        <!-- Actions -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let element">
+            <button class="btn btn-danger btn-sm" (click)="UpdateVariant(element)">
+              Edit
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
+
+    </div>
+  </div>
+</div>

@@ -56,7 +56,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
     AppComponent,
     VmedoAdminLoginComponent,
     VmedoPageNotFoundComponent,
-    VmedoAdminDashboardComponent
+    VmedoAdminDashboardComponent,
   ],
   imports: [
     BrowserModule,
