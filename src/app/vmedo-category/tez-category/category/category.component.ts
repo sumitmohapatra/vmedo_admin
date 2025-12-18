@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ServicesService } from 'src/app/adminservice/services.service';
 import { CreateCategoryComponent } from '../create-category/create-category.component';
+import { EditCategoryComponent } from '../edit-category/edit-category.component';
 
 @Component({
   selector: 'app-category',
@@ -88,8 +89,20 @@ export class CategoryComponent {
   });
   }
 
-  UpdateCorporate(corporateData: any) {
-    //sessionStorage.setItem("corporateData", JSON.stringify(corporateData));
-    //this.dialog.open(UpdateCorporateComponent, this.dialogConfig27Percent80);
-  }
+UpdateCategory(category: any) {
+  const dialogRef = this.dialog.open(EditCategoryComponent, {
+    width: '27%',
+    height: '80%',
+    disableClose: false,
+    autoFocus: false,
+    data: category
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      this.getCategoryDetails(); 
+    }
+  });
+}
+
 }

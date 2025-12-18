@@ -164,6 +164,8 @@ export class ServicesService {
   updateProductsVariant = environment.baseUrl + 'tez/UpdateProductsVariant';
   fetchAllVarients = environment.baseUrl + 'tez/FetchAllVarients';
   updateProduct = environment.baseUrl + 'tez/UpdateProduct';
+  updateCategory = environment.baseUrl + 'tez/UpdateCategory';
+  addCategoryMapping = environment.baseUrl + 'tez/AddCategoryMapping';
 
   hospitalsID: any;
   emergencyUserID: any;
@@ -198,12 +200,23 @@ export class ServicesService {
     return this.http.post(this.saveProductsVariant, data);
   }
 
+  addCategoryProductMapping(payload: any) {
+  return this.http.post(
+    this.addCategoryMapping,
+    payload
+  );
+}
+
   updateProductVariant(data: any) {
     return this.http.post(this.updateProductsVariant, data);
   }
 
    updateProductDetails(data: any) {
     return this.http.post(this.updateProduct, data);
+  }
+
+   updateCategoryDetails(data: any) {
+    return this.http.post(this.updateCategory, data);
   }
 
   getProducts() {

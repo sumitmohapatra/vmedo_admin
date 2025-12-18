@@ -4,6 +4,7 @@ import { TezHealthComponent } from "./tez-health/tez-health-category.component";
 import { CategoryComponent } from "./tez-category/category/category.component";
 import { TezProductComponent } from "./product/tez-product/tez-product.component";
 import { TezProductVariantComponent } from "./product-variant/tez-product-variant/tez-product-variant.component";
+import { CategoryMappingComponent } from "./category-mapping/category-mapping.component";
 
 
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
    { path: 'manage-category', component: CategoryComponent },
    { path:'manage-product', component:TezProductComponent},
    { path:'manage-product-variant', component:TezProductVariantComponent},
+   { path:'manage-category-mapping', component:CategoryMappingComponent},
   ]},
 ];
 

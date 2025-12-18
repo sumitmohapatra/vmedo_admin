@@ -30,6 +30,13 @@
             <span class="pendingBadgeColor" matBadgeOverlap="false" matBadgePosition="after"
                 matBadgeColor="primary">Manage Product Variant</span>
         </a>
+
+         <a mat-tab-link [routerLink]="['/admin-dashboard/tez/manage-category-mapping']" routerLinkActive
+            #rla5="routerLinkActive" [active]="rla5.isActive">
+
+            <span class="pendingBadgeColor" matBadgeOverlap="false" matBadgePosition="after"
+                matBadgeColor="primary">Manage Category Mapping</span>
+        </a>
     </nav>
 </div>
 <div class="mt-3">

@@ -32,6 +32,8 @@ import { CreateProductComponent } from './product/create-product/create-product.
 import { CreateProductVariantComponent } from './product-variant/create-product-variant/create-product-variant.component';
 import { UpdateProductVariantComponent } from './product-variant/update-product-variant/update-product-variant.component';
 import { UpdateProductComponent } from './product/update-product/update-product.component';
+import { EditCategoryComponent } from './tez-category/edit-category/edit-category.component';
+import { CategoryMappingComponent } from './category-mapping/category-mapping.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { UpdateProductComponent } from './product/update-product/update-product.
     CreateProductComponent,
     CreateProductVariantComponent,
     UpdateProductVariantComponent,
-    UpdateProductComponent
+    UpdateProductComponent,
+    EditCategoryComponent,
+    CategoryMappingComponent
   ],
   imports: [
     CommonModule,
