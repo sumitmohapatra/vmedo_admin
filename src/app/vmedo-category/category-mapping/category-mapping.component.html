@@ -5,7 +5,7 @@
     <!-- CATEGORY DROPDOWN -->
     <mat-form-field appearance="outline" style="width:100%;">
         <mat-label>Select Category</mat-label>
-        <mat-select [(ngModel)]="selectedCategoryId" name="category" required>
+        <mat-select [(ngModel)]="selectedCategoryId" name="category" required (selectionChange)="onCategoryChange($event.value)">
             <mat-option *ngFor="let c of categoryList" [value]="c.categoryId">
                 {{ c.name || 'Unnamed Category' }}
             </mat-option>

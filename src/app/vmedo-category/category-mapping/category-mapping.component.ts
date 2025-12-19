@@ -29,6 +29,19 @@ export class CategoryMappingComponent {
     });
   }
 
+  onCategoryChange(categoryId: string) {
+  this.selectedProductIds = []; // reset
+
+  this.adminservice
+    .fetchProductsMappingByCategory(categoryId)
+    .subscribe((res: any) => {
+      this.selectedProductIds = res.data.map(
+          (x: any) => x.productIds
+        );
+    });
+}
+
+
   loadProducts() {
     this.adminservice.getProducts().subscribe((res: any) => {
       this.productList = res.data || [];

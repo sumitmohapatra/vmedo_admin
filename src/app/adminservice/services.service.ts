@@ -1,4 +1,4 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
 import { EmitterVisitorContext } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -166,6 +166,7 @@ export class ServicesService {
   updateProduct = environment.baseUrl + 'tez/UpdateProduct';
   updateCategory = environment.baseUrl + 'tez/UpdateCategory';
   addCategoryMapping = environment.baseUrl + 'tez/AddCategoryMapping';
+  fetchProductsMapping = environment.baseUrl + 'tez/FetchProductsMappingByCategory';
 
   hospitalsID: any;
   emergencyUserID: any;
@@ -190,6 +191,11 @@ export class ServicesService {
 
   addCategory(data: any) {
     return this.http.post(this.saveCategory, data);
+  }
+
+  fetchProductsMappingByCategory(categoryId: string): Observable<any> {
+    const params = new HttpParams().set('categoryId', categoryId);
+    return this.http.get<any>(this.fetchProductsMapping, { params });
   }
 
   addProduct(data: any) {
