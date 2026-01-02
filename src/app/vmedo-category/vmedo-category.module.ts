@@ -34,6 +34,7 @@ import { UpdateProductVariantComponent } from './product-variant/update-product-
 import { UpdateProductComponent } from './product/update-product/update-product.component';
 import { EditCategoryComponent } from './tez-category/edit-category/edit-category.component';
 import { CategoryMappingComponent } from './category-mapping/category-mapping.component';
+import { NgxEditorModule } from 'ngx-editor';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { CategoryMappingComponent } from './category-mapping/category-mapping.co
     MatCardModule,
     MatSelectModule,
     MatSlideToggleModule,
-    VmedoCategoryRoutingModule
+    VmedoCategoryRoutingModule,
+    NgxEditorModule
   ]
 })
 export class VmedoCategoryModule { }

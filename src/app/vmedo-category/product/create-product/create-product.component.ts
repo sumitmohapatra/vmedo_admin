@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Editor, Toolbar } from 'ngx-editor';
 import { ServicesService } from 'src/app/adminservice/services.service';
 import { CreateCorporateComponent } from 'src/app/vmedo-corporates-module/create-corporate/create-corporate.component';
 import Swal from 'sweetalert2';
@@ -12,59 +13,71 @@ import Swal from 'sweetalert2';
   encapsulation: ViewEncapsulation.None
 })
 export class CreateProductComponent {
-selectedFile: File;
-categoryList: any[] = [];
+  selectedFile: File;
+  categoryList: any[] = [];
+  editor: Editor;
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['ordered_list', 'bullet_list'],
+    ['underline', 'strike'],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
 
-constructor(
-  private adminservice: ServicesService,
-  private http: HttpClient,
-  public dialogRef: MatDialogRef<CreateProductComponent>
-) { }
+  longDescription: string = '';
 
-ngOnInit(): void {
-  // Fetch categories from service
-  this.adminservice.getCategoryDetails().subscribe((res:any) => {
-    this.categoryList = res.objret;     // assuming your API structure
-  });
-}
+  constructor(
+    private adminservice: ServicesService,
+    private http: HttpClient,
+    public dialogRef: MatDialogRef<CreateProductComponent>
+  ) { }
 
-handleFileInput(files: FileList) {
-  this.selectedFile = files.item(0);
-}
-
-onSubmit(myForm: any) {
-  if (!this.selectedFile) {
-    alert("Please select an image");
-    return;
+  ngOnInit(): void {
+    this.editor = new Editor();
+    // Fetch categories from service
+    this.adminservice.getCategoryDetails().subscribe((res: any) => {
+      this.categoryList = res.objret;     // assuming your API structure
+    });
   }
 
-  const formData = new FormData();
+  handleFileInput(files: FileList) {
+    this.selectedFile = files.item(0);
+  }
 
-  // Append fields exactly as API expects
-  formData.append('CategoryId', myForm.value.categoryId);
-  formData.append('Name', myForm.value.name);
-  formData.append('Description', myForm.value.description);
-  formData.append('Image', this.selectedFile);
-
-  this.adminservice.addProduct(formData).subscribe(
-    response => {
-      console.log('Success:', response);
-      this.successNotification();
-      this.dialogRef.close(true);
-      myForm.reset();
-    },
-    error => {
-      console.error('Error:', error);
+  onSubmit(myForm: any) {
+    if (!this.selectedFile) {
+      alert("Please select an image");
+      return;
     }
-  );
-}
 
-successNotification() {
-  Swal.fire('New Product', 'Created Successfully!', 'success');
-}
+    const formData = new FormData();
 
-onClose() {
-  this.dialogRef.close();
-}
+    // Append fields exactly as API expects
+    formData.append('CategoryId', myForm.value.categoryId);
+    formData.append('Name', myForm.value.name);
+    formData.append('Description', myForm.value.description);
+    formData.append('LongDescription', this.longDescription);
+    formData.append('Image', this.selectedFile);
+
+    this.adminservice.addProduct(formData).subscribe(
+      response => {
+        console.log('Success:', response);
+        this.successNotification();
+        this.dialogRef.close(true);
+        myForm.reset();
+      },
+      error => {
+        console.error('Error:', error);
+      }
+    );
+  }
+
+  successNotification() {
+    Swal.fire('New Product', 'Created Successfully!', 'success');
+  }
+
+  onClose() {
+    this.dialogRef.close();
+  }
 
 }

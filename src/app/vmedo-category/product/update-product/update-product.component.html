@@ -12,10 +12,8 @@
 
     <!-- IMAGE PREVIEW -->
     <div class="text-center mb-3">
-      <img *ngIf="imagePreview"
-           [src]="imagePreview"
-           alt="Product Image"
-           style="width:150px; height:150px; object-fit:cover; border-radius:8px;">
+      <img *ngIf="imagePreview" [src]="imagePreview" alt="Product Image"
+        style="width:150px; height:150px; object-fit:cover; border-radius:8px;">
     </div>
 
     <!-- NAME -->
@@ -29,6 +27,18 @@
       <mat-label>Description</mat-label>
       <input matInput [(ngModel)]="formData.Description" name="Description" required>
     </mat-form-field>
+
+    <!-- LONG DESCRIPTION (RICH TEXT) -->
+    <div>
+      <div class="NgxEditor__Wrapper">
+        <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
+
+        <ngx-editor [editor]="editor" [(ngModel)]="formData.longDescription" name="longDescription"
+          [placeholder]="'Type long description here...'" [disabled]="false">
+        </ngx-editor>
+      </div>
+    </div>
+
 
     <!-- IMAGE INPUT -->
     <label class="mt-2">Product Image (optional)</label>

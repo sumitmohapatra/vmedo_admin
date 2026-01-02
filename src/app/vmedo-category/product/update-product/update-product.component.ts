@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Editor, Toolbar } from 'ngx-editor';
 import { ServicesService } from 'src/app/adminservice/services.service';
 import Swal from 'sweetalert2';
 
@@ -9,7 +10,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./update-product.component.css']
 })
 export class UpdateProductComponent {
- formData: any = {};
+  formData: any = {};
   selectedFile: File | null = null;
   imagePreview: any = null;
 
@@ -17,12 +18,24 @@ export class UpdateProductComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private adminservice: ServicesService,
     public dialogRef: MatDialogRef<UpdateProductComponent>
-  ) {}
+  ) { }
+
+  editor: Editor;
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['ordered_list', 'bullet_list'],
+    ['underline', 'strike'],
+    ['text_color', 'background_color'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
+
 
   ngOnInit(): void {
+    this.editor = new Editor();
     this.formData = {
       Name: this.data.name,
       Description: this.data.description,
+      longDescription: this.data.longDescription,
       ProductId: this.data.productId
     };
 
@@ -44,6 +57,7 @@ export class UpdateProductComponent {
 
     uploadData.append("Name", this.formData.Name);
     uploadData.append("Description", this.formData.Description);
+    uploadData.append('LongDescription', this.formData.longDescription);
     uploadData.append("ProductId", this.formData.ProductId);
 
     if (this.selectedFile) {

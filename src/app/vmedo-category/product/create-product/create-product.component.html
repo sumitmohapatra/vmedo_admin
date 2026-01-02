@@ -8,10 +8,10 @@
 <mat-divider></mat-divider>
 
 <div class="container mt-4" style="display: flex; justify-content: center;">
-  <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+  <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)" style="width:90%;">
     
     <!-- CATEGORY DROPDOWN -->
-    <mat-form-field appearance="outline" fxFlex="100">
+    <mat-form-field appearance="outline" fxFlex="100" style="width:100%;">
       <mat-label>Select Category</mat-label>
       <mat-select name="categoryId" ngModel required>
         <mat-option *ngFor="let item of categoryList" [value]="item.categoryId">
@@ -21,19 +21,35 @@
     </mat-form-field>
 
     <!-- NAME -->
-    <mat-form-field appearance="outline" fxFlex="100">
+    <mat-form-field appearance="outline" fxFlex="100" style="width:100%;">
       <mat-label>Enter Product Name</mat-label>
       <input matInput ngModel name="name" required>
     </mat-form-field>
 
     <!-- DESCRIPTION -->
-    <mat-form-field appearance="outline" fxFlex="100">
+    <mat-form-field appearance="outline" fxFlex="100" style="width:100%;">
       <mat-label>Enter Description</mat-label>
       <input matInput ngModel name="description" required>
     </mat-form-field>
 
+    <div>
+
+      <div class="NgxEditor__Wrapper">
+        <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
+
+        <ngx-editor
+          [editor]="editor"
+          name="longDescription"
+          [(ngModel)]="longDescription"
+          [placeholder]="'Type long description here...'">
+        </ngx-editor>
+      </div>
+    </div>
+
     <!-- IMAGE -->
-    <input type="file" (change)="handleFileInput($event.target.files)" name="file" required />
+      <div class="mt-3">
+      <input type="file" (change)="handleFileInput($event.target.files)" required />
+    </div>
 
     <!-- ACTION BUTTONS -->
     <div class="mt-3 ml-4 mb-4">
